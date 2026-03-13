@@ -6,11 +6,13 @@ export default function Contact() {
   return (
     <PageTransition>
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 relative">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 relative">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
+          
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-display font-bold text-white mb-6"
+            className="text-5xl md:text-6xl font-display font-bold text-white mb-6 pt-12"
           >
             Get In Touch
           </motion.h1>
@@ -18,58 +20,58 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-muted-foreground text-lg max-w-2xl mx-auto"
+            className="text-white/60 text-lg max-w-2xl mx-auto font-light"
           >
             We'd love to hear from you. Reserve a table, ask about our menu, or simply say hello.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           
           {/* Left Column: Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="space-y-8"
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="space-y-6"
           >
-            <h2 className="text-2xl font-bold text-white mb-8">Contact Information</h2>
+            <h2 className="text-2xl font-display font-bold text-white mb-8">Contact Information</h2>
             
-            <div className="flex items-start gap-6 bg-card/50 p-6 rounded-2xl border border-white/5 hover:border-primary/30 transition-colors">
-              <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center shrink-0">
+            <div className="glass-panel p-6 flex items-center gap-6 hover:translate-x-1 hover:border-primary/40 transition-all duration-300 group">
+              <div className="w-[60px] h-[60px] bg-primary/15 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover:shadow-[0_0_20px_rgba(255,122,0,0.3)] transition-shadow">
                 <FaPhoneAlt className="text-primary text-xl" />
               </div>
               <div>
-                <h3 className="text-white font-bold mb-1">Phone</h3>
-                <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                <p className="text-sm text-muted-foreground mt-1">Mon-Sun, 10am - 11pm</p>
+                <h3 className="text-white font-bold mb-1 text-lg">Phone</h3>
+                <p className="text-white/60 font-light">+1 (555) 123-4567</p>
+                <p className="text-sm text-white/40 mt-1">Mon-Sun, 10am - 11pm</p>
               </div>
             </div>
 
-            <div className="flex items-start gap-6 bg-card/50 p-6 rounded-2xl border border-white/5 hover:border-primary/30 transition-colors">
-              <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center shrink-0">
+            <div className="glass-panel p-6 flex items-center gap-6 hover:translate-x-1 hover:border-primary/40 transition-all duration-300 group">
+              <div className="w-[60px] h-[60px] bg-primary/15 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover:shadow-[0_0_20px_rgba(255,122,0,0.3)] transition-shadow">
                 <FaEnvelope className="text-primary text-xl" />
               </div>
               <div>
-                <h3 className="text-white font-bold mb-1">Email</h3>
-                <p className="text-muted-foreground">hello@samaras.com</p>
-                <p className="text-sm text-muted-foreground mt-1">We'll reply within 24 hours</p>
+                <h3 className="text-white font-bold mb-1 text-lg">Email</h3>
+                <p className="text-white/60 font-light">hello@samaras.com</p>
+                <p className="text-sm text-white/40 mt-1">We'll reply within 24 hours</p>
               </div>
             </div>
 
-            <div className="flex items-start gap-6 bg-card/50 p-6 rounded-2xl border border-white/5 hover:border-primary/30 transition-colors">
-              <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center shrink-0">
+            <div className="glass-panel p-6 flex items-center gap-6 hover:translate-x-1 hover:border-primary/40 transition-all duration-300 group">
+              <div className="w-[60px] h-[60px] bg-primary/15 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover:shadow-[0_0_20px_rgba(255,122,0,0.3)] transition-shadow">
                 <FaMapMarkerAlt className="text-primary text-xl" />
               </div>
               <div>
-                <h3 className="text-white font-bold mb-1">Address</h3>
-                <p className="text-muted-foreground">123 Samaras Street, Food District</p>
-                <p className="text-muted-foreground">New York, NY 10001</p>
+                <h3 className="text-white font-bold mb-1 text-lg">Address</h3>
+                <p className="text-white/60 font-light">123 Samaras Street, Food District</p>
+                <p className="text-white/60 font-light">New York, NY 10001</p>
                 <a 
                   href="https://maps.google.com/?q=Samaras+Restaurant" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-primary text-sm font-medium mt-2 inline-block hover:underline"
+                  className="text-primary text-sm font-bold uppercase tracking-wider mt-3 inline-block hover:text-white transition-colors"
                 >
                   Get Directions →
                 </a>
@@ -81,17 +83,21 @@ export default function Contact() {
               href="https://wa.me/15551234567" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block mt-8"
+              className="block mt-10"
             >
-              <div className="bg-[#25D366]/10 border border-[#25D366]/30 p-6 rounded-2xl flex items-center justify-between hover:bg-[#25D366]/20 transition-all duration-300 group">
-                <div className="flex items-center gap-4">
-                  <FaWhatsapp className="text-[#25D366] text-3xl" />
+              <div className="bg-[#25D366]/8 border border-[#25D366]/25 p-8 rounded-[24px] flex items-center justify-between hover:bg-[#25D366]/15 hover:border-[#25D366]/40 transition-all duration-300 group backdrop-blur-md">
+                <div className="flex items-center gap-6">
+                  <div className="w-14 h-14 bg-[#25D366]/20 rounded-full flex items-center justify-center shrink-0">
+                    <FaWhatsapp className="text-[#25D366] text-3xl" />
+                  </div>
                   <div>
-                    <h3 className="text-white font-bold">Chat on WhatsApp</h3>
-                    <p className="text-[#25D366] text-sm">Instant replies</p>
+                    <h3 className="text-white font-bold text-xl mb-1">Chat on WhatsApp</h3>
+                    <p className="text-[#25D366] text-sm uppercase tracking-wider font-semibold">We reply in minutes</p>
                   </div>
                 </div>
-                <span className="text-[#25D366] group-hover:translate-x-1 transition-transform">→</span>
+                <span className="w-12 h-12 bg-[#25D366] rounded-full flex items-center justify-center text-white font-bold group-hover:translate-x-2 transition-transform shadow-[0_0_20px_rgba(37,211,102,0.4)]">
+                  →
+                </span>
               </div>
             </a>
           </motion.div>
@@ -100,64 +106,64 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <div className="bg-card p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] pointer-events-none rounded-full" />
+            <div className="glass-panel p-8 md:p-12 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] pointer-events-none rounded-full" />
               
-              <h2 className="text-2xl font-bold text-white mb-8 relative z-10">Send a Message</h2>
+              <h2 className="text-3xl font-display font-bold text-white mb-8 relative z-10">Send a Message</h2>
               
               <form className="space-y-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-white/80">First Name</label>
+                    <label className="text-xs font-semibold tracking-wider uppercase text-white/50">First Name</label>
                     <input 
                       type="text" 
-                      className="w-full bg-background border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light"
                       placeholder="John"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-white/80">Last Name</label>
+                    <label className="text-xs font-semibold tracking-wider uppercase text-white/50">Last Name</label>
                     <input 
                       type="text" 
-                      className="w-full bg-background border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light"
                       placeholder="Doe"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-white/80">Email Address</label>
+                  <label className="text-xs font-semibold tracking-wider uppercase text-white/50">Email Address</label>
                   <input 
                     type="email" 
-                    className="w-full bg-background border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light"
                     placeholder="john@example.com"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-white/80">Subject</label>
-                  <select className="w-full bg-background border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none">
-                    <option value="reservation">Table Reservation</option>
-                    <option value="catering">Catering Inquiry</option>
-                    <option value="feedback">Feedback</option>
-                    <option value="other">Other</option>
+                  <label className="text-xs font-semibold tracking-wider uppercase text-white/50">Subject</label>
+                  <select className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all appearance-none font-light">
+                    <option value="reservation" className="bg-[#181818]">Table Reservation</option>
+                    <option value="catering" className="bg-[#181818]">Catering Inquiry</option>
+                    <option value="feedback" className="bg-[#181818]">Feedback</option>
+                    <option value="other" className="bg-[#181818]">Other</option>
                   </select>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-white/80">Message</label>
+                  <label className="text-xs font-semibold tracking-wider uppercase text-white/50">Message</label>
                   <textarea 
-                    rows={4}
-                    className="w-full bg-background border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
+                    rows={5}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all resize-none font-light"
                     placeholder="How can we help you?"
                   ></textarea>
                 </div>
 
                 <button 
                   type="submit"
-                  className="w-full bg-primary text-white font-bold rounded-xl px-4 py-4 hover:bg-primary/90 transition-all hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(255,122,0,0.5)] active:translate-y-0"
+                  className="w-full bg-primary text-white font-bold tracking-[0.15em] uppercase text-sm rounded-xl px-4 py-5 hover:bg-primary/90 transition-all hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(255,122,0,0.6)] active:translate-y-0 mt-4"
                 >
                   Send Message
                 </button>

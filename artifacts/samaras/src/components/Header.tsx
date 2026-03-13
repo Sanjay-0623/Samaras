@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -45,28 +44,38 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 lg:px-12",
-          isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-white/5 py-4" : "bg-transparent py-6"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 lg:px-12",
+          isScrolled ? "bg-[#080808]/80 backdrop-blur-lg border-b border-white/5 py-4" : "bg-transparent py-6"
         )}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link to="/" className="relative z-50 group">
-            <h1 className="text-3xl font-display font-bold text-white tracking-wider group-hover:text-primary transition-colors">
+          <Link to="/" className="relative z-50 group flex flex-col items-center">
+            <h1 className="text-3xl font-display font-bold text-white tracking-widest transition-colors">
               SAMARAS
             </h1>
+            <div className="w-1 h-1 bg-primary rounded-full mt-1 group-hover:scale-150 transition-transform"></div>
           </Link>
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="relative z-50 p-2 text-white hover:text-primary transition-colors focus:outline-none"
+            className="relative z-50 w-12 h-12 flex flex-col items-center justify-center gap-1.5 focus:outline-none group"
             aria-label="Toggle Menu"
           >
-            <motion.div
-              animate={{ rotate: isMenuOpen ? 90 : 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              {isMenuOpen ? <RiCloseLine size={28} /> : <RiMenu3Line size={28} />}
-            </motion.div>
+            <motion.span
+              animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
+            />
+            <motion.span
+              animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
+            />
+            <motion.span
+              animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
+            />
           </button>
         </div>
       </header>
@@ -77,39 +86,73 @@ export default function Header() {
             initial={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
             animate={{ opacity: 1, clipPath: "circle(150% at 100% 0)" }}
             exit={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center"
+            transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed inset-0 z-40 bg-[rgba(8,8,8,0.96)] backdrop-blur-2xl flex items-center"
           >
-            <nav className="flex flex-col items-center gap-8">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.path}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 + i * 0.1 }}
-                >
-                  <Link
-                    to={link.path}
-                    className={cn(
-                      "text-4xl md:text-6xl font-display font-bold hover:text-primary hover:text-glow transition-all duration-300",
-                      location.pathname === link.path ? "text-primary text-glow" : "text-white/80"
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
+            {/* Ambient Orb */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
 
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="absolute bottom-12 text-center text-muted-foreground"
-            >
-              <p>123 Samaras Street, Food District, NY</p>
-              <p className="mt-2 text-primary font-medium">+1 (555) 123-4567</p>
-            </motion.div>
+            <div className="max-w-7xl mx-auto w-full px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10">
+              <nav className="flex flex-col justify-center w-full">
+                {navLinks.map((link, i) => {
+                  const isActive = location.pathname === link.path;
+                  return (
+                    <motion.div
+                      key={link.path}
+                      initial={{ opacity: 0, x: -50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ delay: 0.2 + i * 0.1, duration: 0.5, ease: "easeOut" }}
+                      className="border-b border-white/10 py-6 last:border-b-0"
+                    >
+                      <Link
+                        to={link.path}
+                        className="group relative inline-block overflow-hidden"
+                      >
+                        <span
+                          className={cn(
+                            "text-6xl md:text-8xl font-display font-bold block transition-colors duration-500",
+                            isActive ? "text-primary" : "text-white/40 group-hover:text-white"
+                          )}
+                        >
+                          {link.name}
+                        </span>
+                        <motion.div
+                          className="absolute bottom-0 left-0 w-full h-[4px] bg-primary origin-left"
+                          initial={{ scaleX: 0 }}
+                          whileHover={{ scaleX: 1 }}
+                          transition={{ duration: 0.4, ease: "easeInOut" }}
+                        />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                className="hidden md:flex flex-col justify-end pb-12"
+              >
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-sm">Location</h3>
+                    <p className="text-white/50 text-xl font-light">123 Samaras Street, Food District</p>
+                    <p className="text-white/50 text-xl font-light">New York, NY 10001</p>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-sm">Reservations</h3>
+                    <p className="text-primary text-2xl font-light">+1 (555) 123-4567</p>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-sm">Hours</h3>
+                    <p className="text-white/50 text-xl font-light">Mon-Fri: 11am - 10pm</p>
+                    <p className="text-white/50 text-xl font-light">Sat-Sun: 10am - 11pm</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -11,8 +11,9 @@ export default function PageTransition({ children }: PageTransitionProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className="w-full min-h-screen pt-24" // pt-24 offsets the fixed header
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="w-full min-h-screen pt-24 will-change-transform will-change-opacity"
+      style={{ transform: "translateZ(0)" }}
     >
       {children}
     </motion.div>
