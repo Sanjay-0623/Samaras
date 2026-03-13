@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { MdTableRestaurant, MdTakeoutDining } from "react-icons/md";
 import { GiCookingPot } from "react-icons/gi";
 import PageTransition from "@/components/PageTransition";
@@ -7,27 +8,29 @@ const services = [
   {
     id: "dine-in",
     title: "Dine In",
-    description: "Experience our luxurious ambiance with impeccable table service. Perfect for dates, family gatherings, and business dinners. Enjoy the complete Samaras atmospheric journey.",
+    description: "Experience the warmth of Samara's Veg in our welcoming dining hall. Perfect for family gatherings, celebrations, and everyday indulgence in authentic Indian vegetarian cuisine.",
     icon: MdTableRestaurant,
-    delay: 0.1
+    delay: 0.1,
   },
   {
     id: "takeaway",
     title: "Takeaway",
-    description: "Enjoy restaurant-quality meals in the comfort of your home. Carefully packaged to maintain temperature and presentation, ensuring the Samaras taste wherever you are.",
+    description: "Enjoy the flavours of Samara's Veg from the comfort of your home. Our meals are carefully packed to retain freshness, aroma, and taste — just as if you were dining in.",
     icon: MdTakeoutDining,
-    delay: 0.2
+    delay: 0.2,
   },
   {
     id: "catering",
     title: "Catering",
-    description: "Elevate your events with our bespoke catering services. From corporate events to weddings, we provide customized menus and professional staff to make your occasion unforgettable.",
+    description: "Bring the Samara's Veg experience to your events. From weddings and corporate lunches to festive gatherings, our catering team delivers authentic Indian vegetarian feasts.",
     icon: GiCookingPot,
-    delay: 0.3
-  }
+    delay: 0.3,
+  },
 ];
 
 export default function Services() {
+  const navigate = useNavigate();
+
   return (
     <PageTransition>
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 relative">
@@ -35,21 +38,20 @@ export default function Services() {
 
         <div className="text-center mb-24 relative">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-          
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-6xl font-display font-bold text-white mb-6 pt-12"
           >
             Our Services
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-white/60 text-lg max-w-2xl mx-auto font-light"
           >
-            More than just a meal. We offer tailored experiences to suit your needs, delivering excellence in every format.
+            More than just a meal. We offer tailored vegetarian dining experiences to suit every occasion and lifestyle.
           </motion.p>
         </div>
 
@@ -64,31 +66,34 @@ export default function Services() {
               className="glass-panel p-10 hover:border-primary/50 hover:-translate-y-3 transition-all duration-500 group relative overflow-hidden text-center flex flex-col items-center transform-gpu"
             >
               <div className="absolute top-0 inset-x-0 h-[30%] bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
+
               <div className="w-[100px] h-[100px] bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-8 group-hover:bg-primary/20 transition-colors duration-500 relative z-10">
                 <service.icon className="w-12 h-12 text-primary group-hover:scale-110 transition-transform duration-500" />
               </div>
-              
+
               <h3 className="text-3xl font-display font-bold text-white mb-6 relative z-10">
                 {service.title}
               </h3>
-              
+
               <p className="text-white/60 text-base leading-relaxed relative z-10 mb-8 font-light flex-grow">
                 {service.description}
               </p>
 
               <div className="relative z-10 mt-auto">
-                <button className="text-sm font-bold uppercase tracking-widest text-primary hover:text-white transition-colors flex items-center gap-2">
+                <button
+                  onClick={() => navigate("/contact")}
+                  className="text-sm font-bold uppercase tracking-widest text-primary hover:text-white transition-colors flex items-center gap-2 group/btn"
+                >
                   Learn More
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
                 </button>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom CTA banner */}
-        <motion.div 
+        {/* Bottom CTA Banner */}
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -96,14 +101,19 @@ export default function Services() {
           className="mt-32 glass-panel border-l-4 border-l-primary p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden"
         >
           <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
-          
+
           <div className="relative z-10 md:max-w-2xl text-center md:text-left">
             <h3 className="text-4xl font-display font-bold text-white mb-4">Planning a special event?</h3>
-            <p className="text-white/70 text-lg font-light">Let our team handle the culinary details so you can focus on making memories with your guests.</p>
+            <p className="text-white/70 text-lg font-light">
+              Let our catering team craft an authentic Indian vegetarian feast for your guests — from intimate family dinners to grand celebrations.
+            </p>
           </div>
-          
+
           <div className="relative z-10 shrink-0">
-            <button className="px-10 py-5 bg-primary text-white text-sm font-bold uppercase tracking-[0.15em] rounded-full hover:scale-105 hover:shadow-[0_0_40px_rgba(255,122,0,0.5)] transition-all duration-300">
+            <button
+              onClick={() => navigate("/contact")}
+              className="px-10 py-5 bg-primary text-white text-sm font-bold uppercase tracking-[0.15em] rounded-full hover:scale-105 hover:shadow-[0_0_40px_rgba(255,122,0,0.5)] transition-all duration-300"
+            >
               Inquire Now
             </button>
           </div>

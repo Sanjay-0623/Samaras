@@ -52,7 +52,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link to="/" className="relative z-50 group flex flex-col items-center">
             <h1 className="text-3xl font-display font-bold text-white tracking-widest transition-colors">
-              SAMARAS
+              SAMARA'S VEG
             </h1>
             <div className="w-1 h-1 bg-primary rounded-full mt-1 group-hover:scale-150 transition-transform"></div>
           </Link>
