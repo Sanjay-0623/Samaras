@@ -104,7 +104,7 @@ export default function Header() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ delay: 0.2 + i * 0.1, duration: 0.5, ease: "easeOut" }}
-                      className="border-b border-white/10 py-6 last:border-b-0"
+                      className="border-b border-white/10 py-3 last:border-b-0"
                     >
                       <Link
                         to={link.path}
@@ -112,14 +112,14 @@ export default function Header() {
                       >
                         <span
                           className={cn(
-                            "text-6xl md:text-8xl font-display font-bold block transition-colors duration-500",
-                            isActive ? "text-primary" : "text-white/40 group-hover:text-white"
+                            "text-[24px] md:text-[32px] lg:text-[44px] font-display font-bold block transition-colors duration-400 leading-tight",
+                            isActive ? "text-primary" : "text-white/40 group-hover:text-primary"
                           )}
                         >
                           {link.name}
                         </span>
                         <motion.div
-                          className="absolute bottom-0 left-0 w-full h-[4px] bg-primary origin-left"
+                          className="absolute bottom-0 left-0 w-full h-[3px] bg-primary origin-left"
                           initial={{ scaleX: 0 }}
                           whileHover={{ scaleX: 1 }}
                           transition={{ duration: 0.4, ease: "easeInOut" }}
@@ -139,17 +139,29 @@ export default function Header() {
                 <div className="space-y-8">
                   <div>
                     <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-sm">Location</h3>
-                    <p className="text-white/50 text-xl font-light">123 Samaras Street, Food District</p>
-                    <p className="text-white/50 text-xl font-light">New York, NY 10001</p>
+                    <a
+                      href="https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/50 text-lg font-light hover:text-primary transition-colors duration-300 block leading-relaxed group"
+                    >
+                      Samara's Veg Restaurant
+                      <span className="text-primary/60 text-sm ml-2 group-hover:text-primary transition-colors">↗</span>
+                    </a>
                   </div>
                   <div>
-                    <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-sm">Reservations</h3>
-                    <p className="text-primary text-2xl font-light">+1 (555) 123-4567</p>
+                    <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-sm">Phone</h3>
+                    <a
+                      href="tel:+918951454455"
+                      className="text-primary text-2xl font-light hover:text-white transition-colors duration-300 block"
+                    >
+                      +91 89514 54455
+                    </a>
                   </div>
                   <div>
                     <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-sm">Hours</h3>
-                    <p className="text-white/50 text-xl font-light">Mon-Fri: 11am - 10pm</p>
-                    <p className="text-white/50 text-xl font-light">Sat-Sun: 10am - 11pm</p>
+                    <p className="text-white/50 text-lg font-light">Mon–Fri: 11am – 10pm</p>
+                    <p className="text-white/50 text-lg font-light">Sat–Sun: 10am – 11pm</p>
                   </div>
                 </div>
               </motion.div>
