@@ -1,141 +1,11 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaLeaf, FaSeedling, FaFire } from "react-icons/fa";
 import { MdTableRestaurant } from "react-icons/md";
 import { PiForkKnife } from "react-icons/pi";
 import PageTransition from "@/components/PageTransition";
 
-/* ─── FLOATING DISH DATA ─────────────────────────────────── */
-interface FloatingDishData {
-  name: string;
-  image: string;
-  posClass: string;          // Tailwind absolute position classes
-  visibleClass: string;      // Tailwind responsive show/hide
-  floatDuration: number;
-  floatDelay: number;
-  parallaxSpeed: number;     // px to move on scroll (negative = up faster)
-  rotateDir: number;         // 1 or -1
-  size: number;              // width in px
-}
-
-const floatingDishes: FloatingDishData[] = [
-  {
-    name: "Masala Dosa",
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=400&auto=format&fit=crop",
-    posClass: "top-[18%] left-[2%]",
-    visibleClass: "block",
-    floatDuration: 3.6,
-    floatDelay: 0,
-    parallaxSpeed: -95,
-    rotateDir: 1,
-    size: 138,
-  },
-  {
-    name: "Paneer Butter Masala",
-    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=400&auto=format&fit=crop",
-    posClass: "top-[10%] right-[2%]",
-    visibleClass: "block",
-    floatDuration: 4.2,
-    floatDelay: 0.9,
-    parallaxSpeed: -60,
-    rotateDir: -1,
-    size: 150,
-  },
-  {
-    name: "Gulab Jamun",
-    image: "https://images.unsplash.com/photo-1601303516534-bf4c1a574dc9?q=80&w=400&auto=format&fit=crop",
-    posClass: "bottom-[20%] left-[4%]",
-    visibleClass: "hidden md:block",
-    floatDuration: 3.9,
-    floatDelay: 1.5,
-    parallaxSpeed: -75,
-    rotateDir: 1,
-    size: 130,
-  },
-  {
-    name: "Veg Biryani",
-    image: "https://images.unsplash.com/photo-1563379091339-03246963f96c?q=80&w=400&auto=format&fit=crop",
-    posClass: "bottom-[22%] right-[2%]",
-    visibleClass: "hidden lg:block",
-    floatDuration: 4.5,
-    floatDelay: 0.4,
-    parallaxSpeed: -115,
-    rotateDir: -1,
-    size: 148,
-  },
-  {
-    name: "Idli",
-    image: "https://images.unsplash.com/photo-1567337710282-00832b415979?q=80&w=400&auto=format&fit=crop",
-    posClass: "top-[54%] left-[1%]",
-    visibleClass: "hidden lg:block",
-    floatDuration: 5.0,
-    floatDelay: 2.1,
-    parallaxSpeed: -40,
-    rotateDir: 1,
-    size: 118,
-  },
-];
-
-/* ─── FLOATING DISH COMPONENT ────────────────────────────── */
-function FloatingDish({ dish, scrollY }: { dish: FloatingDishData; scrollY: MotionValue<number> }) {
-  const y = useTransform(scrollY, [0, 600], [0, dish.parallaxSpeed]);
-
-  return (
-    <motion.div
-      className={`absolute ${dish.posClass} ${dish.visibleClass} z-10 select-none pointer-events-auto`}
-      style={{ y, width: dish.size }}
-    >
-      <motion.div
-        animate={{ y: [0, -13, 0] }}
-        transition={{
-          duration: dish.floatDuration,
-          delay: dish.floatDelay,
-          repeat: Infinity,
-          ease: "easeInOut",
-          repeatType: "loop",
-        }}
-        whileHover={{
-          rotateX: -10 * dish.rotateDir,
-          rotateY: 12 * dish.rotateDir,
-          scale: 1.12,
-          y: -22,
-          transition: { duration: 0.35, ease: "easeOut" },
-        }}
-        style={{ transformStyle: "preserve-3d", perspective: "700px" }}
-        className="cursor-default group"
-      >
-        {/* Card */}
-        <div
-          className="rounded-2xl overflow-hidden border border-white/12 bg-white/5 backdrop-blur-md
-                     shadow-[0_20px_60px_rgba(0,0,0,0.55),0_0_0_1px_rgba(255,255,255,0.06)]
-                     group-hover:shadow-[0_28px_70px_rgba(0,0,0,0.7),0_0_30px_rgba(255,122,0,0.25),0_0_0_1px_rgba(255,122,0,0.2)]
-                     transition-shadow duration-400"
-        >
-          <div className="aspect-square overflow-hidden">
-            <img
-              src={dish.image}
-              alt={dish.name}
-              className="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-600 ease-out"
-              loading="lazy"
-            />
-          </div>
-          {/* Name tag */}
-          <div className="px-3 py-2 text-center">
-            <p className="text-white/80 text-[11px] font-semibold tracking-wide truncate group-hover:text-primary transition-colors duration-300">
-              {dish.name}
-            </p>
-          </div>
-        </div>
-
-        {/* Glow on hover */}
-        <div className="absolute inset-0 rounded-2xl bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400 blur-xl -z-10 scale-90" />
-      </motion.div>
-    </motion.div>
-  );
-}
-
-/* ─── SPECIALTY & DISH DATA ──────────────────────────────── */
+/* ─── STATIC DATA ────────────────────────────────────────── */
 const specialities = [
   {
     icon: FaLeaf,
@@ -188,64 +58,70 @@ const cardVariants = {
 
 /* ─── PAGE COMPONENT ─────────────────────────────────────── */
 export default function Home() {
-  const heroRef = useRef<HTMLElement>(null);
-
-  const { scrollY } = useScroll();
   const { scrollYProgress } = useScroll();
-
-  /* Parallax layers */
-  const bgY          = useTransform(scrollY, [0, 700], [0, 140]);   // bg moves slowest
-  const heroContentY = useTransform(scrollY, [0, 700], [0, -60]);   // text lifts gently
-  const largeOrbY    = useTransform(scrollYProgress, [0, 1], [-100, 100]);
-  const mediumOrbY   = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const heroContentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
+  const largeOrbY    = useTransform(scrollYProgress, [0, 1], [-80, 80]);
+  const mediumOrbY   = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
     <PageTransition>
+
       {/* ═══════════════════════════════════════ HERO ═══ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-24"
-      >
-        {/* ── Background image with parallax ── */}
-        <motion.div style={{ y: bgY }} className="absolute inset-[-10%] z-0">
-          <img
-            src="https://images.unsplash.com/photo-1596797038530-2c107229654b?q=85&w=1920&auto=format&fit=crop"
-            alt="Indian vegetarian food spread"
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-24">
+
+        {/* ── Video background ── */}
+        <div className="absolute inset-0 z-0 bg-[#080808]">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="https://images.unsplash.com/photo-1596797038530-2c107229654b?q=80&w=1920&auto=format&fit=crop"
             className="w-full h-full object-cover"
-          />
-        </motion.div>
+            style={{ transform: "translateZ(0)" }}
+          >
+            {/* HD for desktop */}
+            <source
+              src="https://videos.pexels.com/video-files/3214448/3214448-hd_1920_1080_25fps.mp4"
+              type="video/mp4"
+              media="(min-width: 768px)"
+            />
+            {/* SD for mobile */}
+            <source
+              src="https://videos.pexels.com/video-files/3214448/3214448-hd_1280_720_25fps.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
 
         {/* ── Overlays ── */}
-        <div className="absolute inset-0 z-[1] bg-black/62" />
-        <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top_right,rgba(255,122,0,0.18),transparent_50%)]" />
+        <div className="absolute inset-0 z-[1] bg-black/50" />
+        <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top_right,rgba(255,122,0,0.16),transparent_52%)]" />
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_bottom_left,rgba(255,122,0,0.10),transparent_55%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[#080808] to-transparent z-[1]" />
 
         {/* ── Ambient orbs ── */}
-        <motion.div style={{ y: largeOrbY }} className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-[rgba(255,122,0,0.08)] rounded-full blur-[160px] z-[2] pointer-events-none" />
-        <motion.div style={{ y: mediumOrbY }} className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-[rgba(255,122,0,0.06)] rounded-full blur-[120px] z-[2] pointer-events-none" />
         <motion.div
-          animate={{ y: [-20, 20, -20] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[240px] bg-[rgba(255,122,0,0.09)] rounded-full blur-[80px] z-[2] pointer-events-none"
+          style={{ y: largeOrbY }}
+          className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-[rgba(255,122,0,0.07)] rounded-full blur-[160px] z-[2] pointer-events-none"
         />
-
-        {/* ── 3D Floating dish elements ── */}
-        {floatingDishes.map((dish) => (
-          <FloatingDish key={dish.name} dish={dish} scrollY={scrollY} />
-        ))}
+        <motion.div
+          style={{ y: mediumOrbY }}
+          className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-[rgba(255,122,0,0.05)] rounded-full blur-[120px] z-[2] pointer-events-none"
+        />
 
         {/* ── Center content ── */}
         <motion.div
           style={{ y: heroContentY }}
-          className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center mt-24"
+          className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center mt-20"
         >
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-6"
+            className="mb-7"
           >
             <span className="px-6 py-2 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-semibold tracking-[0.3em] uppercase backdrop-blur-md">
               Pure Vegetarian · Authentic Indian
@@ -256,18 +132,18 @@ export default function Home() {
           <motion.h1
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
-            className="text-[4.5rem] sm:text-[6rem] md:text-[8rem] lg:text-[9.5rem] font-display font-bold text-white leading-none tracking-tight mb-3"
+            transition={{ duration: 1, ease: "easeOut", delay: 0.15 }}
+            className="text-[4.2rem] sm:text-[5.5rem] md:text-[7.5rem] lg:text-[9rem] font-display font-bold text-white leading-none tracking-tight mb-4"
           >
             Samara's Veg
           </motion.h1>
 
           {/* Headline */}
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-xl md:text-2xl font-light text-white/75 tracking-wider mb-3"
+            className="text-lg md:text-2xl font-light text-white/80 tracking-wider mb-3"
           >
             Authentic Indian{" "}
             <span className="text-primary font-normal text-glow">Vegetarian</span>{" "}
@@ -279,25 +155,25 @@ export default function Home() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-sm md:text-base text-white/45 tracking-[0.12em] mb-12 font-light"
+            className="text-sm md:text-base text-white/50 tracking-[0.14em] mb-12 font-light"
           >
-            Fresh ingredients. Traditional taste. Modern dining.
+            Fresh Ingredients&nbsp;•&nbsp;Traditional Taste&nbsp;•&nbsp;Modern Dining
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
+            transition={{ delay: 1.0, duration: 0.7 }}
             className="flex flex-col sm:flex-row gap-5 justify-center w-full sm:w-auto"
           >
             <Link
               to="/menu"
-              className="group relative px-10 py-4 bg-primary text-white text-sm font-semibold tracking-[0.15em] uppercase rounded-full overflow-hidden
-                         hover:scale-[1.04] hover:shadow-[0_0_50px_rgba(255,122,0,0.55),0_0_20px_rgba(255,122,0,0.3)] transition-all duration-300"
+              className="relative px-10 py-4 bg-primary text-white text-sm font-semibold tracking-[0.15em] uppercase rounded-full overflow-hidden
+                         hover:scale-[1.04] hover:shadow-[0_0_55px_rgba(255,122,0,0.55),0_0_20px_rgba(255,122,0,0.3)] transition-all duration-300 group"
             >
               <span className="relative z-10">View Menu</span>
-              <motion.div
+              <motion.span
                 className="absolute inset-0 bg-white/10"
                 initial={{ x: "-100%" }}
                 whileHover={{ x: "100%" }}
@@ -306,7 +182,7 @@ export default function Home() {
             </Link>
             <Link
               to="/contact"
-              className="px-10 py-4 bg-transparent border border-white/20 text-white text-sm font-semibold tracking-[0.15em] uppercase rounded-full
+              className="px-10 py-4 bg-transparent border border-white/25 text-white text-sm font-semibold tracking-[0.15em] uppercase rounded-full
                          hover:border-primary/60 hover:bg-primary/8 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(255,122,0,0.15)] transition-all duration-300"
             >
               Contact Us
@@ -537,8 +413,15 @@ export default function Home() {
             >
               <div className="glass-panel p-10 md:p-16 hover:border-primary/30 transition-all duration-500 relative overflow-hidden">
                 <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12" />
-                <motion.div className="w-24 h-24 mx-auto bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-8 relative" whileHover={{ scale: 1.05 }}>
-                  <motion.div className="absolute inset-0 bg-primary/20 rounded-full" animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }} transition={{ duration: 2, repeat: Infinity }} />
+                <motion.div
+                  className="w-24 h-24 mx-auto bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-8 relative"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <motion.div
+                    className="absolute inset-0 bg-primary/20 rounded-full"
+                    animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
                   <FaMapMarkerAlt className="text-primary w-8 h-8 relative z-10" />
                 </motion.div>
                 <h4 className="text-3xl font-display font-bold text-white mb-4">Samara's Veg</h4>
