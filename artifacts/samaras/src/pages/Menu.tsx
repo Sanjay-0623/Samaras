@@ -160,36 +160,54 @@ const menuData: Category[] = [
   },
 ];
 
-/* ─── DISH CARD ──────────────────────────────────────────── */
+/* ─── DISH CARD (3D floating) ────────────────────────────── */
 function DishCard({ dish, index }: { dish: Dish; index: number }) {
+  const floatDuration = 3.2 + (index % 4) * 0.5;
+  const floatDelay = (index % 6) * 0.4;
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.45, delay: (index % 6) * 0.06, ease: "easeOut" }}
-      whileHover={{ y: -6, transition: { duration: 0.22 } }}
-      className="glass-panel group cursor-default overflow-hidden transform-gpu hover:border-primary/40 hover:shadow-[0_24px_48px_rgba(0,0,0,0.45),0_0_0_1px_rgba(255,122,0,0.12)] transition-all duration-300"
+      transition={{ duration: 0.5, delay: (index % 6) * 0.06, ease: "easeOut" }}
+      style={{ perspective: "900px" }}
     >
-      <div className="aspect-[16/10] overflow-hidden relative">
-        <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-500 z-10" />
-        <img
-          src={dish.image}
-          alt={dish.name}
-          loading="lazy"
-          className="w-full h-full object-cover group-hover:scale-[1.07] transition-transform duration-700 ease-out"
-          style={{ transform: "translateZ(0)" }}
-        />
-      </div>
-      <div className="p-5 relative">
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary/[0.06] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none rounded-b-[inherit]" />
-        <h4 className="text-[17px] font-display font-bold text-white mb-1.5 group-hover:text-primary transition-colors duration-300 relative z-10 leading-snug">
-          {dish.name}
-        </h4>
-        <p className="text-white/50 text-[13px] leading-relaxed font-light relative z-10 line-clamp-2">
-          {dish.description}
-        </p>
-      </div>
+      <motion.div
+        animate={{ y: [0, -7, 0] }}
+        transition={{ duration: floatDuration, repeat: Infinity, ease: "easeInOut", delay: floatDelay, repeatType: "loop" }}
+        whileHover={{
+          rotateX: -6,
+          rotateY: 5,
+          scale: 1.03,
+          y: -14,
+          transition: { duration: 0.3, ease: "easeOut" },
+        }}
+        style={{ transformStyle: "preserve-3d" }}
+        className="glass-panel group cursor-default overflow-hidden transform-gpu hover:border-primary/50 hover:shadow-[0_30px_60px_rgba(0,0,0,0.55),0_0_0_1px_rgba(255,122,0,0.18),0_0_40px_rgba(255,122,0,0.06)] transition-colors duration-300"
+      >
+        <div className="aspect-[16/10] overflow-hidden relative">
+          <div className="absolute inset-0 bg-black/25 group-hover:bg-black/5 transition-colors duration-500 z-10" />
+          <img
+            src={dish.image}
+            alt={dish.name}
+            loading="lazy"
+            className="w-full h-full object-cover group-hover:scale-[1.1] transition-transform duration-700 ease-out"
+            style={{ transform: "translateZ(0)" }}
+          />
+          {/* 3D shine overlay */}
+          <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/8 via-transparent to-transparent pointer-events-none" />
+        </div>
+        <div className="p-5 relative" style={{ transform: "translateZ(20px)" }}>
+          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary/[0.07] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none rounded-b-[inherit]" />
+          <h4 className="text-[17px] font-display font-bold text-white mb-1.5 group-hover:text-primary transition-colors duration-300 relative z-10 leading-snug">
+            {dish.name}
+          </h4>
+          <p className="text-white/50 text-[13px] leading-relaxed font-light relative z-10 line-clamp-2">
+            {dish.description}
+          </p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }

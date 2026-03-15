@@ -7,6 +7,7 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "Food Menu", path: "/menu" },
   { name: "Services", path: "/services" },
+  { name: "Gallery", path: "/gallery" },
   { name: "Reviews", path: "/reviews" },
   { name: "Contact Us", path: "/contact" },
 ];
@@ -17,28 +18,16 @@ export default function Header() {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu on route change
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location.pathname]);
+  useEffect(() => { setIsMenuOpen(false); }, [location.pathname]);
 
-  // Prevent scroll when menu is open
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
+    document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
+    return () => { document.body.style.overflow = "unset"; };
   }, [isMenuOpen]);
 
   return (
@@ -49,51 +38,63 @@ export default function Header() {
           isScrolled ? "bg-[#080808]/80 backdrop-blur-lg border-b border-white/5 py-4" : "bg-transparent py-6"
         )}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link to="/" className="relative z-50 group flex flex-col items-center">
-            <h1 className="text-3xl font-display font-bold text-white tracking-widest transition-colors">
-              SAMARA'S VEG
-            </h1>
-            <div className="w-1 h-1 bg-primary rounded-full mt-1 group-hover:scale-150 transition-transform"></div>
-          </Link>
+        <div className="max-w-7xl mx-auto grid grid-cols-3 items-center">
 
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="relative z-50 w-12 h-12 flex flex-col items-center justify-center gap-1.5 focus:outline-none group"
-            aria-label="Toggle Menu"
-          >
-            <motion.span
-              animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
-            />
-            <motion.span
-              animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
-            />
-            <motion.span
-              animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
-            />
-          </button>
+          {/* LEFT — hamburger */}
+          <div className="flex items-center">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="relative z-50 w-12 h-12 flex flex-col items-center justify-center gap-1.5 focus:outline-none group"
+              aria-label="Toggle Menu"
+            >
+              <motion.span
+                animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
+              />
+              <motion.span
+                animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
+              />
+              <motion.span
+                animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
+              />
+            </button>
+          </div>
+
+          {/* CENTER — logo */}
+          <div className="flex justify-center">
+            <Link to="/" className="relative z-50 group flex flex-col items-center">
+              <h1 className="text-2xl md:text-3xl font-display font-bold text-white tracking-widest transition-colors whitespace-nowrap">
+                SAMARA'S VEG
+              </h1>
+              <div className="w-1 h-1 bg-primary rounded-full mt-1 group-hover:scale-150 transition-transform" />
+            </Link>
+          </div>
+
+          {/* RIGHT — spacer (keeps logo truly centered) */}
+          <div className="flex justify-end w-12" />
         </div>
       </header>
 
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
-            animate={{ opacity: 1, clipPath: "circle(150% at 100% 0)" }}
-            exit={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
+            initial={{ opacity: 0, clipPath: "circle(0% at 0% 0%)" }}
+            animate={{ opacity: 1, clipPath: "circle(150% at 0% 0%)" }}
+            exit={{ opacity: 0, clipPath: "circle(0% at 0% 0%)" }}
             transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-40 bg-[rgba(8,8,8,0.96)] backdrop-blur-2xl flex items-center"
+            className="fixed inset-0 z-40 bg-[rgba(8,8,8,0.97)] backdrop-blur-2xl flex items-center"
           >
-            {/* Ambient Orb */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
+            {/* Ambient orb from left */}
+            <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
 
             <div className="max-w-7xl mx-auto w-full px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10">
+
+              {/* Nav links */}
               <nav className="flex flex-col justify-center w-full">
                 {navLinks.map((link, i) => {
                   const isActive = location.pathname === link.path;
@@ -103,16 +104,13 @@ export default function Header() {
                       initial={{ opacity: 0, x: -50 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
-                      transition={{ delay: 0.2 + i * 0.1, duration: 0.5, ease: "easeOut" }}
+                      transition={{ delay: 0.15 + i * 0.08, duration: 0.45, ease: "easeOut" }}
                       className="border-b border-white/10 py-3 last:border-b-0"
                     >
-                      <Link
-                        to={link.path}
-                        className="group relative inline-block overflow-hidden"
-                      >
+                      <Link to={link.path} className="group relative inline-block overflow-hidden">
                         <span
                           className={cn(
-                            "text-[24px] md:text-[32px] lg:text-[44px] font-display font-bold block transition-colors duration-400 leading-tight",
+                            "text-[24px] md:text-[32px] lg:text-[44px] font-display font-bold block transition-colors duration-300 leading-tight",
                             isActive ? "text-primary" : "text-white/40 group-hover:text-primary"
                           )}
                         >
@@ -130,10 +128,11 @@ export default function Header() {
                 })}
               </nav>
 
-              <motion.div 
+              {/* Contact info panel */}
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
+                transition={{ delay: 0.65, duration: 0.5 }}
                 className="hidden md:flex flex-col justify-end pb-12"
               >
                 <div className="space-y-8">
