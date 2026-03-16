@@ -1,6 +1,23 @@
 import { motion } from "framer-motion";
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
+import { FaPhoneAlt, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
 import PageTransition from "@/components/PageTransition";
+
+const branches = [
+  {
+    name: "Chikkaballapura Branch",
+    phone: "+91 8951454455",
+    tel: "tel:+918951454455",
+    wa: "https://wa.me/918951454455",
+    mapsUrl: "https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw",
+  },
+  {
+    name: "Bagepalli Branch",
+    phone: "+91 9164117733",
+    tel: "tel:+919164117733",
+    wa: "https://wa.me/919164117733",
+    mapsUrl: null,
+  },
+];
 
 export default function Contact() {
   return (
@@ -32,75 +49,100 @@ export default function Contact() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-5"
           >
-            <h2 className="text-2xl font-display font-bold text-white mb-8">Contact Information</h2>
+            <h2 className="text-2xl font-display font-bold text-white mb-6">Our Branches</h2>
 
-            {/* Phone */}
-            <a href="tel:+918951454455" className="glass-panel p-6 flex items-center gap-6 hover:translate-x-1 hover:border-primary/40 transition-all duration-300 group block">
-              <div className="w-[60px] h-[60px] bg-primary/15 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover:shadow-[0_0_20px_rgba(255,122,0,0.3)] transition-shadow">
-                <FaPhoneAlt className="text-primary text-xl" />
-              </div>
-              <div>
-                <h3 className="text-white font-bold mb-1 text-lg">Phone</h3>
-                <p className="text-white/60 font-light">+91 89514 54455</p>
-                <p className="text-sm text-white/40 mt-1">Mon–Sun, 10am – 11pm</p>
-              </div>
-            </a>
+            {/* Branch Cards */}
+            {branches.map((branch, i) => (
+              <motion.div
+                key={branch.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25 + i * 0.1, duration: 0.5 }}
+                className="glass-panel p-7 relative overflow-hidden group hover:border-primary/30 transition-all duration-300"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
 
-            {/* Email */}
-            <div className="glass-panel p-6 flex items-center gap-6 hover:translate-x-1 hover:border-primary/40 transition-all duration-300 group">
-              <div className="w-[60px] h-[60px] bg-primary/15 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover:shadow-[0_0_20px_rgba(255,122,0,0.3)] transition-shadow">
-                <FaEnvelope className="text-primary text-xl" />
-              </div>
-              <div>
-                <h3 className="text-white font-bold mb-1 text-lg">Email</h3>
-                <p className="text-white/60 font-light">hello@samarasveg.com</p>
-                <p className="text-sm text-white/40 mt-1">We'll reply within 24 hours</p>
-              </div>
-            </div>
-
-            {/* Address */}
-            <a
-              href="https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-panel p-6 flex items-center gap-6 hover:translate-x-1 hover:border-primary/40 transition-all duration-300 group block"
-            >
-              <div className="w-[60px] h-[60px] bg-primary/15 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover:shadow-[0_0_20px_rgba(255,122,0,0.3)] transition-shadow">
-                <FaMapMarkerAlt className="text-primary text-xl" />
-              </div>
-              <div>
-                <h3 className="text-white font-bold mb-1 text-lg">Address</h3>
-                <p className="text-white/60 font-light">Samara's Veg Restaurant</p>
-                <span className="text-primary text-sm font-bold uppercase tracking-wider mt-2 inline-block group-hover:text-white transition-colors">
-                  Open in Google Maps →
-                </span>
-              </div>
-            </a>
-
-            {/* WhatsApp CTA */}
-            <a
-              href="https://wa.me/918951454455"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block mt-10"
-            >
-              <div className="bg-[#25D366]/8 border border-[#25D366]/25 p-8 rounded-[24px] flex items-center justify-between hover:bg-[#25D366]/15 hover:border-[#25D366]/40 transition-all duration-300 group backdrop-blur-md">
-                <div className="flex items-center gap-6">
-                  <div className="w-14 h-14 bg-[#25D366]/20 rounded-full flex items-center justify-center shrink-0">
-                    <FaWhatsapp className="text-[#25D366] text-3xl" />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-bold text-xl mb-1">Chat on WhatsApp</h3>
-                    <p className="text-[#25D366] text-sm uppercase tracking-wider font-semibold">+91 89514 54455</p>
-                  </div>
+                {/* Branch name */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(255,122,0,0.7)]" />
+                  <h3 className="text-white font-display font-bold text-xl tracking-wide relative z-10">
+                    {branch.name}
+                  </h3>
                 </div>
-                <span className="w-12 h-12 bg-[#25D366] rounded-full flex items-center justify-center text-white font-bold group-hover:translate-x-2 transition-transform shadow-[0_0_20px_rgba(37,211,102,0.4)]">
-                  →
-                </span>
-              </div>
-            </a>
+
+                <div className="space-y-4 relative z-10">
+                  {/* Phone */}
+                  <a
+                    href={branch.tel}
+                    className="flex items-center gap-4 group/phone"
+                  >
+                    <div className="w-10 h-10 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover/phone:bg-primary/20 transition-colors duration-300">
+                      <FaPhoneAlt className="text-primary text-sm" />
+                    </div>
+                    <div>
+                      <p className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-0.5">Phone</p>
+                      <p className="text-white font-semibold text-lg group-hover/phone:text-primary transition-colors duration-300">
+                        {branch.phone}
+                      </p>
+                    </div>
+                  </a>
+
+                  {/* Maps — only for Chikkaballapura */}
+                  {branch.mapsUrl && (
+                    <a
+                      href={branch.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-4 group/map"
+                    >
+                      <div className="w-10 h-10 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover/map:bg-primary/20 transition-colors duration-300">
+                        <FaMapMarkerAlt className="text-primary text-sm" />
+                      </div>
+                      <div>
+                        <p className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-0.5">Location</p>
+                        <span className="text-primary font-semibold text-sm tracking-wide group-hover/map:text-white transition-colors duration-300 flex items-center gap-1">
+                          Open in Google Maps <span className="text-xs">↗</span>
+                        </span>
+                      </div>
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+
+            {/* WhatsApp CTAs — one per branch */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="space-y-3 pt-3"
+            >
+              <p className="text-white/40 text-xs uppercase tracking-widest font-semibold">Chat on WhatsApp</p>
+              {branches.map((branch, i) => (
+                <a
+                  key={i}
+                  href={branch.wa}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-4 bg-[#25D366]/8 border border-[#25D366]/20 px-6 py-4 rounded-2xl hover:bg-[#25D366]/15 hover:border-[#25D366]/40 transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-[#25D366]/20 rounded-full flex items-center justify-center shrink-0">
+                      <FaWhatsapp className="text-[#25D366] text-lg" />
+                    </div>
+                    <div>
+                      <p className="text-white font-semibold text-sm leading-tight">{branch.name}</p>
+                      <p className="text-[#25D366]/70 text-xs mt-0.5 font-light">{branch.phone}</p>
+                    </div>
+                  </div>
+                  <span className="w-9 h-9 bg-[#25D366]/20 rounded-full flex items-center justify-center text-[#25D366] font-bold group-hover:bg-[#25D366] group-hover:text-white transition-all duration-300 shrink-0">
+                    →
+                  </span>
+                </a>
+              ))}
+            </motion.div>
           </motion.div>
 
           {/* Right Column: Contact Form */}

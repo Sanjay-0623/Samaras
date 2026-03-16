@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -10,6 +11,21 @@ const navLinks = [
   { name: "Gallery", path: "/gallery" },
   { name: "Reviews", path: "/reviews" },
   { name: "Contact Us", path: "/contact" },
+];
+
+const branches = [
+  {
+    name: "Chikkaballapura",
+    phone: "+91 8951454455",
+    tel: "tel:+918951454455",
+    mapsUrl: "https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw",
+  },
+  {
+    name: "Bagepalli",
+    phone: "+91 9164117733",
+    tel: "tel:+919164117733",
+    mapsUrl: null,
+  },
 ];
 
 export default function Header() {
@@ -75,7 +91,7 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* RIGHT — spacer (keeps logo truly centered) */}
+          {/* RIGHT — spacer */}
           <div className="flex justify-end w-12" />
         </div>
       </header>
@@ -89,7 +105,7 @@ export default function Header() {
             transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
             className="fixed inset-0 z-40 bg-[rgba(8,8,8,0.97)] backdrop-blur-2xl flex items-center"
           >
-            {/* Ambient orb from left */}
+            {/* Ambient orb */}
             <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
 
             <div className="max-w-7xl mx-auto w-full px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10">
@@ -128,7 +144,7 @@ export default function Header() {
                 })}
               </nav>
 
-              {/* Contact info panel */}
+              {/* Branch contact panel */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -136,31 +152,47 @@ export default function Header() {
                 className="hidden md:flex flex-col justify-end pb-12"
               >
                 <div className="space-y-8">
+                  {branches.map((branch, i) => (
+                    <div key={i}>
+                      <h3 className="text-white font-bold mb-3 uppercase tracking-[0.2em] text-xs">
+                        {branch.name} Branch
+                      </h3>
+
+                      {/* Phone */}
+                      <a
+                        href={branch.tel}
+                        className="flex items-center gap-2.5 text-primary text-xl font-light hover:text-white transition-colors duration-300 mb-2 group"
+                      >
+                        <FaPhoneAlt className="text-primary/60 text-sm shrink-0 group-hover:text-primary transition-colors" />
+                        {branch.phone}
+                      </a>
+
+                      {/* Maps — only for Chikkaballapura */}
+                      {branch.mapsUrl && (
+                        <a
+                          href={branch.mapsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2.5 text-white/50 text-base font-light hover:text-primary transition-colors duration-300 group"
+                        >
+                          <FaMapMarkerAlt className="text-primary/60 text-sm shrink-0 group-hover:text-primary transition-colors" />
+                          Open in Google Maps
+                          <span className="text-primary/60 text-sm group-hover:text-primary transition-colors">↗</span>
+                        </a>
+                      )}
+
+                      {/* Divider between branches */}
+                      {i < branches.length - 1 && (
+                        <div className="mt-6 h-[1px] w-full bg-white/10" />
+                      )}
+                    </div>
+                  ))}
+
+                  {/* Hours */}
                   <div>
-                    <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-sm">Location</h3>
-                    <a
-                      href="https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white/50 text-lg font-light hover:text-primary transition-colors duration-300 block leading-relaxed group"
-                    >
-                      Samara's Veg Restaurant
-                      <span className="text-primary/60 text-sm ml-2 group-hover:text-primary transition-colors">↗</span>
-                    </a>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-sm">Phone</h3>
-                    <a
-                      href="tel:+918951454455"
-                      className="text-primary text-2xl font-light hover:text-white transition-colors duration-300 block"
-                    >
-                      +91 89514 54455
-                    </a>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-sm">Hours</h3>
-                    <p className="text-white/50 text-lg font-light">Mon–Fri: 11am – 10pm</p>
-                    <p className="text-white/50 text-lg font-light">Sat–Sun: 10am – 11pm</p>
+                    <h3 className="text-white font-bold mb-2 uppercase tracking-[0.2em] text-xs">Hours</h3>
+                    <p className="text-white/50 text-base font-light">Mon–Fri: 11am – 10pm</p>
+                    <p className="text-white/50 text-base font-light">Sat–Sun: 10am – 11pm</p>
                   </div>
                 </div>
               </motion.div>

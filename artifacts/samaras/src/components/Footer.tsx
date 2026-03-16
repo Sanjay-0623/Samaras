@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaInstagram, FaFacebookF } from "react-icons/fa";
+import { FaInstagram, FaFacebookF, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { BsFlower1 } from "react-icons/bs";
 
 export default function Footer() {
@@ -9,12 +9,14 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
-        <div className="col-span-1 md:col-span-2">
+
+        {/* Brand column */}
+        <div className="col-span-1 md:col-span-1">
           <Link to="/" className="flex items-center gap-3 mb-4 group w-fit">
             <BsFlower1 className="text-primary text-2xl group-hover:scale-110 transition-transform duration-300" />
-            <h2 className="text-3xl font-display font-bold text-white tracking-wider">SAMARA'S VEG</h2>
+            <h2 className="text-2xl font-display font-bold text-white tracking-wider">SAMARA'S VEG</h2>
           </Link>
-          <p className="text-white/50 max-w-sm mb-6 italic font-light">
+          <p className="text-white/50 max-w-sm mb-6 italic font-light text-sm">
             "Where every meal becomes a memory."
           </p>
           <div className="flex gap-4">
@@ -23,24 +25,25 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 ease-out"
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 ease-out"
             >
-              <FaInstagram size={18} />
+              <FaInstagram size={16} />
             </a>
             <a
               href="https://www.facebook.com/share/18AnVPJqBA/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 ease-out"
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 ease-out"
             >
-              <FaFacebookF size={18} />
+              <FaFacebookF size={16} />
             </a>
           </div>
         </div>
 
+        {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-display font-bold text-white mb-6">Quick Links</h3>
+          <h3 className="text-base font-display font-bold text-white mb-6">Quick Links</h3>
           <ul className="space-y-4">
             {[
               { label: "Home", to: "/" },
@@ -50,7 +53,7 @@ export default function Footer() {
               { label: "Contact Us", to: "/contact" },
             ].map((item) => (
               <li key={item.label}>
-                <Link to={item.to} className="text-white/50 hover:text-primary transition-colors flex items-center gap-2 duration-300 font-light">
+                <Link to={item.to} className="text-white/50 hover:text-primary transition-colors flex items-center gap-2 duration-300 font-light text-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />
                   {item.label}
                 </Link>
@@ -59,29 +62,61 @@ export default function Footer() {
           </ul>
         </div>
 
+        {/* Opening Hours */}
         <div>
-          <h3 className="text-lg font-display font-bold text-white mb-6">Opening Hours</h3>
-          <ul className="space-y-4 text-white/50 font-light">
-            <li className="flex justify-between items-center">
+          <h3 className="text-base font-display font-bold text-white mb-6">Opening Hours</h3>
+          <ul className="space-y-4 text-white/50 font-light text-sm">
+            <li className="flex justify-between items-center gap-2">
               <span className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#25D366]" />
+                <span className="w-2 h-2 rounded-full bg-[#25D366] shrink-0" />
                 Mon – Fri:
               </span>
-              <span className="text-white">11:00 AM – 10:00 PM</span>
+              <span className="text-white">11am – 10pm</span>
             </li>
-            <li className="flex justify-between">
+            <li className="flex justify-between gap-2">
               <span className="pl-4">Saturday:</span>
-              <span className="text-white">10:00 AM – 11:00 PM</span>
+              <span className="text-white">10am – 11pm</span>
             </li>
-            <li className="flex justify-between">
+            <li className="flex justify-between gap-2">
               <span className="pl-4">Sunday:</span>
-              <span className="text-white">10:00 AM – 09:00 PM</span>
+              <span className="text-white">10am – 9pm</span>
             </li>
           </ul>
-          <div className="mt-8">
-            <a href="tel:+918951454455" className="text-primary font-semibold text-lg hover:text-white transition-colors duration-300">
-              +91 89514 54455
-            </a>
+        </div>
+
+        {/* Branch Contact */}
+        <div>
+          <h3 className="text-base font-display font-bold text-white mb-6">Contact</h3>
+          <div className="space-y-5">
+
+            {/* Chikkaballapura */}
+            <div>
+              <p className="text-primary text-xs font-bold uppercase tracking-widest mb-2">Chikkaballapura</p>
+              <a href="tel:+918951454455" className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light mb-1.5 group">
+                <FaPhoneAlt className="text-primary/60 text-xs group-hover:text-primary transition-colors" />
+                +91 8951454455
+              </a>
+              <a
+                href="https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group"
+              >
+                <FaMapMarkerAlt className="text-primary/60 text-xs group-hover:text-primary transition-colors" />
+                Open in Maps ↗
+              </a>
+            </div>
+
+            <div className="w-full h-[1px] bg-white/8" />
+
+            {/* Bagepalli */}
+            <div>
+              <p className="text-primary text-xs font-bold uppercase tracking-widest mb-2">Bagepalli</p>
+              <a href="tel:+919164117733" className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group">
+                <FaPhoneAlt className="text-primary/60 text-xs group-hover:text-primary transition-colors" />
+                +91 9164117733
+              </a>
+            </div>
           </div>
         </div>
       </div>
