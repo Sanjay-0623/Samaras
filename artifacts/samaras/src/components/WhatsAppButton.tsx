@@ -5,20 +5,16 @@ import { useState, useRef, useEffect } from "react";
 
 const branches = [
   {
-    label: "Samara's Veg – Branch 1",
+    label: "Samara's Veg – Chikkaballapura",
+    sublabel: "+91 89514 54455",
     number: "918951454455",
     available: true,
   },
   {
-    label: "Samara's Veg – Branch 2",
-    number: "919876543210",
+    label: "Samara's Veg – Bagepalli",
+    sublabel: "+91 91641 17733",
+    number: "919164117733",
     available: true,
-  },
-  {
-    label: "Samara's Veg – Branch 3",
-    number: "",
-    available: false,
-    tag: "Coming Soon",
   },
 ];
 
@@ -74,33 +70,26 @@ export default function WhatsAppButton() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.06 + i * 0.07, duration: 0.3 }}
                 >
-                  {branch.available ? (
-                    <a
-                      href={`https://wa.me/${branch.number}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-3 px-4 py-3.5 rounded-xl hover:bg-[#25D366]/10 hover:border-[#25D366]/25 border border-transparent transition-all duration-200 group"
-                    >
-                      <div className="w-8 h-8 bg-[#25D366]/15 rounded-full flex items-center justify-center shrink-0 group-hover:bg-[#25D366]/25 transition-colors">
-                        <FaWhatsapp className="text-[#25D366]" size={15} />
-                      </div>
-                      <span className="text-white/80 group-hover:text-white text-sm font-medium transition-colors leading-tight">
+                  <a
+                    href={`https://wa.me/${branch.number}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3.5 rounded-xl hover:bg-[#25D366]/10 hover:border-[#25D366]/25 border border-transparent transition-all duration-200 group"
+                  >
+                    <div className="w-8 h-8 bg-[#25D366]/15 rounded-full flex items-center justify-center shrink-0 group-hover:bg-[#25D366]/25 transition-colors">
+                      <FaWhatsapp className="text-[#25D366]" size={15} />
+                    </div>
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-white/85 group-hover:text-white text-sm font-medium transition-colors leading-tight truncate">
                         {branch.label}
                       </span>
-                      <span className="ml-auto text-white/25 group-hover:text-[#25D366]/70 transition-colors text-xs">→</span>
-                    </a>
-                  ) : (
-                    <div className="flex items-center gap-3 px-4 py-3.5 rounded-xl border border-transparent opacity-45 cursor-not-allowed">
-                      <div className="w-8 h-8 bg-white/6 rounded-full flex items-center justify-center shrink-0">
-                        <FaWhatsapp className="text-white/30" size={15} />
-                      </div>
-                      <span className="text-white/40 text-sm font-medium leading-tight">{branch.label}</span>
-                      <span className="ml-auto text-[10px] font-bold uppercase tracking-wider text-[#FF7A00]/70 bg-[#FF7A00]/10 px-2 py-0.5 rounded-full whitespace-nowrap">
-                        {branch.tag}
+                      <span className="text-white/35 text-[11px] group-hover:text-[#25D366]/70 transition-colors mt-0.5">
+                        {branch.sublabel}
                       </span>
                     </div>
-                  )}
+                    <span className="ml-auto text-white/25 group-hover:text-[#25D366]/70 transition-colors text-xs shrink-0">→</span>
+                  </a>
                 </motion.div>
               ))}
             </div>

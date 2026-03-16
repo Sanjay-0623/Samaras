@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaInstagram, FaFacebookF, FaTwitter } from "react-icons/fa";
+import { FaInstagram, FaFacebookF } from "react-icons/fa";
 import { BsFlower1 } from "react-icons/bs";
 
 export default function Footer() {
@@ -18,11 +18,24 @@ export default function Footer() {
             "Where every meal becomes a memory."
           </p>
           <div className="flex gap-4">
-            {[FaInstagram, FaFacebookF, FaTwitter].map((Icon, i) => (
-              <a key={i} href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 ease-out">
-                <Icon size={18} />
-              </a>
-            ))}
+            <a
+              href="https://www.instagram.com/samarasveg?igsh=NHNhcjRnd29obzFh"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 ease-out"
+            >
+              <FaInstagram size={18} />
+            </a>
+            <a
+              href="https://www.facebook.com/share/18AnVPJqBA/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 ease-out"
+            >
+              <FaFacebookF size={18} />
+            </a>
           </div>
         </div>
 

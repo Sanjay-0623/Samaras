@@ -58,7 +58,8 @@ const cardVariants = {
 
 /* ─── PAGE COMPONENT ─────────────────────────────────────── */
 export default function Home() {
-  const { scrollYProgress } = useScroll();
+  const { scrollY, scrollYProgress } = useScroll();
+  const bgY          = useTransform(scrollY, [0, 700], [0, 120]);
   const heroContentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
   const largeOrbY    = useTransform(scrollYProgress, [0, 1], [-80, 80]);
   const mediumOrbY   = useTransform(scrollYProgress, [0, 1], [40, -40]);
@@ -69,31 +70,15 @@ export default function Home() {
       {/* ═══════════════════════════════════════ HERO ═══ */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-24">
 
-        {/* ── Video background ── */}
-        <div className="absolute inset-0 z-0 bg-[#080808]">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster="https://images.unsplash.com/photo-1596797038530-2c107229654b?q=80&w=1920&auto=format&fit=crop"
+        {/* ── Background image with parallax ── */}
+        <motion.div style={{ y: bgY }} className="absolute inset-[-10%] z-0">
+          <img
+            src="https://images.unsplash.com/photo-1596797038530-2c107229654b?q=90&w=1920&auto=format&fit=crop"
+            alt="Indian vegetarian cooking"
             className="w-full h-full object-cover"
             style={{ transform: "translateZ(0)" }}
-          >
-            {/* HD for desktop */}
-            <source
-              src="https://videos.pexels.com/video-files/3214448/3214448-hd_1920_1080_25fps.mp4"
-              type="video/mp4"
-              media="(min-width: 768px)"
-            />
-            {/* SD for mobile */}
-            <source
-              src="https://videos.pexels.com/video-files/3214448/3214448-hd_1280_720_25fps.mp4"
-              type="video/mp4"
-            />
-          </video>
-        </div>
+          />
+        </motion.div>
 
         {/* ── Overlays ── */}
         <div className="absolute inset-0 z-[1] bg-black/50" />
