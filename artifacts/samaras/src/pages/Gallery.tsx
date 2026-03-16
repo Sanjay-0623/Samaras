@@ -2,107 +2,59 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import PageTransition from "@/components/PageTransition";
 
+import img01 from "@assets/IMG_6427-1_1773696883206.jpg";
+import img02 from "@assets/_DSC1844-59_1773696883212.jpg";
+import img03 from "@assets/_DSC1837-58_1773696883216.jpg";
+import img04 from "@assets/_DSC1835-57_1773696883220.jpg";
+import img05 from "@assets/_DSC1831-56_1773696883224.jpg";
+import img06 from "@assets/_DSC1828-55_1773696883229.jpg";
+import img07 from "@assets/_DSC1827-54_1773696883233.jpg";
+import img08 from "@assets/_DSC1820-53_1773696883236.jpg";
+import img09 from "@assets/_DSC1819-52_1773696883240.jpg";
+import img10 from "@assets/_DSC1816-51_1773696883244.jpg";
+import img11 from "@assets/_DSC1813-50_1773696883248.jpg";
+import img12 from "@assets/_DSC1808-49_1773696883252.jpg";
+import img13 from "@assets/_DSC1807-48_1773696883256.jpg";
+import img14 from "@assets/_DSC1805-47_1773696883262.jpg";
+import img15 from "@assets/_DSC1803-46_1773696883267.jpg";
+import img16 from "@assets/_DSC1802-45_1773696883271.jpg";
+import img17 from "@assets/_DSC1801-44_1773696883276.jpg";
+import img18 from "@assets/_DSC1795-43_1773696883280.jpg";
+import img19 from "@assets/_DSC1784-42_1773696883285.jpg";
+import img20 from "@assets/_DSC1782-41_1773696883290.jpg";
+
 const galleryImages = [
-  {
-    src: "https://images.unsplash.com/photo-1596797038530-2c107229654b?q=85&w=900&auto=format&fit=crop",
-    alt: "Indian masala curry being cooked",
-    label: "Kitchen Cooking",
-    tall: true,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=85&w=900&auto=format&fit=crop",
-    alt: "Paneer Butter Masala",
-    label: "Paneer Butter Masala",
-    tall: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=85&w=900&auto=format&fit=crop",
-    alt: "Crispy Masala Dosa on plate",
-    label: "Masala Dosa",
-    tall: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=85&w=900&auto=format&fit=crop",
-    alt: "Warm restaurant dining area",
-    label: "Dining Area",
-    tall: true,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1563379091339-03246963f96c?q=85&w=900&auto=format&fit=crop",
-    alt: "Fragrant Veg Biryani",
-    label: "Veg Biryani",
-    tall: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1618449840665-9ed506d73a34?q=85&w=900&auto=format&fit=crop",
-    alt: "Palak Paneer — spinach and cottage cheese",
-    label: "Palak Paneer",
-    tall: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1567337710282-00832b415979?q=85&w=900&auto=format&fit=crop",
-    alt: "Full Indian Thali spread",
-    label: "Grand Thali",
-    tall: true,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1601050690597-df0568f70950?q=85&w=900&auto=format&fit=crop",
-    alt: "Crispy golden samosas",
-    label: "Crispy Samosas",
-    tall: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=85&w=900&auto=format&fit=crop",
-    alt: "Chole Bhature — chickpea curry",
-    label: "Chole Bhature",
-    tall: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1601303516534-bf4c1a574dc9?q=85&w=900&auto=format&fit=crop",
-    alt: "Gulab Jamun dessert in syrup",
-    label: "Gulab Jamun",
-    tall: true,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1546833998-877b37c2e5c6?q=85&w=900&auto=format&fit=crop",
-    alt: "Dal Tadka with ghee tempering",
-    label: "Dal Tadka",
-    tall: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=85&w=900&auto=format&fit=crop",
-    alt: "Chilled mango lassi",
-    label: "Mango Lassi",
-    tall: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=85&w=900&auto=format&fit=crop",
-    alt: "Premium restaurant ambiance",
-    label: "Our Ambiance",
-    tall: true,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?q=85&w=900&auto=format&fit=crop",
-    alt: "Steaming cup of masala chai",
-    label: "Masala Chai",
-    tall: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1606248897732-2c5eba2c9e90?q=85&w=900&auto=format&fit=crop",
-    alt: "Indian street chaat snacks",
-    label: "Street Chaats",
-    tall: false,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=85&w=900&auto=format&fit=crop",
-    alt: "Steaming basmati rice",
-    label: "Basmati Rice",
-    tall: true,
-  },
+  { src: img01,  alt: "Signature Thali plate",        label: "Signature Thali",    tall: true  },
+  { src: img02,  alt: "Crispy Rava Dosa with chutney",label: "Rava Dosa",          tall: false },
+  { src: img03,  alt: "Tomato Dosa with chutneys",    label: "Tomato Dosa",        tall: false },
+  { src: img04,  alt: "Fluffy Set Dosa",              label: "Set Dosa",           tall: true  },
+  { src: img05,  alt: "Ragi Dosa on plate",           label: "Ragi Dosa",          tall: false },
+  { src: img06,  alt: "Carrot Halwa in glass cup",    label: "Carrot Halwa",       tall: false },
+  { src: img07,  alt: "Sweet Halwa top view",         label: "Sweet Halwa",        tall: true  },
+  { src: img08,  alt: "Masala Dosa triangle",         label: "Masala Dosa",        tall: false },
+  { src: img09,  alt: "Golden Medu Vada",             label: "Medu Vada",          tall: false },
+  { src: img10,  alt: "Cone Dosa served with chutney",label: "Cone Dosa",          tall: true  },
+  { src: img11,  alt: "Large Benne Dosa",             label: "Benne Dosa",         tall: false },
+  { src: img12,  alt: "Crispy Oats Dosa",             label: "Oats Dosa",          tall: false },
+  { src: img13,  alt: "Plain Dosa folded",            label: "Plain Dosa",         tall: true  },
+  { src: img14,  alt: "Idli Vada combo plate",        label: "Idli Vada",          tall: false },
+  { src: img15,  alt: "Spicy Veg Noodles",            label: "Veg Noodles",        tall: false },
+  { src: img16,  alt: "Veg Fried Rice",               label: "Veg Fried Rice",     tall: true  },
+  { src: img17,  alt: "Veg Stir Fry",                 label: "Veg Stir Fry",       tall: false },
+  { src: img18,  alt: "Chinese-style Noodles",        label: "Chinese Noodles",    tall: false },
+  { src: img19,  alt: "Gobi Manchurian with peppers", label: "Gobi Manchurian",    tall: true  },
+  { src: img20,  alt: "Starter Platter",              label: "Starter Platter",    tall: false },
 ];
 
+interface GalleryImage {
+  src: string;
+  alt: string;
+  label: string;
+  tall: boolean;
+}
+
 interface LightboxProps {
-  image: typeof galleryImages[0];
+  image: GalleryImage;
   onClose: () => void;
 }
 
@@ -139,7 +91,7 @@ function Lightbox({ image, onClose }: LightboxProps) {
 }
 
 export default function Gallery() {
-  const [selected, setSelected] = useState<typeof galleryImages[0] | null>(null);
+  const [selected, setSelected] = useState<GalleryImage | null>(null);
 
   return (
     <PageTransition>
@@ -197,17 +149,13 @@ export default function Gallery() {
 
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-2xl flex items-end p-5">
-                <motion.div
-                  initial={{ y: 10, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  className="translate-y-2 group-hover:translate-y-0 transition-transform duration-300"
-                >
+                <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                   <p className="text-white font-display font-bold text-lg leading-tight">{img.label}</p>
                   <p className="text-white/60 text-xs mt-0.5 tracking-wider">Tap to enlarge</p>
-                </motion.div>
+                </div>
               </div>
 
-              {/* Orange top-left corner accent */}
+              {/* Orange accent dot */}
               <div className="absolute top-3 left-3 w-2 h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_8px_rgba(255,122,0,0.8)]" />
             </motion.div>
           ))}

@@ -1,11 +1,26 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaLeaf, FaSeedling, FaFire } from "react-icons/fa";
 import { MdTableRestaurant } from "react-icons/md";
 import { PiForkKnife } from "react-icons/pi";
 import PageTransition from "@/components/PageTransition";
 
+import heroImg1 from "@assets/IMG_6427-1_1773696883206.jpg";
+import heroImg2 from "@assets/_DSC1844-59_1773696883212.jpg";
+import heroImg3 from "@assets/_DSC1820-53_1773696883236.jpg";
+import heroImg4 from "@assets/_DSC1813-50_1773696883248.jpg";
+import heroImg5 from "@assets/_DSC1784-42_1773696883285.jpg";
+
 /* ─── STATIC DATA ────────────────────────────────────────── */
+const heroSlides = [
+  { src: heroImg1, label: "Signature Thali" },
+  { src: heroImg2, label: "Rava Dosa" },
+  { src: heroImg3, label: "Masala Dosa" },
+  { src: heroImg4, label: "Benne Dosa" },
+  { src: heroImg5, label: "Gobi Manchurian" },
+];
+
 const specialities = [
   {
     icon: FaLeaf,
@@ -64,24 +79,40 @@ export default function Home() {
   const largeOrbY    = useTransform(scrollYProgress, [0, 1], [-80, 80]);
   const mediumOrbY   = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlideIndex((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <PageTransition>
 
       {/* ═══════════════════════════════════════ HERO ═══ */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-24">
 
-        {/* ── Background image with parallax ── */}
+        {/* ── Slideshow background with parallax ── */}
         <motion.div style={{ y: bgY }} className="absolute inset-[-10%] z-0">
-          <img
-            src="https://images.unsplash.com/photo-1596797038530-2c107229654b?q=90&w=1920&auto=format&fit=crop"
-            alt="Indian vegetarian cooking"
-            className="w-full h-full object-cover"
-            style={{ transform: "translateZ(0)" }}
-          />
+          <AnimatePresence mode="sync">
+            <motion.img
+              key={slideIndex}
+              src={heroSlides[slideIndex].src}
+              alt={heroSlides[slideIndex].label}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.4, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ transform: "translateZ(0)" }}
+            />
+          </AnimatePresence>
         </motion.div>
 
         {/* ── Overlays ── */}
-        <div className="absolute inset-0 z-[1] bg-black/50" />
+        <div className="absolute inset-0 z-[1] bg-black/55" />
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top_right,rgba(255,122,0,0.16),transparent_52%)]" />
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_bottom_left,rgba(255,122,0,0.10),transparent_55%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[#080808] to-transparent z-[1]" />
@@ -174,6 +205,22 @@ export default function Home() {
             </Link>
           </motion.div>
         </motion.div>
+
+        {/* ── Slide dots ── */}
+        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          {heroSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setSlideIndex(i)}
+              className={`rounded-full transition-all duration-500 ${
+                i === slideIndex
+                  ? "w-6 h-2 bg-primary shadow-[0_0_8px_rgba(255,122,0,0.7)]"
+                  : "w-2 h-2 bg-white/30 hover:bg-white/60"
+              }`}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
+        </div>
 
         {/* ── Scroll indicator ── */}
         <motion.div
