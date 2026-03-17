@@ -28,7 +28,7 @@ const branches = [
   },
 ];
 
-const LOGO_SRC = `${import.meta.env.BASE_URL}logo.jpg`;
+const LOGO_SRC = `${import.meta.env.BASE_URL}logo.png`;
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);

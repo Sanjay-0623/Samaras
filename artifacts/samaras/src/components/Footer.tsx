@@ -18,7 +18,7 @@ export default function Footer() {
           <Link to="/" className="flex items-center gap-2 mb-5 group w-fit">
             {!logoError ? (
               <img
-                src={`${import.meta.env.BASE_URL}logo.jpg`}
+                src={`${import.meta.env.BASE_URL}logo.png`}
                 alt="Samara's Veg"
                 className="h-10 w-auto object-contain"
                 onError={() => setLogoError(true)}
