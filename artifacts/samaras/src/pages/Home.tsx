@@ -82,7 +82,7 @@ export default function Home() {
             className="absolute inset-0 w-full h-full object-cover"
             style={{ transform: "translateZ(0)" }}
           >
-            <source src={`${import.meta.env.BASE_URL}videos/hero.mp4`} type="video/mp4" />
+            <source src="/videos/hero.mp4" type="video/mp4" />
           </video>
         </motion.div>
 
