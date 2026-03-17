@@ -107,8 +107,8 @@ const menuData: Category[] = [
     ],
   },
   {
-    id: "chaats",
-    label: "Chaats",
+    id: "chats",
+    label: "Chats",
     emoji: "🌮",
     items: [
       { name: "Pani Puri",      description: "Hollow crispy puris filled with spiced potato-chickpea and dunked in tangy, ice-cold flavoured jaljeera water.", image: IMG.chaat   },

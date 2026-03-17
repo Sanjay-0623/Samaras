@@ -1,26 +1,11 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaLeaf, FaSeedling, FaFire } from "react-icons/fa";
 import { MdTableRestaurant } from "react-icons/md";
 import { PiForkKnife } from "react-icons/pi";
 import PageTransition from "@/components/PageTransition";
 
-import heroImg1 from "@assets/IMG_6427-1_1773696883206.jpg";
-import heroImg2 from "@assets/_DSC1844-59_1773696883212.jpg";
-import heroImg3 from "@assets/_DSC1820-53_1773696883236.jpg";
-import heroImg4 from "@assets/_DSC1813-50_1773696883248.jpg";
-import heroImg5 from "@assets/_DSC1784-42_1773696883285.jpg";
-
 /* ─── STATIC DATA ────────────────────────────────────────── */
-const heroSlides = [
-  { src: heroImg1, label: "Signature Thali" },
-  { src: heroImg2, label: "Rava Dosa" },
-  { src: heroImg3, label: "Masala Dosa" },
-  { src: heroImg4, label: "Benne Dosa" },
-  { src: heroImg5, label: "Gobi Manchurian" },
-];
-
 const specialities = [
   {
     icon: FaLeaf,
@@ -74,19 +59,10 @@ const cardVariants = {
 /* ─── PAGE COMPONENT ─────────────────────────────────────── */
 export default function Home() {
   const { scrollY, scrollYProgress } = useScroll();
-  const bgY          = useTransform(scrollY, [0, 700], [0, 120]);
+  const bgY          = useTransform(scrollY, [0, 700], [0, 80]);
   const heroContentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
   const largeOrbY    = useTransform(scrollYProgress, [0, 1], [-80, 80]);
   const mediumOrbY   = useTransform(scrollYProgress, [0, 1], [40, -40]);
-
-  const [slideIndex, setSlideIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setSlideIndex((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <PageTransition>
@@ -94,26 +70,22 @@ export default function Home() {
       {/* ═══════════════════════════════════════ HERO ═══ */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-24">
 
-        {/* ── Slideshow background with parallax ── */}
-        <motion.div style={{ y: bgY }} className="absolute inset-[-10%] z-0">
-          <AnimatePresence mode="sync">
-            <motion.img
-              key={slideIndex}
-              src={heroSlides[slideIndex].src}
-              alt={heroSlides[slideIndex].label}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.4, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ transform: "translateZ(0)" }}
-            />
-          </AnimatePresence>
+        {/* ── Full-screen video background ── */}
+        <motion.div style={{ y: bgY }} className="absolute inset-[-8%] z-0">
+          <video
+            src={`${import.meta.env.BASE_URL}videos/indian_chef_cooking_paneer.mp4`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ transform: "translateZ(0)" }}
+          />
         </motion.div>
 
         {/* ── Overlays ── */}
-        <div className="absolute inset-0 z-[1] bg-black/55" />
-        <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top_right,rgba(255,122,0,0.16),transparent_52%)]" />
+        <div className="absolute inset-0 z-[1] bg-black/60" />
+        <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top_right,rgba(255,122,0,0.18),transparent_52%)]" />
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_bottom_left,rgba(255,122,0,0.10),transparent_55%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[#080808] to-transparent z-[1]" />
 
@@ -132,24 +104,12 @@ export default function Home() {
           style={{ y: heroContentY }}
           className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center mt-20"
         >
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-7"
-          >
-            <span className="px-6 py-2 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-semibold tracking-[0.3em] uppercase backdrop-blur-md">
-              Pure Vegetarian · Authentic Indian
-            </span>
-          </motion.div>
-
           {/* Restaurant name */}
           <motion.h1
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.15 }}
-            className="text-[4.2rem] sm:text-[5.5rem] md:text-[7.5rem] lg:text-[9rem] font-display font-bold text-white leading-none tracking-tight mb-4"
+            transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
+            className="text-[4.2rem] sm:text-[5.5rem] md:text-[7.5rem] lg:text-[9rem] font-display font-bold text-white leading-none tracking-tight mb-5"
           >
             Samara's Veg
           </motion.h1>
@@ -158,7 +118,7 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg md:text-2xl font-light text-white/80 tracking-wider mb-3"
           >
             Authentic Indian{" "}
@@ -170,7 +130,7 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             className="text-sm md:text-base text-white/50 tracking-[0.14em] mb-12 font-light"
           >
             Fresh Ingredients&nbsp;•&nbsp;Traditional Taste&nbsp;•&nbsp;Modern Dining
@@ -180,7 +140,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, duration: 0.7 }}
+            transition={{ delay: 0.9, duration: 0.7 }}
             className="flex flex-col sm:flex-row gap-5 justify-center w-full sm:w-auto"
           >
             <Link
@@ -205,22 +165,6 @@ export default function Home() {
             </Link>
           </motion.div>
         </motion.div>
-
-        {/* ── Slide dots ── */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-          {heroSlides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setSlideIndex(i)}
-              className={`rounded-full transition-all duration-500 ${
-                i === slideIndex
-                  ? "w-6 h-2 bg-primary shadow-[0_0_8px_rgba(255,122,0,0.7)]"
-                  : "w-2 h-2 bg-white/30 hover:bg-white/60"
-              }`}
-              aria-label={`Slide ${i + 1}`}
-            />
-          ))}
-        </div>
 
         {/* ── Scroll indicator ── */}
         <motion.div

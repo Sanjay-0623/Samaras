@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaInstagram, FaFacebookF, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { BsFlower1 } from "react-icons/bs";
 
 export default function Footer() {
+  const [logoError, setLogoError] = useState(false);
+
   return (
     <footer className="bg-[#080808] pt-16 pb-8 px-6 lg:px-12 relative overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
@@ -12,14 +15,25 @@ export default function Footer() {
 
         {/* Brand column */}
         <div className="col-span-1 md:col-span-1">
-          <Link to="/" className="flex items-center gap-3 mb-4 group w-fit">
-            <BsFlower1 className="text-primary text-2xl group-hover:scale-110 transition-transform duration-300" />
-            <h2 className="text-2xl font-display font-bold text-white tracking-wider">SAMARA'S VEG</h2>
+          <Link to="/" className="flex items-center gap-2 mb-5 group w-fit">
+            {!logoError ? (
+              <img
+                src={`${import.meta.env.BASE_URL}logo.png`}
+                alt="Samara's Veg"
+                className="h-10 w-auto object-contain"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <div className="flex items-center gap-2">
+                <BsFlower1 className="text-primary text-xl group-hover:scale-110 transition-transform duration-300" />
+                <span className="text-xl font-display font-bold text-white tracking-wider">SAMARA'S VEG</span>
+              </div>
+            )}
           </Link>
           <p className="text-white/50 max-w-sm mb-6 italic font-light text-sm">
             "Where every meal becomes a memory."
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             <a
               href="https://www.instagram.com/samarasveg?igsh=NHNhcjRnd29obzFh"
               target="_blank"
@@ -93,7 +107,7 @@ export default function Footer() {
             <div>
               <p className="text-primary text-xs font-bold uppercase tracking-widest mb-2">Chikkaballapura</p>
               <a href="tel:+918951454455" className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light mb-1.5 group">
-                <FaPhoneAlt className="text-primary/60 text-xs group-hover:text-primary transition-colors" />
+                <FaPhoneAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
                 +91 8951454455
               </a>
               <a
@@ -102,7 +116,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group"
               >
-                <FaMapMarkerAlt className="text-primary/60 text-xs group-hover:text-primary transition-colors" />
+                <FaMapMarkerAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
                 Open in Maps ↗
               </a>
             </div>
@@ -113,8 +127,27 @@ export default function Footer() {
             <div>
               <p className="text-primary text-xs font-bold uppercase tracking-widest mb-2">Bagepalli</p>
               <a href="tel:+919164117733" className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group">
-                <FaPhoneAlt className="text-primary/60 text-xs group-hover:text-primary transition-colors" />
+                <FaPhoneAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
                 +91 9164117733
+              </a>
+            </div>
+
+            <div className="w-full h-[1px] bg-white/8" />
+
+            {/* New Branch */}
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <p className="text-primary text-xs font-bold uppercase tracking-widest">New Branch</p>
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/15 text-primary px-2 py-0.5 rounded-full border border-primary/25">New</span>
+              </div>
+              <a
+                href="https://share.google/PHvX6mZyHGcqLZRph"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group"
+              >
+                <FaMapMarkerAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
+                View on Google Maps ↗
               </a>
             </div>
           </div>

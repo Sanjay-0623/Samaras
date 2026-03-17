@@ -9,6 +9,7 @@ const branches = [
     tel: "tel:+918951454455",
     wa: "https://wa.me/918951454455",
     mapsUrl: "https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw",
+    isNew: false,
   },
   {
     name: "Bagepalli Branch",
@@ -16,6 +17,15 @@ const branches = [
     tel: "tel:+919164117733",
     wa: "https://wa.me/919164117733",
     mapsUrl: null,
+    isNew: false,
+  },
+  {
+    name: "New Branch",
+    phone: null,
+    tel: null,
+    wa: null,
+    mapsUrl: "https://share.google/PHvX6mZyHGcqLZRph",
+    isNew: true,
   },
 ];
 
@@ -64,32 +74,33 @@ export default function Contact() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
 
-                {/* Branch name */}
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(255,122,0,0.7)]" />
                   <h3 className="text-white font-display font-bold text-xl tracking-wide relative z-10">
                     {branch.name}
                   </h3>
+                  {branch.isNew && (
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/15 text-primary px-2.5 py-0.5 rounded-full border border-primary/30">
+                      New
+                    </span>
+                  )}
                 </div>
 
                 <div className="space-y-4 relative z-10">
-                  {/* Phone */}
-                  <a
-                    href={branch.tel}
-                    className="flex items-center gap-4 group/phone"
-                  >
-                    <div className="w-10 h-10 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover/phone:bg-primary/20 transition-colors duration-300">
-                      <FaPhoneAlt className="text-primary text-sm" />
-                    </div>
-                    <div>
-                      <p className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-0.5">Phone</p>
-                      <p className="text-white font-semibold text-lg group-hover/phone:text-primary transition-colors duration-300">
-                        {branch.phone}
-                      </p>
-                    </div>
-                  </a>
+                  {branch.phone && branch.tel && (
+                    <a href={branch.tel} className="flex items-center gap-4 group/phone">
+                      <div className="w-10 h-10 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover/phone:bg-primary/20 transition-colors duration-300">
+                        <FaPhoneAlt className="text-primary text-sm" />
+                      </div>
+                      <div>
+                        <p className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-0.5">Phone</p>
+                        <p className="text-white font-semibold text-lg group-hover/phone:text-primary transition-colors duration-300">
+                          {branch.phone}
+                        </p>
+                      </div>
+                    </a>
+                  )}
 
-                  {/* Maps — only for Chikkaballapura */}
                   {branch.mapsUrl && (
                     <a
                       href={branch.mapsUrl}
@@ -108,22 +119,26 @@ export default function Contact() {
                       </div>
                     </a>
                   )}
+
+                  {branch.isNew && !branch.phone && (
+                    <p className="text-white/40 text-sm font-light italic">Phone number coming soon</p>
+                  )}
                 </div>
               </motion.div>
             ))}
 
-            {/* WhatsApp CTAs — one per branch */}
+            {/* WhatsApp CTAs — for branches with phone */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
               className="space-y-3 pt-3"
             >
               <p className="text-white/40 text-xs uppercase tracking-widest font-semibold">Chat on WhatsApp</p>
-              {branches.map((branch, i) => (
+              {branches.filter(b => b.wa).map((branch, i) => (
                 <a
                   key={i}
-                  href={branch.wa}
+                  href={branch.wa!}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between gap-4 bg-[#25D366]/8 border border-[#25D366]/20 px-6 py-4 rounded-2xl hover:bg-[#25D366]/15 hover:border-[#25D366]/40 transition-all duration-300 group"

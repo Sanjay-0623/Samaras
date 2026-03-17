@@ -4,6 +4,30 @@
 
 pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
 
+## Samara's Veg — Website Notes
+
+### Key files
+- `artifacts/samaras/src/pages/Home.tsx` — Hero (video BG, no badge, parallax overlay)
+- `artifacts/samaras/src/components/Header.tsx` — Logo LEFT, hamburger RIGHT
+- `artifacts/samaras/src/components/Footer.tsx` — Logo, 3 branches, socials
+- `artifacts/samaras/src/components/WhatsAppButton.tsx` — Multi-contact speed-dial (WhatsApp + Email + Instagram + Facebook)
+- `artifacts/samaras/src/pages/Contact.tsx` — 3 branches (Chikkaballapura, Bagepalli, New Branch)
+- `artifacts/samaras/src/pages/Menu.tsx` — 9 categories, 64 dishes; "Chats" category (was "Chaats")
+- `artifacts/samaras/src/pages/Gallery.tsx` — 20 real restaurant photos, masonry + lightbox
+
+### Assets
+- `artifacts/samaras/public/logo.png` — AI-generated brand logo
+- `artifacts/samaras/public/videos/indian_chef_cooking_paneer.mp4` — Hero BG video + About section video
+
+### Branch info
+- Chikkaballapura: +91 8951454455, Maps: maps.app.goo.gl/nZhwxaGPvhtRrkhKA, Email: Chikkaballapur@gmail.com
+- Bagepalli: +91 9164117733, Maps: none, Email: Bagepalli@samarasveg.com
+- New Branch: Maps: share.google/PHvX6mZyHGcqLZRph (no phone yet)
+
+### Social
+- Instagram: https://www.instagram.com/samarasveg?igsh=NHNhcjRnd29obzFh
+- Facebook: https://www.facebook.com/share/18AnVPJqBA/
+
 ## Stack
 
 - **Monorepo tool**: pnpm workspaces
