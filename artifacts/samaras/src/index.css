@@ -34,6 +34,11 @@
 }
 
 @layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-white overflow-x-hidden;
     background-color: #080808;

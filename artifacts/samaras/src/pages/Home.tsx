@@ -33,17 +33,17 @@ const signatureDishes = [
   {
     name: "Paneer Butter Masala",
     description: "Soft paneer cubes in a rich, creamy tomato-based gravy with aromatic spices.",
-    image: "https://images.unsplash.com/photo-1631452180519-a9c68606ddf2?q=80&w=800&auto=format&fit=crop",
+    image: `${import.meta.env.BASE_URL}dish-paneer.png`,
   },
   {
     name: "Masala Dosa",
     description: "Crispy golden dosa filled with spiced potato stuffing, served with sambar and chutneys.",
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=800&auto=format&fit=crop",
+    image: `${import.meta.env.BASE_URL}dish-dosa.jpg`,
   },
   {
     name: "Veg Biryani",
     description: "Fragrant basmati rice layered with seasonal vegetables and whole spices, slow-cooked to perfection.",
-    image: "https://images.unsplash.com/photo-1574653853027-5382a3d23a15?q=80&w=800&auto=format&fit=crop",
+    image: `${import.meta.env.BASE_URL}dish-biryani.png`,
   },
 ];
 
@@ -68,7 +68,7 @@ export default function Home() {
     <PageTransition>
 
       {/* ═══════════════════════════════════════ HERO ═══ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-16 md:-mt-24">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden" style={{ marginTop: 0 }}>
 
         {/* ── Full-screen video background ── */}
         <motion.div style={{ y: bgY }} className="absolute inset-[-8%] z-0">
@@ -105,7 +105,7 @@ export default function Home() {
         {/* ── Center content ── */}
         <motion.div
           style={{ y: heroContentY }}
-          className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center mt-8 md:mt-20"
+          className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center pt-20 md:pt-24"
         >
           {/* Restaurant name */}
           <motion.h1
