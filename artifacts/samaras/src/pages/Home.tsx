@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaLeaf, FaSeedling, FaFire } from "react-icons/fa";
 import { MdTableRestaurant } from "react-icons/md";
@@ -64,6 +65,15 @@ export default function Home() {
   const largeOrbY    = useTransform(scrollYProgress, [0, 1], [-80, 80]);
   const mediumOrbY   = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.play().catch(() => {});
+    }
+  }, []);
+
   return (
     <PageTransition>
 
@@ -73,13 +83,14 @@ export default function Home() {
         {/* ── Full-screen video background ── */}
         <motion.div style={{ y: bgY }} className="absolute inset-[-8%] z-0">
           <video
+            ref={videoRef}
             autoPlay
             muted
             loop
             playsInline
             preload="auto"
             poster="https://images.unsplash.com/photo-1585937421612-70a008356fbe?q=80&w=1600&auto=format&fit=crop"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover hero-video"
             style={{ transform: "translateZ(0)" }}
           >
             <source src="/videos/hero.mp4" type="video/mp4" />
