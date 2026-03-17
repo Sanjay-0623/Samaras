@@ -395,7 +395,7 @@ export default function Home() {
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4">We Are Serving At</h3>
+            <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4">We Serve At</h3>
             <p className="text-white/60 mb-8 md:mb-16 text-lg font-light">Come visit us and enjoy an authentic Indian vegetarian experience.</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
