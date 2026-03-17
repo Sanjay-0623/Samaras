@@ -8,24 +8,14 @@ const branches = [
     phone: "+91 8951454455",
     tel: "tel:+918951454455",
     wa: "https://wa.me/918951454455",
-    mapsUrl: "https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw",
-    isNew: false,
+    address: "FP2P+M9C, Chikkaballapur, Karnataka 562101",
   },
   {
     name: "Bagepalli Branch",
     phone: "+91 9164117733",
     tel: "tel:+919164117733",
     wa: "https://wa.me/919164117733",
-    mapsUrl: null,
-    isNew: false,
-  },
-  {
-    name: "New Branch",
-    phone: null,
-    tel: null,
-    wa: null,
-    mapsUrl: "https://share.google/PHvX6mZyHGcqLZRph",
-    isNew: true,
+    address: "Toll plaza, NH7, Bagepalli, Karnataka 561207",
   },
 ];
 
@@ -79,66 +69,46 @@ export default function Contact() {
                   <h3 className="text-white font-display font-bold text-xl tracking-wide relative z-10">
                     {branch.name}
                   </h3>
-                  {branch.isNew && (
-                    <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/15 text-primary px-2.5 py-0.5 rounded-full border border-primary/30">
-                      New
-                    </span>
-                  )}
                 </div>
 
                 <div className="space-y-4 relative z-10">
-                  {branch.phone && branch.tel && (
-                    <a href={branch.tel} className="flex items-center gap-4 group/phone">
-                      <div className="w-10 h-10 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover/phone:bg-primary/20 transition-colors duration-300">
-                        <FaPhoneAlt className="text-primary text-sm" />
-                      </div>
-                      <div>
-                        <p className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-0.5">Phone</p>
-                        <p className="text-white font-semibold text-lg group-hover/phone:text-primary transition-colors duration-300">
-                          {branch.phone}
-                        </p>
-                      </div>
-                    </a>
-                  )}
+                  <a href={branch.tel} className="flex items-center gap-4 group/phone">
+                    <div className="w-10 h-10 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover/phone:bg-primary/20 transition-colors duration-300">
+                      <FaPhoneAlt className="text-primary text-sm" />
+                    </div>
+                    <div>
+                      <p className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-0.5">Phone</p>
+                      <p className="text-white font-semibold text-lg group-hover/phone:text-primary transition-colors duration-300">
+                        {branch.phone}
+                      </p>
+                    </div>
+                  </a>
 
-                  {branch.mapsUrl && (
-                    <a
-                      href={branch.mapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 group/map"
-                    >
-                      <div className="w-10 h-10 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center shrink-0 group-hover/map:bg-primary/20 transition-colors duration-300">
-                        <FaMapMarkerAlt className="text-primary text-sm" />
-                      </div>
-                      <div>
-                        <p className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-0.5">Location</p>
-                        <span className="text-primary font-semibold text-sm tracking-wide group-hover/map:text-white transition-colors duration-300 flex items-center gap-1">
-                          Open in Google Maps <span className="text-xs">↗</span>
-                        </span>
-                      </div>
-                    </a>
-                  )}
-
-                  {branch.isNew && !branch.phone && (
-                    <p className="text-white/40 text-sm font-light italic">Phone number coming soon</p>
-                  )}
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                      <FaMapMarkerAlt className="text-primary text-sm" />
+                    </div>
+                    <div>
+                      <p className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-0.5">Address</p>
+                      <p className="text-white/80 text-base font-light leading-snug">{branch.address}</p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
 
-            {/* WhatsApp CTAs — for branches with phone */}
+            {/* WhatsApp CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
               className="space-y-3 pt-3"
             >
               <p className="text-white/40 text-xs uppercase tracking-widest font-semibold">Chat on WhatsApp</p>
-              {branches.filter(b => b.wa).map((branch, i) => (
+              {branches.map((branch, i) => (
                 <a
                   key={i}
-                  href={branch.wa!}
+                  href={branch.wa}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between gap-4 bg-[#25D366]/8 border border-[#25D366]/20 px-6 py-4 rounded-2xl hover:bg-[#25D366]/15 hover:border-[#25D366]/40 transition-all duration-300 group"

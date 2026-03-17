@@ -33,7 +33,7 @@ const signatureDishes = [
   {
     name: "Paneer Butter Masala",
     description: "Soft paneer cubes in a rich, creamy tomato-based gravy with aromatic spices.",
-    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1631452180519-a9c68606ddf2?q=80&w=800&auto=format&fit=crop",
   },
   {
     name: "Masala Dosa",
@@ -43,7 +43,7 @@ const signatureDishes = [
   {
     name: "Veg Biryani",
     description: "Fragrant basmati rice layered with seasonal vegetables and whole spices, slow-cooked to perfection.",
-    image: "https://images.unsplash.com/photo-1563379091339-03246963f96c?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1574653853027-5382a3d23a15?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
@@ -112,7 +112,11 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
-            className="text-[4.2rem] sm:text-[5.5rem] md:text-[7.5rem] lg:text-[9rem] font-display font-bold text-white leading-none tracking-tight mb-5"
+            className="text-[4.2rem] sm:text-[5.5rem] md:text-[7.5rem] lg:text-[9rem] font-display font-bold leading-none tracking-tight mb-5"
+            style={{
+              color: "#22CC22",
+              textShadow: "3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 4px 12px rgba(0,0,0,0.85)",
+            }}
           >
             Samara's Veg
           </motion.h1>
@@ -169,15 +173,6 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* ── Scroll indicator ── */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <span className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase">Scroll</span>
-          <div className="w-[1px] h-[60px] bg-gradient-to-b from-white/60 to-transparent" />
-        </motion.div>
       </section>
 
       {/* ═══════════════════════════ ABOUT ═══ */}
@@ -376,44 +371,75 @@ export default function Home() {
       {/* ═══════════════════════ SERVING LOCATION ═══ */}
       <section className="py-32 px-6 lg:px-12 bg-[#080808] relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+        <div className="max-w-5xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h2 className="text-primary font-bold tracking-[0.3em] uppercase mb-4 text-xs">Find Us</h2>
-            <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4">Serving At</h3>
+            <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4">We Are Serving At</h3>
             <p className="text-white/60 mb-16 text-lg font-light">Come visit us and enjoy an authentic Indian vegetarian experience.</p>
 
-            <a
-              href="https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block mx-auto max-w-2xl"
-            >
-              <div className="glass-panel p-10 md:p-16 hover:border-primary/30 transition-all duration-500 relative overflow-hidden">
-                <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12" />
-                <motion.div
-                  className="w-24 h-24 mx-auto bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-8 relative"
-                  whileHover={{ scale: 1.05 }}
-                >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Location 1 */}
+              <a
+                href="https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block"
+              >
+                <div className="glass-panel p-10 hover:border-primary/30 transition-all duration-500 relative overflow-hidden h-full">
+                  <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12" />
                   <motion.div
-                    className="absolute inset-0 bg-primary/20 rounded-full"
-                    animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  <FaMapMarkerAlt className="text-primary w-8 h-8 relative z-10" />
-                </motion.div>
-                <h4 className="text-3xl font-display font-bold text-white mb-4">Samara's Veg</h4>
-                <p className="text-white/60 text-xl mb-8 font-light">Click to open location in Google Maps</p>
-                <span className="inline-flex items-center text-primary text-sm font-bold uppercase tracking-widest group-hover:text-white transition-colors">
-                  Open in Google Maps
-                  <motion.span className="ml-2 inline-block" initial={{ x: 0 }} whileHover={{ x: 5 }}>→</motion.span>
-                </span>
-              </div>
-            </a>
+                    className="w-16 h-16 mx-auto bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-6 relative"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-primary/20 rounded-full"
+                      animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                    <FaMapMarkerAlt className="text-primary w-6 h-6 relative z-10" />
+                  </motion.div>
+                  <h4 className="text-2xl font-display font-bold text-white mb-3">Samara's Veg</h4>
+                  <p className="text-white/50 text-base mb-6 font-light">Chikkaballapura</p>
+                  <span className="inline-flex items-center text-primary text-sm font-bold uppercase tracking-widest group-hover:text-white transition-colors">
+                    Open in Google Maps
+                    <motion.span className="ml-2 inline-block" initial={{ x: 0 }} whileHover={{ x: 5 }}>→</motion.span>
+                  </span>
+                </div>
+              </a>
+
+              {/* Location 2 */}
+              <a
+                href="https://share.google/PHvX6mZyHGcqLZRph"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block"
+              >
+                <div className="glass-panel p-10 hover:border-primary/30 transition-all duration-500 relative overflow-hidden h-full">
+                  <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12" />
+                  <motion.div
+                    className="w-16 h-16 mx-auto bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-6 relative"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-primary/20 rounded-full"
+                      animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                    />
+                    <FaMapMarkerAlt className="text-primary w-6 h-6 relative z-10" />
+                  </motion.div>
+                  <h4 className="text-2xl font-display font-bold text-white mb-3">Samara's Veg</h4>
+                  <p className="text-white/50 text-base mb-6 font-light">Bagepalli</p>
+                  <span className="inline-flex items-center text-primary text-sm font-bold uppercase tracking-widest group-hover:text-white transition-colors">
+                    Open in Google Maps
+                    <motion.span className="ml-2 inline-block" initial={{ x: 0 }} whileHover={{ x: 5 }}>→</motion.span>
+                  </span>
+                </div>
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>

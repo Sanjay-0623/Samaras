@@ -227,8 +227,13 @@ export default function WhatsAppButton() {
               <MdClose className="w-7 h-7" />
             </motion.span>
           ) : (
-            <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <FaWhatsapp className="w-7 h-7" />
+            <motion.span key="phone" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }} className="flex items-center justify-center w-7 h-7">
+              <img
+                src={`${import.meta.env.BASE_URL}phone-icon.jpg`}
+                alt="Contact"
+                className="w-full h-full object-contain"
+                style={{ mixBlendMode: "screen" }}
+              />
             </motion.span>
           )}
         </AnimatePresence>

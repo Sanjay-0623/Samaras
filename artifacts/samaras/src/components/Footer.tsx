@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaInstagram, FaFacebookF, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaInstagram, FaFacebookF, FaWhatsapp, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { BsFlower1 } from "react-icons/bs";
 
 export default function Footer() {
@@ -34,6 +34,15 @@ export default function Footer() {
             "Where every meal becomes a memory."
           </p>
           <div className="flex gap-3">
+            <a
+              href="https://wa.me/918951454455"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-[#25D366] hover:border-[#25D366] hover:scale-110 transition-all duration-300 ease-out"
+            >
+              <FaWhatsapp size={16} />
+            </a>
             <a
               href="https://www.instagram.com/samarasveg?igsh=NHNhcjRnd29obzFh"
               target="_blank"
