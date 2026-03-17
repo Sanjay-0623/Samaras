@@ -30,26 +30,12 @@ const speedDial = [
   { id: "whatsapp",  label: "WhatsApp",  Icon: FaWhatsapp,   color: "bg-[#25D366]", href: null },
 ];
 
-/* ─── BRANCH POPUP ────────────────────────────────────────── */
-type PopupType = "whatsapp" | "email" | null;
-
+/* ─── EMAIL BRANCH POPUP (inline, unchanged) ──────────────── */
 interface BranchPopupProps {
-  type: PopupType;
   onClose: () => void;
 }
 
-function BranchPopup({ type, onClose }: BranchPopupProps) {
-  if (!type) return null;
-
-  const isWa = type === "whatsapp";
-  const branches = isWa ? waBranches : emailBranches;
-  const Icon = isWa ? FaWhatsapp : FaEnvelope;
-  const iconColor = isWa ? "text-[#25D366]" : "text-primary";
-  const hoverColor = isWa ? "hover:bg-[#25D366]/10 hover:border-[#25D366]/25" : "hover:bg-primary/10 hover:border-primary/25";
-  const sublabelHover = isWa ? "group-hover:text-[#25D366]/70" : "group-hover:text-primary/70";
-  const bgIcon = isWa ? "bg-[#25D366]/15 group-hover:bg-[#25D366]/25" : "bg-primary/15 group-hover:bg-primary/25";
-  const title = isWa ? "Select a Branch" : "Email a Branch";
-
+function EmailBranchPopup({ onClose }: BranchPopupProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16, scale: 0.92 }}
@@ -60,10 +46,10 @@ function BranchPopup({ type, onClose }: BranchPopupProps) {
     >
       <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
         <div className="flex items-center gap-2.5">
-          <div className={`w-8 h-8 ${isWa ? "bg-[#25D366]/15" : "bg-primary/15"} rounded-full flex items-center justify-center`}>
-            <Icon className={iconColor} size={15} />
+          <div className="w-8 h-8 bg-primary/15 rounded-full flex items-center justify-center">
+            <FaEnvelope className="text-primary" size={15} />
           </div>
-          <p className="text-white font-semibold text-sm">{title}</p>
+          <p className="text-white font-semibold text-sm">Email a Branch</p>
         </div>
         <button
           onClick={onClose}
@@ -74,7 +60,7 @@ function BranchPopup({ type, onClose }: BranchPopupProps) {
       </div>
 
       <div className="p-3 space-y-1.5">
-        {branches.map((branch, i) => (
+        {emailBranches.map((branch, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, x: 10 }}
@@ -83,20 +69,18 @@ function BranchPopup({ type, onClose }: BranchPopupProps) {
           >
             <a
               href={branch.url}
-              target={isWa ? "_blank" : undefined}
-              rel={isWa ? "noopener noreferrer" : undefined}
               onClick={onClose}
-              className={`flex items-center gap-3 px-4 py-3.5 rounded-xl border border-transparent ${hoverColor} transition-all duration-200 group`}
+              className="flex items-center gap-3 px-4 py-3.5 rounded-xl border border-transparent hover:bg-primary/10 hover:border-primary/25 transition-all duration-200 group"
             >
-              <div className={`w-8 h-8 ${bgIcon} rounded-full flex items-center justify-center shrink-0 transition-colors`}>
-                <Icon className={iconColor} size={14} />
+              <div className="w-8 h-8 bg-primary/15 group-hover:bg-primary/25 rounded-full flex items-center justify-center shrink-0 transition-colors">
+                <FaEnvelope className="text-primary" size={14} />
               </div>
               <div className="flex flex-col min-w-0">
                 <span className="text-white/85 group-hover:text-white text-sm font-medium transition-colors leading-tight">
                   {branch.name}
                 </span>
-                <span className={`text-white/35 text-[11px] ${sublabelHover} transition-colors mt-0.5 truncate`}>
-                  {"email" in branch ? branch.email : branch.phone}
+                <span className="text-white/35 text-[11px] group-hover:text-primary/70 transition-colors mt-0.5 truncate">
+                  {branch.email}
                 </span>
               </div>
               <span className="ml-auto text-white/25 group-hover:text-white/60 transition-colors text-xs shrink-0">→</span>
@@ -106,23 +90,111 @@ function BranchPopup({ type, onClose }: BranchPopupProps) {
       </div>
 
       <div className="px-5 pb-4 pt-1">
-        <p className="text-white/25 text-[11px] text-center">
-          {isWa ? "We typically reply within minutes" : "We'll respond within 24 hours"}
-        </p>
+        <p className="text-white/25 text-[11px] text-center">We'll respond within 24 hours</p>
       </div>
+    </motion.div>
+  );
+}
+
+/* ─── WHATSAPP CENTERED MODAL ─────────────────────────────── */
+interface WaModalProps {
+  onClose: () => void;
+}
+
+function WaBranchModal({ onClose }: WaModalProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[200] flex items-center justify-center px-4"
+      onClick={onClose}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+      {/* Modal card */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 24 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.93, y: 16 }}
+        transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+        className="relative w-full max-w-sm rounded-2xl border border-white/10 bg-[#111]/98 backdrop-blur-2xl shadow-[0_32px_80px_rgba(0,0,0,0.8)] overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-white/8">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-[#25D366]/15 rounded-full flex items-center justify-center">
+              <FaWhatsapp className="text-[#25D366]" size={17} />
+            </div>
+            <div>
+              <p className="text-white font-semibold text-base leading-tight">Select a Branch</p>
+              <p className="text-white/35 text-[11px] mt-0.5">Chat with us on WhatsApp</p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-white/6 hover:bg-white/14 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+            aria-label="Close"
+          >
+            <MdClose size={16} />
+          </button>
+        </div>
+
+        {/* Branch options */}
+        <div className="p-4 space-y-2">
+          {waBranches.map((branch, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.08 + i * 0.07, duration: 0.28 }}
+            >
+              <a
+                href={branch.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={onClose}
+                className="flex items-center gap-4 px-5 py-4 rounded-xl border border-white/6 hover:bg-[#25D366]/8 hover:border-[#25D366]/30 transition-all duration-200 group"
+              >
+                <div className="w-10 h-10 bg-[#25D366]/12 group-hover:bg-[#25D366]/22 rounded-full flex items-center justify-center shrink-0 transition-colors">
+                  <FaWhatsapp className="text-[#25D366]" size={17} />
+                </div>
+                <div className="flex flex-col min-w-0">
+                  <span className="text-white/90 group-hover:text-white text-sm font-semibold transition-colors leading-tight">
+                    {branch.name}
+                  </span>
+                  <span className="text-white/40 text-xs group-hover:text-[#25D366]/80 transition-colors mt-0.5">
+                    {branch.phone}
+                  </span>
+                </div>
+                <span className="ml-auto text-white/20 group-hover:text-[#25D366]/70 transition-colors text-sm shrink-0">→</span>
+              </a>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Footer */}
+        <div className="px-6 pb-5 pt-1">
+          <p className="text-white/25 text-[11px] text-center">We typically reply within minutes</p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
 
 /* ─── MAIN WIDGET ─────────────────────────────────────────── */
 export default function WhatsAppButton() {
-  const [popup, setPopup] = useState<PopupType>(null);
+  const [emailPopup, setEmailPopup] = useState(false);
+  const [waModal, setWaModal]       = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setPopup(null);
+        setEmailPopup(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -131,39 +203,47 @@ export default function WhatsAppButton() {
 
   const handleDialClick = (item: typeof speedDial[0]) => {
     if (item.id === "whatsapp") {
-      setPopup(popup === "whatsapp" ? null : "whatsapp");
+      setWaModal(true);
     } else if (item.id === "email") {
-      setPopup(popup === "email" ? null : "email");
+      setEmailPopup((prev) => !prev);
     } else if (item.href) {
       window.open(item.href, "_blank", "noopener,noreferrer");
     }
   };
 
   return (
-    <div ref={containerRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-
-      {/* Branch popup (WhatsApp or Email) */}
+    <>
+      {/* Centered WhatsApp modal (portal-style, covers full screen) */}
       <AnimatePresence>
-        {popup && (
-          <div className="mb-1">
-            <BranchPopup type={popup} onClose={() => setPopup(null)} />
-          </div>
-        )}
+        {waModal && <WaBranchModal onClose={() => setWaModal(false)} />}
       </AnimatePresence>
 
-      {/* Always-visible contact buttons */}
-      <div className="flex flex-col items-end gap-2.5">
-        {speedDial.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => handleDialClick(item)}
-            className={`w-11 h-11 ${item.color} text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform duration-200`}
-            aria-label={item.label}
-          >
-            <item.Icon size={18} />
-          </button>
-        ))}
+      {/* Floating contact buttons */}
+      <div ref={containerRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+
+        {/* Email inline popup */}
+        <AnimatePresence>
+          {emailPopup && (
+            <div className="mb-1">
+              <EmailBranchPopup onClose={() => setEmailPopup(false)} />
+            </div>
+          )}
+        </AnimatePresence>
+
+        {/* Always-visible contact buttons */}
+        <div className="flex flex-col items-end gap-2.5">
+          {speedDial.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => handleDialClick(item)}
+              className={`w-11 h-11 ${item.color} text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform duration-200`}
+              aria-label={item.label}
+            >
+              <item.Icon size={18} />
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

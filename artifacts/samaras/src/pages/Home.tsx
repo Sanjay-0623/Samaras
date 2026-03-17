@@ -68,10 +68,16 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const video = videoRef.current;
-    if (video) {
-      video.muted = true;
-      video.play().catch(() => {});
-    }
+    if (!video) return;
+    video.muted = true;
+    video.play().catch(() => {});
+
+    const onLoad = () => {
+      const v = document.querySelector<HTMLVideoElement>(".hero-video");
+      if (v) v.play().catch(() => {});
+    };
+    window.addEventListener("load", onLoad);
+    return () => window.removeEventListener("load", onLoad);
   }, []);
 
   return (
