@@ -73,18 +73,21 @@ export default function Home() {
         {/* ── Full-screen video background ── */}
         <motion.div style={{ y: bgY }} className="absolute inset-[-8%] z-0">
           <video
-            src={`${import.meta.env.BASE_URL}videos/indian_chef_cooking_paneer.mp4`}
             autoPlay
             muted
             loop
             playsInline
+            preload="auto"
+            poster="https://images.unsplash.com/photo-1585937421612-70a008356fbe?q=80&w=1600&auto=format&fit=crop"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ transform: "translateZ(0)" }}
-          />
+          >
+            <source src={`${import.meta.env.BASE_URL}videos/hero.mp4`} type="video/mp4" />
+          </video>
         </motion.div>
 
         {/* ── Overlays ── */}
-        <div className="absolute inset-0 z-[1] bg-black/60" />
+        <div className="absolute inset-0 z-[1] bg-black/50" />
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top_right,rgba(255,122,0,0.18),transparent_52%)]" />
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_bottom_left,rgba(255,122,0,0.10),transparent_55%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[#080808] to-transparent z-[1]" />
