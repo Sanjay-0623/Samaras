@@ -120,13 +120,13 @@ export default function Footer() {
                 +91 8951454455
               </a>
               <a
-                href="https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw"
+                href="https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group"
               >
                 <FaMapMarkerAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
-                Open in Maps ↗
+                FP2P+M9C, Chikkaballapur, Karnataka 562101
               </a>
             </div>
 
@@ -135,20 +135,10 @@ export default function Footer() {
             {/* Bagepalli */}
             <div>
               <p className="text-primary text-xs font-bold uppercase tracking-widest mb-2">Bagepalli</p>
-              <a href="tel:+919164117733" className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group">
+              <a href="tel:+919164117733" className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light mb-1.5 group">
                 <FaPhoneAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
                 +91 9164117733
               </a>
-            </div>
-
-            <div className="w-full h-[1px] bg-white/8" />
-
-            {/* New Branch */}
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <p className="text-primary text-xs font-bold uppercase tracking-widest">New Branch</p>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/15 text-primary px-2 py-0.5 rounded-full border border-primary/25">New</span>
-              </div>
               <a
                 href="https://share.google/PHvX6mZyHGcqLZRph"
                 target="_blank"
@@ -156,7 +146,7 @@ export default function Footer() {
                 className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group"
               >
                 <FaMapMarkerAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
-                View on Google Maps ↗
+                Toll plaza, NH7, Bagepalli, Karnataka 561207
               </a>
             </div>
           </div>
