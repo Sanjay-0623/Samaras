@@ -9,6 +9,7 @@ const branches = [
     tel: "tel:+918951454455",
     wa: "https://wa.me/918951454455",
     address: "FP2P+M9C, Chikkaballapur, Karnataka 562101",
+    mapsUrl: "https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw",
   },
   {
     name: "Bagepalli Branch",
@@ -16,6 +17,7 @@ const branches = [
     tel: "tel:+919164117733",
     wa: "https://wa.me/919164117733",
     address: "Toll plaza, NH7, Bagepalli, Karnataka 561207",
+    mapsUrl: "https://share.google/PHvX6mZyHGcqLZRph",
   },
 ];
 
@@ -90,7 +92,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-0.5">Address</p>
-                      <p className="text-white/80 text-base font-light leading-snug">{branch.address}</p>
+                      <a href={branch.mapsUrl} target="_blank" rel="noopener noreferrer" className="text-white/80 text-base font-light leading-snug hover:text-primary transition-colors duration-300">{branch.address}</a>
                     </div>
                   </div>
                 </div>
