@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
-import { BsFlower1 } from "react-icons/bs";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -29,10 +28,11 @@ const branches = [
   },
 ];
 
+const LOGO_SRC = `${import.meta.env.BASE_URL}logo.jpg`;
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [logoError, setLogoError] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -53,89 +53,90 @@ export default function Header() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 lg:px-12",
-          isScrolled ? "bg-[#080808]/85 backdrop-blur-lg border-b border-white/5 py-3" : "bg-transparent py-5"
+          isScrolled
+            ? "bg-[#080808]/85 backdrop-blur-lg border-b border-white/5 py-3"
+            : "bg-transparent py-5"
         )}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* 3-column flex: hamburger | logo | spacer */}
+        <div className="max-w-7xl mx-auto flex items-center">
 
-          {/* LEFT — logo */}
-          <Link to="/" className="relative z-50 flex items-center gap-2.5 group shrink-0">
-            {!logoError ? (
-              <img
-                src={`${import.meta.env.BASE_URL}logo.png`}
-                alt="Samara's Veg"
-                className="h-10 w-auto object-contain"
-                onError={() => setLogoError(true)}
+          {/* LEFT — hamburger */}
+          <div className="flex items-center" style={{ width: "48px" }}>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="relative z-50 w-12 h-12 flex flex-col items-center justify-center gap-[5px] focus:outline-none group"
+              aria-label="Toggle Menu"
+            >
+              <motion.span
+                animate={isMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-7 h-[2px] bg-white group-hover:bg-primary transition-colors block origin-center"
               />
-            ) : (
-              <div className="flex items-center gap-2">
-                <BsFlower1 className="text-primary text-2xl group-hover:scale-110 transition-transform duration-300" />
-                <span className="text-xl font-display font-bold text-white tracking-wider whitespace-nowrap">
-                  SAMARA'S VEG
-                </span>
-              </div>
-            )}
-          </Link>
+              <motion.span
+                animate={isMenuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.25 }}
+                className="w-7 h-[2px] bg-white group-hover:bg-primary transition-colors block"
+              />
+              <motion.span
+                animate={isMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-7 h-[2px] bg-white group-hover:bg-primary transition-colors block origin-center"
+              />
+            </button>
+          </div>
 
-          {/* RIGHT — hamburger */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="relative z-50 w-12 h-12 flex flex-col items-center justify-center gap-1.5 focus:outline-none group"
-            aria-label="Toggle Menu"
-          >
-            <motion.span
-              animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
-            />
-            <motion.span
-              animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
-            />
-            <motion.span
-              animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="w-8 h-[2px] bg-white group-hover:bg-primary transition-colors block"
-            />
-          </button>
+          {/* CENTER — logo */}
+          <div className="flex-1 flex justify-center">
+            <Link to="/" className="relative z-50 flex items-center" aria-label="Samara's Veg — Home">
+              <img
+                src={LOGO_SRC}
+                alt="Samara's Veg"
+                className="h-[35px] md:h-[50px] w-auto object-contain"
+                style={{ objectFit: "contain" }}
+              />
+            </Link>
+          </div>
+
+          {/* RIGHT — empty spacer to balance layout */}
+          <div style={{ width: "48px" }} />
         </div>
       </header>
 
+      {/* ── Full-screen overlay menu ── */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, clipPath: "circle(0% at 100% 0%)" }}
-            animate={{ opacity: 1, clipPath: "circle(150% at 100% 0%)" }}
-            exit={{ opacity: 0, clipPath: "circle(0% at 100% 0%)" }}
-            transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+            initial={{ opacity: 0, clipPath: "circle(0% at 3% 3%)" }}
+            animate={{ opacity: 1, clipPath: "circle(150% at 3% 3%)" }}
+            exit={{ opacity: 0, clipPath: "circle(0% at 3% 3%)" }}
+            transition={{ duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
             className="fixed inset-0 z-40 bg-[rgba(8,8,8,0.97)] backdrop-blur-2xl flex flex-col"
           >
             {/* Ambient orb */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
+            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
 
-            {/* Menu header — logo */}
+            {/* Overlay header — logo centered (mirrors main header) */}
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.4 }}
-              className="relative z-10 px-6 lg:px-12 pt-6 flex items-center"
+              transition={{ delay: 0.12, duration: 0.35 }}
+              className="relative z-10 px-6 lg:px-12 flex items-center"
+              style={{ paddingTop: isScrolled ? "0.75rem" : "1.25rem", paddingBottom: isScrolled ? "0.75rem" : "1.25rem" }}
             >
-              {!logoError ? (
+              <div style={{ width: "48px" }} />
+              <div className="flex-1 flex justify-center">
                 <img
-                  src={`${import.meta.env.BASE_URL}logo.png`}
+                  src={LOGO_SRC}
                   alt="Samara's Veg"
-                  className="h-9 w-auto object-contain opacity-80"
-                  onError={() => setLogoError(true)}
+                  className="h-[35px] md:h-[50px] w-auto object-contain opacity-80"
+                  style={{ objectFit: "contain" }}
                 />
-              ) : (
-                <div className="flex items-center gap-2">
-                  <BsFlower1 className="text-primary text-xl" />
-                  <span className="text-lg font-display font-bold text-white/80 tracking-wider">SAMARA'S VEG</span>
-                </div>
-              )}
+              </div>
+              <div style={{ width: "48px" }} />
             </motion.div>
 
+            {/* Nav + contact grid */}
             <div className="flex-1 flex items-center max-w-7xl mx-auto w-full px-6 lg:px-12">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full relative z-10">
 
