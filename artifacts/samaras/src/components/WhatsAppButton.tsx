@@ -116,14 +116,12 @@ function BranchPopup({ type, onClose }: BranchPopupProps) {
 
 /* ─── MAIN WIDGET ─────────────────────────────────────────── */
 export default function WhatsAppButton() {
-  const [isOpen, setIsOpen] = useState(false);
   const [popup, setPopup] = useState<PopupType>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
         setPopup(null);
       }
     }
@@ -138,13 +136,7 @@ export default function WhatsAppButton() {
       setPopup(popup === "email" ? null : "email");
     } else if (item.href) {
       window.open(item.href, "_blank", "noopener,noreferrer");
-      setIsOpen(false);
     }
-  };
-
-  const toggleOpen = () => {
-    setIsOpen(!isOpen);
-    if (isOpen) setPopup(null);
   };
 
   return (
@@ -159,85 +151,19 @@ export default function WhatsAppButton() {
         )}
       </AnimatePresence>
 
-      {/* Speed-dial buttons */}
-      <AnimatePresence>
-        {isOpen && (
-          <div className="flex flex-col items-end gap-2.5">
-            {speedDial.map((item, i) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20, scale: 0.7 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 16, scale: 0.7 }}
-                transition={{ duration: 0.22, delay: i * 0.05, ease: [0.4, 0, 0.2, 1] }}
-                className="flex items-center gap-3"
-              >
-                <motion.span
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 10 }}
-                  transition={{ delay: i * 0.05 + 0.05 }}
-                  className="text-white text-xs font-semibold tracking-wider bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10 whitespace-nowrap"
-                >
-                  {item.label}
-                </motion.span>
-                <button
-                  onClick={() => handleDialClick(item)}
-                  className={`w-11 h-11 ${item.color} text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform duration-200`}
-                  aria-label={item.label}
-                >
-                  <item.Icon size={18} />
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* Main FAB button */}
-      <motion.button
-        onClick={toggleOpen}
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: "spring", stiffness: 260, damping: 20, delay: 1.5 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className="relative flex items-center justify-center w-[60px] h-[60px] bg-primary text-white rounded-full shadow-lg shadow-primary/30 hover:shadow-[0_0_30px_rgba(255,122,0,0.6)] transition-shadow"
-        style={{ transform: "translateZ(0)" }}
-        aria-label="Contact us"
-      >
-        {/* Pulse rings */}
-        {!isOpen && (
-          <>
-            <motion.div
-              className="absolute inset-0 rounded-full border-2 border-primary"
-              animate={{ scale: [1, 1.8, 2], opacity: [0.7, 0, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 2 }}
-            />
-            <motion.div
-              className="absolute inset-0 rounded-full border-2 border-primary"
-              animate={{ scale: [1, 1.8, 2], opacity: [0.7, 0, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 2.6 }}
-            />
-          </>
-        )}
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <MdClose className="w-7 h-7" />
-            </motion.span>
-          ) : (
-            <motion.span key="phone" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }} className="flex items-center justify-center w-7 h-7">
-              <img
-                src={`${import.meta.env.BASE_URL}phone-icon.jpg`}
-                alt="Contact"
-                className="w-full h-full object-contain"
-                style={{ mixBlendMode: "screen" }}
-              />
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </motion.button>
+      {/* Always-visible contact buttons */}
+      <div className="flex flex-col items-end gap-2.5">
+        {speedDial.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => handleDialClick(item)}
+            className={`w-11 h-11 ${item.color} text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform duration-200`}
+            aria-label={item.label}
+          >
+            <item.Icon size={18} />
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
