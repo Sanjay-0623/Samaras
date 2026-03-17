@@ -68,7 +68,7 @@ export default function Home() {
     <PageTransition>
 
       {/* ═══════════════════════════════════════ HERO ═══ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-24">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-16 md:-mt-24">
 
         {/* ── Full-screen video background ── */}
         <motion.div style={{ y: bgY }} className="absolute inset-[-8%] z-0">
@@ -105,7 +105,7 @@ export default function Home() {
         {/* ── Center content ── */}
         <motion.div
           style={{ y: heroContentY }}
-          className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center mt-20"
+          className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center mt-8 md:mt-20"
         >
           {/* Restaurant name */}
           <motion.h1
@@ -176,8 +176,8 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════ ABOUT ═══ */}
-      <section className="py-32 px-6 lg:px-12 relative bg-[#080808]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <section className="py-16 md:py-28 px-6 lg:px-12 relative bg-[#080808]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -247,10 +247,10 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════ OUR SPECIALITY ═══ */}
-      <section className="py-32 px-6 lg:px-12 bg-[#080808] relative overflow-hidden">
+      <section className="py-16 md:py-28 px-6 lg:px-12 bg-[#080808] relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,122,0,0.05),transparent_70%)] pointer-events-none" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-20">
+          <div className="text-center mb-10 md:mb-20">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -281,7 +281,7 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.15 }}
                 whileHover={{ y: -8, transition: { duration: 0.25 } }}
-                className="glass-panel p-8 text-center group relative overflow-hidden flex flex-col items-center"
+                className="glass-panel p-5 md:p-8 text-center group relative overflow-hidden flex flex-col items-center"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/8 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
                 <div className="w-20 h-20 bg-primary/10 border border-primary/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary/20 group-hover:border-primary/40 transition-all duration-400 relative z-10">
@@ -296,9 +296,9 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════ SIGNATURE DISHES ═══ */}
-      <section className="py-32 px-6 lg:px-12 bg-[#080808] relative">
+      <section className="py-16 md:py-28 px-6 lg:px-12 bg-[#080808] relative">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
+          <div className="text-center mb-10 md:mb-20">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -319,7 +319,7 @@ export default function Home() {
             </motion.h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
             {signatureDishes.map((dish, i) => (
               <motion.div
                 key={dish.name}
@@ -340,7 +340,7 @@ export default function Home() {
                     style={{ transform: "translateZ(0)" }}
                   />
                 </div>
-                <div className="p-8 relative">
+                <div className="p-5 md:p-8 relative">
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   <h3 className="text-2xl font-display font-bold text-white mb-3 group-hover:text-primary transition-colors duration-300 relative z-10">
                     {dish.name}
@@ -369,7 +369,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════ SERVING LOCATION ═══ */}
-      <section className="py-32 px-6 lg:px-12 bg-[#080808] relative overflow-hidden">
+      <section className="py-16 md:py-28 px-6 lg:px-12 bg-[#080808] relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <motion.div
@@ -379,9 +379,9 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4">We Are Serving At</h3>
-            <p className="text-white/60 mb-16 text-lg font-light">Come visit us and enjoy an authentic Indian vegetarian experience.</p>
+            <p className="text-white/60 mb-8 md:mb-16 text-lg font-light">Come visit us and enjoy an authentic Indian vegetarian experience.</p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {/* Location 1 */}
               <a
                 href="https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw"
@@ -389,7 +389,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="group block"
               >
-                <div className="glass-panel p-10 hover:border-primary/30 transition-all duration-500 relative overflow-hidden h-full">
+                <div className="glass-panel p-6 md:p-10 hover:border-primary/30 transition-all duration-500 relative overflow-hidden h-full">
                   <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12" />
                   <motion.div
                     className="w-16 h-16 mx-auto bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-6 relative"
@@ -418,7 +418,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="group block"
               >
-                <div className="glass-panel p-10 hover:border-primary/30 transition-all duration-500 relative overflow-hidden h-full">
+                <div className="glass-panel p-6 md:p-10 hover:border-primary/30 transition-all duration-500 relative overflow-hidden h-full">
                   <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12" />
                   <motion.div
                     className="w-16 h-16 mx-auto bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-6 relative"

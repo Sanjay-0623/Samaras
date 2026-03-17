@@ -11,10 +11,10 @@ export default function Footer() {
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 relative z-10">
 
         {/* Brand column */}
-        <div className="col-span-1 md:col-span-1">
+        <div className="sm:col-span-2 lg:col-span-1">
           <Link to="/" className="flex items-center gap-2 mb-5 group w-fit">
             {!logoError ? (
               <img
