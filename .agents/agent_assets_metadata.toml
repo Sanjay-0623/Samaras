@@ -1,0 +1,356 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "IdGs2giFXvUgTzl-qKrza"
+uri = "file://artifacts/samaras/public/menu/masala-dosa.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "VYgpFiW8H7oto-Hg0iuCp"
+uri = "file://artifacts/samaras/public/menu/plain-dosa.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "p0Akdz0HPYzzBeJux0oT-"
+uri = "file://artifacts/samaras/public/menu/rava-dosa.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "uNmZHSrvVAJcz6CK7E4B9"
+uri = "file://artifacts/samaras/public/menu/onion-dosa.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "dvPA3-gepjpfTmHvT2irf"
+uri = "file://artifacts/samaras/public/menu/idli.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "DVaUFDbUJg1J2Fwf0VHGf"
+uri = "file://artifacts/samaras/public/menu/vada.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "1svKOLyIYQ6HKJjOtEWfe"
+uri = "file://artifacts/samaras/public/menu/sambar-idli.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "t4K-OVVwujM_wMNWBcAOP"
+uri = "file://artifacts/samaras/public/menu/paneer-butter-masala.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "MRGknKucmdP6PwCvqr4Pa"
+uri = "file://artifacts/samaras/public/menu/kadai-paneer.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Dr19jDMstwqXoYg8I6_Sj"
+uri = "file://artifacts/samaras/public/menu/upma.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "rLgOrhViAKb_WHRjUqO8N"
+uri = "file://artifacts/samaras/public/menu/palak-paneer.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "SRTu5_nlupl72Psk9FUdJ"
+uri = "file://artifacts/samaras/public/menu/shahi-paneer.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "MbAdlvQy0I-DEEpq3Pr_8"
+uri = "file://artifacts/samaras/public/menu/chole-masala.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "7Rhbj0oh7EPOJ9cRCPrS0"
+uri = "file://artifacts/samaras/public/menu/dal-tadka.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "X5I8QfzXRtIfrIzht_sky"
+uri = "file://artifacts/samaras/public/menu/dal-makhani.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "jxXWUi5ewSML4j_0WBSLh"
+uri = "file://artifacts/samaras/public/menu/veg-kolhapuri.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "AdsxJBEqUlRxcH1lnoxER"
+uri = "file://artifacts/samaras/public/menu/mix-veg-curry.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "MbDiIjxUfYtj1uKfmOekK"
+uri = "file://artifacts/samaras/public/menu/malai-kofta.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "kz15nR3N1LZ6hv6T9PXtG"
+uri = "file://artifacts/samaras/public/menu/butter-naan.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "4ijdtTN-jBTMzFz96PMEZ"
+uri = "file://artifacts/samaras/public/menu/garlic-naan.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "vOq4sJrKfevBcD8H7nO0M"
+uri = "file://artifacts/samaras/public/menu/tandoori-roti.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "xoDtY3c7bHGLMdllrbSMX"
+uri = "file://artifacts/samaras/public/menu/veg-biryani.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "5-KeuwMo1qgQ3Km83zdYA"
+uri = "file://artifacts/samaras/public/menu/paneer-biryani.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "j2OYvosYIpn8FwpDS75Qd"
+uri = "file://artifacts/samaras/public/menu/paratha.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "am4-4wcq2ijCj3dTPVG3r"
+uri = "file://artifacts/samaras/public/menu/veg-pulao.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "rHSv5749ck4Bg67gznJ5A"
+uri = "file://artifacts/samaras/public/menu/paneer-tikka.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "y10fWDnEuOB-MTDYcOfaM"
+uri = "file://artifacts/samaras/public/menu/curd-rice.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Jw4fhwSgkr93RLA5S-UmO"
+uri = "file://artifacts/samaras/public/menu/veg-manchurian.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "URWMvJAt_A1VaHvp7oyMR"
+uri = "file://artifacts/samaras/public/menu/sambar-rice.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "oLzLH1-lEdGYD_ml246E2"
+uri = "file://artifacts/samaras/public/menu/gobi-manchurian.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "iWNqxyWRFq6z2YURFOgfE"
+uri = "file://artifacts/samaras/public/menu/lemon-rice.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "NVmvJSEVVAya_XFCyxrOs"
+uri = "file://artifacts/samaras/public/menu/chilli-paneer.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "hIeaiL09yo9pj5s-D_fmE"
+uri = "file://artifacts/samaras/public/menu/tomato-rice.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "y-aUfiUBhkudHPdJ83WR3"
+uri = "file://artifacts/samaras/public/menu/veg-cutlet.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "wiPSwWU1IVBGwOIc7kdJp"
+uri = "file://artifacts/samaras/public/menu/hara-bhara-kabab.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "zSvKN3lxmnMDf97-7xRdB"
+uri = "file://artifacts/samaras/public/menu/pani-puri.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "s1ipPOP3hF_6wN8k58FU3"
+uri = "file://artifacts/samaras/public/menu/bhel-puri.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Q8gqbP2CL2YGWSd99E-xb"
+uri = "file://artifacts/samaras/public/menu/sev-puri.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "GE6Em0WbnS9Gqwp3ICcXg"
+uri = "file://artifacts/samaras/public/menu/pav-bhaji.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "1nLGsgtkvZVEzLRuXu_tu"
+uri = "file://artifacts/samaras/public/menu/samosa-chaat.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "BdkSTkKTCau4Q44YE-bIS"
+uri = "file://artifacts/samaras/public/menu/masala-chai.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "cLieBND67RWZZUjrISQT_"
+uri = "file://artifacts/samaras/public/menu/dahi-puri.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "AJ2Y-E6wxKGwfKWq_teNT"
+uri = "file://artifacts/samaras/public/menu/filter-coffee.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "RkquCs5y1rNmb6otjzgUF"
+uri = "file://artifacts/samaras/public/menu/sweet-lassi.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "U0qCUW7WApZ5tgslFUlF5"
+uri = "file://artifacts/samaras/public/menu/salt-lassi.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "mnxfgraKWZkCl75m3R0Y9"
+uri = "file://artifacts/samaras/public/menu/buttermilk.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "4CUZ9AhamFU3K7c22CjI3"
+uri = "file://artifacts/samaras/public/menu/fresh-lime-soda.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "1OdDQaEn1r8Xwo844w93m"
+uri = "file://artifacts/samaras/public/menu/veg-fried-rice.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "KY2D3arM2A0V_aURqQ_Ed"
+uri = "file://artifacts/samaras/public/menu/schezwan-fried-rice.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "RHf9gqz7TGIw7IIkcYLsC"
+uri = "file://artifacts/samaras/public/menu/veg-noodles.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "xmHK-2et3UvzG_n3UJ4hU"
+uri = "file://artifacts/samaras/public/menu/hakka-noodles.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "ndNdfpVs7bNaWfobpJOua"
+uri = "file://artifacts/samaras/public/menu/chilli-garlic-noodles.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "NjYqi1K_y8ZV8wfHtCF2j"
+uri = "file://artifacts/samaras/public/menu/veg-manchurian-gravy.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "EWkN0TpvPF2UfaVLzcWKe"
+uri = "file://artifacts/samaras/public/menu/gulab-jamun.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "I9QgX7x_DZPIj4HXLUgjX"
+uri = "file://artifacts/samaras/public/menu/rasgulla.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "ebL2HJ7w-SlMP11w6AEpM"
+uri = "file://artifacts/samaras/public/menu/rasmalai.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "xajYZv78Rs3IjqipwKEyz"
+uri = "file://artifacts/samaras/public/menu/gajar-halwa.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "_AfGp3wkGJt7sA27M3q-t"
+uri = "file://artifacts/samaras/public/menu/kulfi.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "OZyXxfTJfEuetU3mfJFwH"
+uri = "file://artifacts/samaras/public/menu/kheer.png"
+type = "image"
+title = "generated_image"
