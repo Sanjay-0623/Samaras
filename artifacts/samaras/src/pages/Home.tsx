@@ -204,7 +204,7 @@ export default function Home() {
           >
             <div className="aspect-[3/4] rounded-3xl overflow-hidden relative group shadow-[0_32px_80px_rgba(0,0,0,0.55),0_0_0_1px_rgba(255,255,255,0.05)]">
               <video
-                src={`${import.meta.env.BASE_URL}videos/indian_chef_cooking_paneer.mp4`}
+                src="/videos/chef.mp4"
                 autoPlay
                 muted
                 loop
