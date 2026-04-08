@@ -202,15 +202,15 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative order-2 lg:order-1"
           >
-            <div className="aspect-[3/4] rounded-3xl overflow-hidden relative group shadow-[0_32px_80px_rgba(0,0,0,0.55),0_0_0_1px_rgba(255,255,255,0.05)]">
+            <div className="w-full rounded-3xl relative group shadow-[0_32px_80px_rgba(0,0,0,0.55),0_0_0_1px_rgba(255,255,255,0.05)]">
               <video
                 src="/videos/chef.mp4"
                 autoPlay
                 muted
                 loop
                 playsInline
-                className="w-full h-full object-contain object-center"
-                style={{ transform: "translateZ(0)", background: "#080808" }}
+                className="w-full h-auto block"
+                style={{ transform: "translateZ(0)" }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/10 to-transparent z-10" />
               <div className="absolute bottom-8 left-8 z-20 glass-panel p-5 rounded-2xl flex items-center gap-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
