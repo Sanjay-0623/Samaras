@@ -95,7 +95,6 @@ export default function Home() {
             loop
             playsInline
             preload="auto"
-            poster="https://images.unsplash.com/photo-1585937421612-70a008356fbe?q=80&w=1600&auto=format&fit=crop"
             className="absolute inset-0 w-full h-full object-cover hero-video"
             style={{ transform: "translateZ(0)" }}
           >
