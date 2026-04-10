@@ -194,17 +194,6 @@ export default function Header() {
                           <FaPhoneAlt className="text-primary/60 text-sm shrink-0 group-hover:text-primary transition-colors" />
                           {branch.phone}
                         </a>
-                        {branch.mapsUrl && (
-                          <a
-                            href={branch.mapsUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2.5 text-white/50 text-base font-light hover:text-primary transition-colors duration-300 group"
-                          >
-                            <FaMapMarkerAlt className="text-primary/60 text-sm shrink-0 group-hover:text-primary transition-colors" />
-                            Open in Google Maps ↗
-                          </a>
-                        )}
                         {i < branches.length - 1 && (
                           <div className="mt-6 h-[1px] w-full bg-white/10" />
                         )}
