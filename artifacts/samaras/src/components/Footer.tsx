@@ -240,7 +240,7 @@ export default function Footer() {
                 className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group"
               >
                 <FaMapMarkerAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
-                Toll plaza, NH7, Bagepalli, Karnataka 561207
+                Toll plaza, HYD - BLR NH 44, Bagepalli, Karnataka 561207
               </a>
             </div>
           </div>

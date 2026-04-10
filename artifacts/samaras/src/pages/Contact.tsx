@@ -16,7 +16,7 @@ const branches = [
     phone: "+91 9164117733",
     tel: "tel:+919164117733",
     wa: "https://wa.me/919164117733",
-    address: "Toll plaza, NH7, Bagepalli, Karnataka 561207",
+    address: "Toll plaza, HYD - BLR NH 44, Bagepalli, Karnataka 561207",
     mapsUrl: "https://share.google/PHvX6mZyHGcqLZRph",
   },
 ];
