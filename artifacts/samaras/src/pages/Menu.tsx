@@ -162,19 +162,6 @@ const menuData: Category[] = [
     ],
   },
   {
-    id: "chats",
-    label: "Chats",
-    emoji: "🌮",
-    items: [
-      { name: "Pani Puri",      description: "Hollow crispy puris filled with spiced potato-chickpea and dunked in tangy, ice-cold flavoured jaljeera water.", image: IMG.paniPuri },
-      { name: "Bhel Puri",      description: "A crunchy mix of puffed rice, sev, onions, tomatoes, coriander, and sweet-tangy tamarind chutney.",            image: IMG.bhelPuri },
-      { name: "Sev Puri",       description: "Crispy puris loaded with potatoes, chutneys, onions, and topped with fine sev — a Mumbai street classic.",     image: IMG.sevPuri },
-      { name: "Pav Bhaji",      description: "Buttery, spiced mixed vegetable mash served with toasted buttered pav rolls and a squeeze of lime.",           image: IMG.pavBhaji },
-      { name: "Samosa Chaat",   description: "Flaky samosas broken open and topped with chole, chutneys, yoghurt, onions, and crunchy sev.",                image: IMG.samosaChaat },
-      { name: "Dahi Puri",      description: "Crispy puris filled with potatoes, chickpeas, fresh yoghurt, chutneys, and a sprinkle of chaat masala.",      image: IMG.dahiPuri },
-    ],
-  },
-  {
     id: "chinese-veg",
     label: "Chinese Veg",
     emoji: "🥢",
@@ -185,6 +172,19 @@ const menuData: Category[] = [
       { name: "Hakka Noodles",          description: "Classic Indo-Chinese Hakka noodles tossed with vegetables, soy, and chilli in a wok on high flame.",       image: IMG.hakkaNoodles },
       { name: "Chilli Garlic Noodles",  description: "Noodles stir-fried with bold chilli garlic sauce, capsicum, and spring onions — a flavour-packed bowl.",  image: IMG.chilliGarlicNoodles },
       { name: "Veg Manchurian Gravy",   description: "Crispy vegetable balls served in a rich, tangy Manchurian gravy — perfect with fried rice or noodles.",    image: IMG.vegManchurianGravy },
+    ],
+  },
+  {
+    id: "chats",
+    label: "Chats",
+    emoji: "🌮",
+    items: [
+      { name: "Pani Puri",      description: "Hollow crispy puris filled with spiced potato-chickpea and dunked in tangy, ice-cold flavoured jaljeera water.", image: IMG.paniPuri },
+      { name: "Bhel Puri",      description: "A crunchy mix of puffed rice, sev, onions, tomatoes, coriander, and sweet-tangy tamarind chutney.",            image: IMG.bhelPuri },
+      { name: "Sev Puri",       description: "Crispy puris loaded with potatoes, chutneys, onions, and topped with fine sev — a Mumbai street classic.",     image: IMG.sevPuri },
+      { name: "Pav Bhaji",      description: "Buttery, spiced mixed vegetable mash served with toasted buttered pav rolls and a squeeze of lime.",           image: IMG.pavBhaji },
+      { name: "Samosa Chaat",   description: "Flaky samosas broken open and topped with chole, chutneys, yoghurt, onions, and crunchy sev.",                image: IMG.samosaChaat },
+      { name: "Dahi Puri",      description: "Crispy puris filled with potatoes, chickpeas, fresh yoghurt, chutneys, and a sprinkle of chaat masala.",      image: IMG.dahiPuri },
     ],
   },
   {
