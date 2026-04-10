@@ -1,4 +1,5 @@
-import { FaWhatsapp, FaInstagram, FaFacebookF, FaEnvelope, FaPhone } from "react-icons/fa";
+import { FaWhatsapp, FaInstagram, FaFacebookF, FaEnvelope } from "react-icons/fa";
+import { Phone } from "lucide-react";
 import { MdClose } from "react-icons/md";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
@@ -29,7 +30,7 @@ const emailBranches = [
 
 /* ─── SPEED-DIAL ACTIONS ──────────────────────────────────── */
 const speedDial = [
-  { id: "call",      label: "Call Us",   Icon: FaPhone,      color: "bg-[#2563EB]", href: null },
+  { id: "call",      label: "Call Us",   Icon: Phone,        color: "bg-[#2563EB]", href: null },
   { id: "facebook",  label: "Facebook",  Icon: FaFacebookF,  color: "bg-[#1877F2]", href: "https://www.facebook.com/share/18AnVPJqBA/" },
   { id: "instagram", label: "Instagram", Icon: FaInstagram,  color: "bg-gradient-to-tr from-[#f09433] via-[#e6683c] via-[#dc2743] via-[#cc2366] to-[#bc1888]", href: "https://www.instagram.com/samarasveg?igsh=NHNhcjRnd29obzFh" },
   { id: "email",     label: "Email",     Icon: FaEnvelope,   color: "bg-primary",   href: null },
@@ -214,7 +215,7 @@ function CallBranchModal({ onClose }: { onClose: () => void }) {
         <div className="flex items-center justify-between px-6 py-5 border-b border-white/8">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 bg-[#2563EB]/15 rounded-full flex items-center justify-center">
-              <FaPhone className="text-[#2563EB]" size={15} />
+              <Phone className="text-[#2563EB]" size={16} />
             </div>
             <div>
               <p className="text-white font-semibold text-base leading-tight">Select a Branch</p>
@@ -244,7 +245,7 @@ function CallBranchModal({ onClose }: { onClose: () => void }) {
                 className="flex items-center gap-4 px-5 py-4 rounded-xl border border-white/6 hover:bg-[#2563EB]/8 hover:border-[#2563EB]/30 transition-all duration-200 group"
               >
                 <div className="w-10 h-10 bg-[#2563EB]/12 group-hover:bg-[#2563EB]/22 rounded-full flex items-center justify-center shrink-0 transition-colors">
-                  <FaPhone className="text-[#2563EB]" size={15} />
+                  <Phone className="text-[#2563EB]" size={16} />
                 </div>
                 <div className="flex flex-col min-w-0">
                   <span className="text-white/90 group-hover:text-white text-sm font-semibold transition-colors leading-tight">
