@@ -29,10 +29,10 @@ const emailBranches = [
 
 /* ─── SPEED-DIAL ACTIONS ──────────────────────────────────── */
 const speedDial = [
+  { id: "call",      label: "Call Us",   Icon: FaPhone,      color: "bg-[#2563EB]", href: null },
   { id: "facebook",  label: "Facebook",  Icon: FaFacebookF,  color: "bg-[#1877F2]", href: "https://www.facebook.com/share/18AnVPJqBA/" },
   { id: "instagram", label: "Instagram", Icon: FaInstagram,  color: "bg-gradient-to-tr from-[#f09433] via-[#e6683c] via-[#dc2743] via-[#cc2366] to-[#bc1888]", href: "https://www.instagram.com/samarasveg?igsh=NHNhcjRnd29obzFh" },
   { id: "email",     label: "Email",     Icon: FaEnvelope,   color: "bg-primary",   href: null },
-  { id: "call",      label: "Call Us",   Icon: FaPhone,      color: "bg-[#2563EB]", href: null },
   { id: "whatsapp",  label: "WhatsApp",  Icon: FaWhatsapp,   color: "bg-[#25D366]", href: null },
 ];
 
