@@ -69,21 +69,22 @@ export default function Career() {
     try {
       setStatus("uploading");
       const resumeUrl = await uploadResume(resumeFile);
-      console.log(resumeUrl);
+      if (!resumeUrl) throw new Error("Resume URL is missing after upload.");
+
+      const payload = {
+        name,
+        email,
+        department,
+        experience,
+        resume_link: resumeUrl,
+      };
+      console.log(payload);
 
       setStatus("sending");
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        {
-          name,
-          email,
-          department,
-          experience,
-          resume_link: resumeUrl,
-          to_email: "support@samarasveg.com",
-          subject: `New Career Application - ${name}`,
-        },
+        payload,
         EMAILJS_PUBLIC_KEY
       );
 
