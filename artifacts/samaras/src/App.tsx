@@ -15,6 +15,7 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Reviews from "./pages/Reviews";
 import Gallery from "./pages/Gallery";
+import Career from "./pages/Career";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ function App() {
               <Route path="contact" element={<Contact />} />
               <Route path="gallery" element={<Gallery />} />
               <Route path="reviews" element={<Reviews />} />
+              <Route path="career" element={<Career />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
