@@ -6,25 +6,25 @@ import { useState, useRef, useEffect } from "react";
 
 /* ─── BRANCH DATA ─────────────────────────────────────────── */
 const waBranches = [
-  { name: "Chikkaballapura", phone: "+91 8951454455", url: "https://wa.me/918951454455" },
   { name: "Bagepalli",       phone: "+91 9164117733", url: "https://wa.me/919164117733" },
+  { name: "Chikkaballapura", phone: "+91 8951454455", url: "https://wa.me/918951454455" },
 ];
 
 const callBranches = [
-  { name: "Chikkaballapura", phone: "+91 8951454455", url: "tel:+918951454455" },
   { name: "Bagepalli",       phone: "+91 9164117733", url: "tel:+919164117733" },
+  { name: "Chikkaballapura", phone: "+91 8951454455", url: "tel:+918951454455" },
 ];
 
 const emailBranches = [
   {
-    name: "Chikkaballapura",
-    email: "Chikkaballapur@gmail.com",
-    url: "mailto:Chikkaballapur@gmail.com?subject=Inquiry%20-%20Samara's%20Veg%20Chikkaballapura",
-  },
-  {
     name: "Bagepalli",
     email: "Bagepalli@samarasveg.com",
     url: "mailto:Bagepalli@samarasveg.com?subject=Inquiry%20-%20Samara's%20Veg%20Bagepalli",
+  },
+  {
+    name: "Chikkaballapura",
+    email: "Chikkaballapur@gmail.com",
+    url: "mailto:Chikkaballapur@gmail.com?subject=Inquiry%20-%20Samara's%20Veg%20Chikkaballapura",
   },
 ];
 

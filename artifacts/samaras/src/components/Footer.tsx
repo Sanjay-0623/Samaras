@@ -7,8 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 /* ─── BRANCH DATA ─────────────────────────────────────────── */
 const waBranches = [
-  { name: "Chikkaballapura", phone: "+91 8951454455", url: "https://wa.me/918951454455" },
   { name: "Bagepalli",       phone: "+91 9164117733", url: "https://wa.me/919164117733" },
+  { name: "Chikkaballapura", phone: "+91 8951454455", url: "https://wa.me/918951454455" },
 ];
 
 /* ─── WHATSAPP BRANCH MODAL ───────────────────────────────── */
@@ -206,26 +206,6 @@ export default function Footer() {
           <h3 className="text-base font-display font-bold text-white mb-6">Contact</h3>
           <div className="space-y-5">
 
-            {/* Chikkaballapura */}
-            <div>
-              <p className="text-primary text-xs font-bold uppercase tracking-widest mb-2">Chikkaballapura</p>
-              <a href="tel:+918951454455" className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light mb-1.5 group">
-                <FaPhoneAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
-                +91 8951454455
-              </a>
-              <a
-                href="https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group"
-              >
-                <FaMapMarkerAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
-                Samara's Veg, Chikkaballapur, Karnataka 562101
-              </a>
-            </div>
-
-            <div className="w-full h-[1px] bg-white/8" />
-
             {/* Bagepalli */}
             <div>
               <p className="text-primary text-xs font-bold uppercase tracking-widest mb-2">Bagepalli</p>
@@ -241,6 +221,26 @@ export default function Footer() {
               >
                 <FaMapMarkerAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
                 Toll plaza, HYD - BLR NH 44, Bagepalli, Karnataka 561207
+              </a>
+            </div>
+
+            <div className="w-full h-[1px] bg-white/8" />
+
+            {/* Chikkaballapura */}
+            <div>
+              <p className="text-primary text-xs font-bold uppercase tracking-widest mb-2">Chikkaballapura</p>
+              <a href="tel:+918951454455" className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light mb-1.5 group">
+                <FaPhoneAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
+                +91 8951454455
+              </a>
+              <a
+                href="https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group"
+              >
+                <FaMapMarkerAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
+                Samara's Veg, Chikkaballapur, Karnataka 562101
               </a>
             </div>
           </div>

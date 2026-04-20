@@ -400,7 +400,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {/* Location 1 */}
               <a
-                href="https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw"
+                href="https://share.google/PHvX6mZyHGcqLZRph"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group block"
@@ -419,7 +419,7 @@ export default function Home() {
                     <FaMapMarkerAlt className="text-primary w-6 h-6 relative z-10" />
                   </motion.div>
                   <h4 className="text-2xl font-display font-bold text-white mb-3">Samara's Veg</h4>
-                  <p className="text-white/50 text-base mb-6 font-light">Chikkaballapura</p>
+                  <p className="text-white/50 text-base mb-6 font-light">Bagepalli</p>
                   <span className="inline-flex items-center text-primary text-sm font-bold uppercase tracking-widest group-hover:text-white transition-colors">
                     Open in Google Maps
                     <motion.span className="ml-2 inline-block" initial={{ x: 0 }} whileHover={{ x: 5 }}>→</motion.span>
@@ -429,7 +429,7 @@ export default function Home() {
 
               {/* Location 2 */}
               <a
-                href="https://share.google/PHvX6mZyHGcqLZRph"
+                href="https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group block"
@@ -448,7 +448,7 @@ export default function Home() {
                     <FaMapMarkerAlt className="text-primary w-6 h-6 relative z-10" />
                   </motion.div>
                   <h4 className="text-2xl font-display font-bold text-white mb-3">Samara's Veg</h4>
-                  <p className="text-white/50 text-base mb-6 font-light">Bagepalli</p>
+                  <p className="text-white/50 text-base mb-6 font-light">Chikkaballapura</p>
                   <span className="inline-flex items-center text-primary text-sm font-bold uppercase tracking-widest group-hover:text-white transition-colors">
                     Open in Google Maps
                     <motion.span className="ml-2 inline-block" initial={{ x: 0 }} whileHover={{ x: 5 }}>→</motion.span>

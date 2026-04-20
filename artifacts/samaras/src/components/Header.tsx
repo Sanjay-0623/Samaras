@@ -16,16 +16,16 @@ const navLinks = [
 
 const branches = [
   {
-    name: "Chikkaballapura",
-    phone: "+91 8951454455",
-    tel: "tel:+918951454455",
-    mapsUrl: "https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw",
-  },
-  {
     name: "Bagepalli",
     phone: "+91 9164117733",
     tel: "tel:+919164117733",
     mapsUrl: null,
+  },
+  {
+    name: "Chikkaballapura",
+    phone: "+91 8951454455",
+    tel: "tel:+918951454455",
+    mapsUrl: "https://maps.app.goo.gl/nZhwxaGPvhtRrkhKA?g_st=iw",
   },
 ];
 

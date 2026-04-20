@@ -4,20 +4,20 @@ import PageTransition from "@/components/PageTransition";
 
 const branches = [
   {
-    name: "Chikkaballapura Branch",
-    phone: "+91 8951454455",
-    tel: "tel:+918951454455",
-    wa: "https://wa.me/918951454455",
-    address: "Samara's Veg, Chikkaballapur, Karnataka 562101",
-    mapsUrl: "https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw",
-  },
-  {
     name: "Bagepalli Branch",
     phone: "+91 9164117733",
     tel: "tel:+919164117733",
     wa: "https://wa.me/919164117733",
     address: "Toll plaza, HYD - BLR NH 44, Bagepalli, Karnataka 561207",
     mapsUrl: "https://share.google/PHvX6mZyHGcqLZRph",
+  },
+  {
+    name: "Chikkaballapura Branch",
+    phone: "+91 8951454455",
+    tel: "tel:+918951454455",
+    wa: "https://wa.me/918951454455",
+    address: "Samara's Veg, Chikkaballapur, Karnataka 562101",
+    mapsUrl: "https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw",
   },
 ];
 
