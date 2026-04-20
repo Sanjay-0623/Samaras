@@ -44,7 +44,7 @@ export default function Career() {
     if (status === "error") setStatus("idle");
   };
 
-  const uploadResume = async (file: File): Promise<string> => {
+  const uploadResume = async (file: File): Promise<{ secure_url: string }> => {
     const fd = new FormData();
     fd.append("file", file);
     fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
@@ -55,7 +55,7 @@ export default function Career() {
     if (!res.ok) throw new Error("Resume upload failed.");
     const data = await res.json();
     if (!data.secure_url) throw new Error("Resume upload failed.");
-    return data.secure_url as string;
+    return data;
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -66,39 +66,66 @@ export default function Career() {
       return;
     }
     setErrorMsg("");
+
+    let resumeUrl = "";
     try {
       setStatus("uploading");
-      const resumeUrl = await uploadResume(resumeFile);
-      if (!resumeUrl) throw new Error("Resume URL is missing after upload.");
+      const uploadResponse = await uploadResume(resumeFile);
+      resumeUrl = uploadResponse.secure_url;
+    } catch (err) {
+      console.error("CLOUDINARY ERROR:", err);
+      setStatus("error");
+      setErrorMsg("Resume upload failed. Please try again.");
+      alert("Resume upload failed. Please try again.");
+      return;
+    }
 
-      const payload = {
+    if (!name || !email || !department || !experience || !resumeUrl) {
+      console.error("Missing required fields", {
         name,
         email,
         department,
         experience,
-        resume_link: resumeUrl,
-      };
-      console.log(payload);
-
-      setStatus("sending");
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        payload,
-        EMAILJS_PUBLIC_KEY
-      );
-
-      setStatus("success");
-      alert("Application sent successfully!");
-      formRef.current?.reset();
-      setName(""); setEmail(""); setDepartment(DEPARTMENTS[0]); setExperience(""); setResumeFile(null);
-    } catch (err) {
-      console.error(err);
-      const msg = err instanceof Error ? err.message : "Something went wrong.";
-      setErrorMsg(msg);
+        resumeUrl,
+      });
       setStatus("error");
-      alert("Failed to send application. Please try again or call us directly.");
+      alert("All fields including resume are required.");
+      return;
     }
+
+    const templateParams = {
+      name,
+      email,
+      department,
+      experience,
+      resume_link: resumeUrl,
+    };
+    console.log("EMAIL PAYLOAD:", templateParams);
+
+    setStatus("sending");
+    await emailjs
+      .send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        setStatus("success");
+        alert("Application sent successfully!");
+        formRef.current?.reset();
+        setName("");
+        setEmail("");
+        setDepartment(DEPARTMENTS[0]);
+        setExperience("");
+        setResumeFile(null);
+      })
+      .catch((error) => {
+        console.error("EMAILJS ERROR:", error);
+        setStatus("error");
+        setErrorMsg("Failed to send application. Check console.");
+        alert("Failed to send application. Check console.");
+      });
   };
 
   const isBusy = status === "uploading" || status === "sending";
