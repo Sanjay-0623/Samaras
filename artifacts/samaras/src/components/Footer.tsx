@@ -214,7 +214,7 @@ export default function Footer() {
                 +91 9164117733
               </a>
               <a
-                href="https://share.google/PHvX6mZyHGcqLZRph"
+                href="https://maps.app.goo.gl/yH5BbVWAhXPif5Vk7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group"

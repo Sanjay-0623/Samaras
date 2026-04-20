@@ -400,7 +400,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {/* Location 1 */}
               <a
-                href="https://share.google/PHvX6mZyHGcqLZRph"
+                href="https://maps.app.goo.gl/yH5BbVWAhXPif5Vk7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group block"

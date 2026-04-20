@@ -9,7 +9,7 @@ const branches = [
     tel: "tel:+919164117733",
     wa: "https://wa.me/919164117733",
     address: "Toll plaza, HYD - BLR NH 44, Bagepalli, Karnataka 561207",
-    mapsUrl: "https://share.google/PHvX6mZyHGcqLZRph",
+    mapsUrl: "https://maps.app.goo.gl/yH5BbVWAhXPif5Vk7",
   },
   {
     name: "Chikkaballapura Branch",
