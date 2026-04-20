@@ -69,6 +69,7 @@ export default function Career() {
     try {
       setStatus("uploading");
       const resumeUrl = await uploadResume(resumeFile);
+      console.log(resumeUrl);
 
       setStatus("sending");
       await emailjs.send(
@@ -79,11 +80,11 @@ export default function Career() {
           email,
           department,
           experience,
-          resume: resumeUrl,
+          resume_link: resumeUrl,
           to_email: "support@samarasveg.com",
           subject: `New Career Application - ${name}`,
         },
-        { publicKey: EMAILJS_PUBLIC_KEY }
+        EMAILJS_PUBLIC_KEY
       );
 
       setStatus("success");
