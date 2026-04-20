@@ -8,7 +8,7 @@ const branches = [
     phone: "+91 8951454455",
     tel: "tel:+918951454455",
     wa: "https://wa.me/918951454455",
-    address: "FP2P+M9C, Chikkaballapur, Karnataka 562101",
+    address: "Samara's Veg, Chikkaballapur, Karnataka 562101",
     mapsUrl: "https://maps.app.goo.gl/gtABD36duSbhTRT28?g_st=aw",
   },
   {

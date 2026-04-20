@@ -128,7 +128,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
-            className="text-[4.2rem] sm:text-[5.5rem] md:text-[7.5rem] lg:text-[9rem] font-display font-bold leading-none tracking-tight mb-5"
+            className="text-[clamp(2.25rem,11vw,4.2rem)] sm:text-[5.5rem] md:text-[7.5rem] lg:text-[9rem] font-display font-bold leading-none tracking-tight mb-5 whitespace-nowrap"
             style={{
               color: "#22CC22",
               textShadow: "3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 4px 12px rgba(0,0,0,0.85)",

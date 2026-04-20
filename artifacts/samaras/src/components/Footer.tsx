@@ -220,7 +220,7 @@ export default function Footer() {
                 className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors duration-300 text-sm font-light group"
               >
                 <FaMapMarkerAlt className="text-primary/60 text-xs shrink-0 group-hover:text-primary transition-colors" />
-                FP2P+M9C, Chikkaballapur, Karnataka 562101
+                Samara's Veg, Chikkaballapur, Karnataka 562101
               </a>
             </div>
 
