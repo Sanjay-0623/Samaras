@@ -504,6 +504,9 @@ importers:
       input-otp:
         specifier: ^1.4.2
         version: 1.4.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      intl-tel-input:
+        specifier: ^27.1.1
+        version: 27.1.1
       lucide-react:
         specifier: 'catalog:'
         version: 0.545.0(react@19.1.0)
@@ -2278,6 +2281,9 @@ packages:
   internmap@2.0.3:
     resolution: {integrity: sha512-5Hh7Y1wQbvY5ooGgPbDaL5iYLAPzMTUrjMulskHLH6wnv/A+1q5rgEaiuqEjB+oxGXIVZs1FF+R/KPN3ZSQYYg==}
     engines: {node: '>=12'}
+
+  intl-tel-input@27.1.1:
+    resolution: {integrity: sha512-6JMxNd5Ol6bRwnMGMo0DiWOpKKIQQXzwvKrxu+PKMNLa5heXKYcA7zHjqBLANjs4txoRO2SnKjqwErhrXbJWTA==}
 
   ipaddr.js@1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
@@ -4813,6 +4819,8 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
 
   internmap@2.0.3: {}
+
+  intl-tel-input@27.1.1: {}
 
   ipaddr.js@1.9.1: {}
 

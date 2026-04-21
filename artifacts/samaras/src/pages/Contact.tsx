@@ -1,7 +1,9 @@
-import { useState, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { motion } from "framer-motion";
 import { FaPhoneAlt, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
+import intlTelInput from "intl-tel-input/intlTelInputWithUtils";
+import "intl-tel-input/styles";
 import PageTransition from "@/components/PageTransition";
 
 const branches = [
@@ -34,6 +36,26 @@ const INITIAL_FORM = {
 export default function Contact() {
   const [formData, setFormData] = useState(INITIAL_FORM);
   const [isSending, setIsSending] = useState(false);
+  const phoneInputRef = useRef<HTMLInputElement>(null);
+  const itiRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (!phoneInputRef.current) return;
+    const iti = intlTelInput(phoneInputRef.current, {
+      initialCountry: "auto",
+      geoIpLookup: (success: (countryCode: string) => void, failure: () => void) => {
+        fetch("https://ipapi.co/json")
+          .then((res) => res.json())
+          .then((data) => success(data.country_code || "IN"))
+          .catch(() => success("IN"));
+      },
+    });
+    itiRef.current = iti;
+    return () => {
+      iti.destroy();
+      itiRef.current = null;
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -45,11 +67,12 @@ export default function Contact() {
     e.preventDefault();
     if (isSending) return;
 
+    const fullPhone = itiRef.current ? itiRef.current.getNumber() : formData.phone;
     const payload = {
       name: `${formData.first_name} ${formData.last_name}`.trim(),
       first_name: formData.first_name,
       last_name: formData.last_name,
-      phone: formData.phone,
+      phone: fullPhone,
       subject: formData.subject,
       message: formData.message,
     };
@@ -65,6 +88,7 @@ export default function Contact() {
       );
       alert("Message sent successfully!");
       setFormData(INITIAL_FORM);
+      if (itiRef.current) itiRef.current.setNumber("");
     } catch (error) {
       console.error("CONTACT EMAILJS ERROR:", error);
       alert("Failed to send message. Please try again.");
@@ -205,9 +229,18 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-2 contact-iti-wrapper">
                   <label className="text-xs font-semibold tracking-wider uppercase text-white/50">Phone</label>
-                  <input name="phone" type="tel" required value={formData.phone} onChange={handleChange} disabled={isSending} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60" />
+                  <input
+                    ref={phoneInputRef}
+                    name="phone"
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={handleChange}
+                    disabled={isSending}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60"
+                  />
                 </div>
 
                 <div className="space-y-2">

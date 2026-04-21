@@ -101,3 +101,69 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary));
 }
+/* intl-tel-input dark theme overrides for contact form */
+.contact-iti-wrapper .iti { width: 100%; display: block; }
+.contact-iti-wrapper .iti__flag-container { z-index: 5; }
+.contact-iti-wrapper .iti--allow-dropdown input.iti__tel-input { padding-left: 58px !important; }
+.contact-iti-wrapper .iti__selected-flag {
+  background: transparent !important;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  padding: 0 8px 0 14px;
+}
+.contact-iti-wrapper .iti__selected-flag:hover,
+.contact-iti-wrapper .iti__selected-flag:focus {
+  background: rgba(255,255,255,0.05) !important;
+}
+.contact-iti-wrapper .iti__arrow { border-top-color: rgba(255,255,255,0.5); }
+.contact-iti-wrapper .iti__arrow--up { border-bottom-color: rgba(255,255,255,0.5); }
+.contact-iti-wrapper .iti__country-list {
+  background: #181818;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 0.75rem;
+  color: #fff;
+  max-height: 240px;
+  box-shadow: 0 20px 50px -10px rgba(0,0,0,0.6);
+}
+.contact-iti-wrapper .iti__country { padding: 8px 12px; color: #fff; }
+.contact-iti-wrapper .iti__country.iti__highlight,
+.contact-iti-wrapper .iti__country:hover { background-color: rgba(255,122,0,0.18); }
+.contact-iti-wrapper .iti__divider { border-bottom-color: rgba(255,255,255,0.08); }
+.contact-iti-wrapper .iti__dial-code { color: rgba(255,255,255,0.55); }
+
+/* intl-tel-input v27 class name overrides */
+.contact-iti-wrapper .iti__country-container { z-index: 5; }
+.contact-iti-wrapper .iti--allow-dropdown input.iti__tel-input,
+.contact-iti-wrapper .iti--show-flags input.iti__tel-input { padding-left: 62px !important; }
+.contact-iti-wrapper .iti__selected-country,
+.contact-iti-wrapper .iti__selected-country-primary {
+  background: transparent !important;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  padding: 0 6px 0 14px;
+}
+.contact-iti-wrapper .iti__selected-country:hover,
+.contact-iti-wrapper .iti__selected-country-primary:hover,
+.contact-iti-wrapper .iti__selected-country:focus,
+.contact-iti-wrapper .iti__selected-country-primary:focus {
+  background: rgba(255,255,255,0.05) !important;
+}
+.contact-iti-wrapper .iti__dropdown-content {
+  background: #181818 !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 0.75rem !important;
+  color: #fff !important;
+  box-shadow: 0 20px 50px -10px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+.contact-iti-wrapper .iti__search-input {
+  background: rgba(255,255,255,0.05) !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  padding: 12px 14px !important;
+}
+.contact-iti-wrapper .iti__search-input::placeholder { color: rgba(255,255,255,0.35); }
+.contact-iti-wrapper .iti__country-list { background: transparent !important; border: 0 !important; max-height: 240px; }
+.contact-iti-wrapper .iti__country { color: #fff; }
+.contact-iti-wrapper .iti__country.iti__highlight { background-color: rgba(255,122,0,0.18) !important; }
