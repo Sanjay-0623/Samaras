@@ -43,6 +43,7 @@ export default function Contact() {
     if (!phoneInputRef.current) return;
     const iti = intlTelInput(phoneInputRef.current, {
       initialCountry: "auto",
+      separateDialCode: true,
       geoIpLookup: (success: (countryCode: string) => void, failure: () => void) => {
         fetch("https://ipapi.co/json")
           .then((res) => res.json())

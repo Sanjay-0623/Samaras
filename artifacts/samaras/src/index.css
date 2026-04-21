@@ -135,6 +135,8 @@
 .contact-iti-wrapper .iti__country-container { z-index: 5; }
 .contact-iti-wrapper .iti--allow-dropdown input.iti__tel-input,
 .contact-iti-wrapper .iti--show-flags input.iti__tel-input { padding-left: 62px !important; }
+.contact-iti-wrapper .iti--separate-dial-code input.iti__tel-input { padding-left: 110px !important; }
+.contact-iti-wrapper .iti__selected-dial-code { color: #fff; margin-left: 4px; }
 .contact-iti-wrapper .iti__selected-country,
 .contact-iti-wrapper .iti__selected-country-primary {
   background: transparent !important;
