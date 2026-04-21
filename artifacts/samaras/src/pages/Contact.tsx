@@ -28,7 +28,6 @@ const branches = [
 const INITIAL_FORM = {
   first_name: "",
   last_name: "",
-  phone: "",
   subject: "catering",
   message: "",
 };
@@ -68,7 +67,7 @@ export default function Contact() {
     e.preventDefault();
     if (isSending) return;
 
-    const fullPhone = itiRef.current ? itiRef.current.getNumber() : formData.phone;
+    const fullPhone = itiRef.current ? itiRef.current.getNumber() : "";
     const payload = {
       name: `${formData.first_name} ${formData.last_name}`.trim(),
       first_name: formData.first_name,
@@ -234,11 +233,8 @@ export default function Contact() {
                   <label className="text-xs font-semibold tracking-wider uppercase text-white/50">Phone</label>
                   <input
                     ref={phoneInputRef}
-                    name="phone"
+                    id="phone"
                     type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
                     disabled={isSending}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60"
                   />
