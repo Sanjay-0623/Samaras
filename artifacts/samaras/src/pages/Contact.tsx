@@ -1,5 +1,7 @@
+import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
 import { FaPhoneAlt, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
 import PageTransition from "@/components/PageTransition";
 
 const branches = [
@@ -21,7 +23,56 @@ const branches = [
   },
 ];
 
+const INITIAL_FORM = {
+  first_name: "",
+  last_name: "",
+  phone: "",
+  subject: "catering",
+  message: "",
+};
+
 export default function Contact() {
+  const [formData, setFormData] = useState(INITIAL_FORM);
+  const [isSending, setIsSending] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleContactSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (isSending) return;
+
+    const payload = {
+      name: `${formData.first_name} ${formData.last_name}`.trim(),
+      first_name: formData.first_name,
+      last_name: formData.last_name,
+      phone: formData.phone,
+      subject: formData.subject,
+      message: formData.message,
+    };
+    console.log("CONTACT FORM PAYLOAD:", payload);
+
+    setIsSending(true);
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_CONTACT_TEMPLATE_ID,
+        payload,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+      alert("Message sent successfully!");
+      setFormData(INITIAL_FORM);
+    } catch (error) {
+      console.error("CONTACT EMAILJS ERROR:", error);
+      alert("Failed to send message. Please try again.");
+    } finally {
+      setIsSending(false);
+    }
+  };
+
   return (
     <PageTransition>
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 relative">
@@ -142,27 +193,26 @@ export default function Contact() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] pointer-events-none rounded-full" />
               <h2 className="text-3xl font-display font-bold text-white mb-8 relative z-10">Send a Message</h2>
 
-              <form className="space-y-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-6 relative z-10" onSubmit={handleContactSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-xs font-semibold tracking-wider uppercase text-white/50">First Name</label>
-                    <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light" placeholder="John" />
+                    <input name="first_name" type="text" required value={formData.first_name} onChange={handleChange} disabled={isSending} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-semibold tracking-wider uppercase text-white/50">Last Name</label>
-                    <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light" placeholder="Doe" />
+                    <input name="last_name" type="text" required value={formData.last_name} onChange={handleChange} disabled={isSending} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs font-semibold tracking-wider uppercase text-white/50">Phone</label>
-                  <input type="tel" className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light" placeholder="+91 XXXXX XXXXX" />
+                  <input name="phone" type="tel" required value={formData.phone} onChange={handleChange} disabled={isSending} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60" />
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs font-semibold tracking-wider uppercase text-white/50">Subject</label>
-                  <select className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all appearance-none font-light">
-                    <option value="reservation" className="bg-[#181818]">Table Reservation</option>
+                  <select name="subject" required value={formData.subject} onChange={handleChange} disabled={isSending} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all appearance-none font-light disabled:opacity-60">
                     <option value="catering" className="bg-[#181818]">Catering Inquiry</option>
                     <option value="takeaway" className="bg-[#181818]">Takeaway Order</option>
                     <option value="feedback" className="bg-[#181818]">Feedback</option>
@@ -172,11 +222,11 @@ export default function Contact() {
 
                 <div className="space-y-2">
                   <label className="text-xs font-semibold tracking-wider uppercase text-white/50">Message</label>
-                  <textarea rows={5} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all resize-none font-light" placeholder="How can we help you?"></textarea>
+                  <textarea name="message" rows={5} required value={formData.message} onChange={handleChange} disabled={isSending} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all resize-none font-light disabled:opacity-60" placeholder="How can we help you?"></textarea>
                 </div>
 
-                <button type="submit" className="w-full bg-primary text-white font-bold tracking-[0.15em] uppercase text-sm rounded-xl px-4 py-5 hover:bg-primary/90 transition-all hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(255,122,0,0.6)] active:translate-y-0 mt-4">
-                  Send Message
+                <button type="submit" disabled={isSending} className="w-full bg-primary text-white font-bold tracking-[0.15em] uppercase text-sm rounded-xl px-4 py-5 hover:bg-primary/90 transition-all hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(255,122,0,0.6)] active:translate-y-0 mt-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none">
+                  {isSending ? "Sending..." : "Send Message"}
                 </button>
               </form>
             </div>
