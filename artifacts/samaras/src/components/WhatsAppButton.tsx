@@ -23,8 +23,8 @@ const emailBranches = [
   },
   {
     name: "Chikkaballapura",
-    email: "Chikkaballapur@gmail.com",
-    url: "mailto:Chikkaballapur@gmail.com?subject=Inquiry%20-%20Samara's%20Veg%20Chikkaballapura",
+    email: "Samarasvegcbpur@gmail.com",
+    url: "mailto:Samarasvegcbpur@gmail.com?subject=Inquiry%20-%20Samara's%20Veg%20Chikkaballapura",
   },
 ];
 
