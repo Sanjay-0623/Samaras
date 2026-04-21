@@ -1,6 +1,14 @@
-import { useState, useRef, FormEvent, ChangeEvent } from "react";
-import { motion } from "framer-motion";
-import { FaBriefcase, FaUser, FaEnvelope, FaCloudUploadAlt, FaPaperPlane, FaCheckCircle } from "react-icons/fa";
+import { useState, useRef, useEffect, FormEvent, ChangeEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FaBriefcase,
+  FaUser,
+  FaEnvelope,
+  FaCloudUploadAlt,
+  FaPaperPlane,
+  FaCheckCircle,
+  FaTimesCircle,
+} from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 import PageTransition from "@/components/PageTransition";
 
@@ -20,7 +28,7 @@ const DEPARTMENTS = [
   "Other",
 ];
 
-type Status = "idle" | "uploading" | "sending" | "success" | "error";
+type PopupType = "success" | "error" | "loading" | null;
 
 export default function Career() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -29,19 +37,60 @@ export default function Career() {
   const [department, setDepartment] = useState(DEPARTMENTS[0]);
   const [experience, setExperience] = useState("");
   const [resumeFile, setResumeFile] = useState<File | null>(null);
-  const [status, setStatus] = useState<Status>("idle");
-  const [errorMsg, setErrorMsg] = useState("");
+
+  const [popupType, setPopupType] = useState<PopupType>(null);
+  const [popupTitle, setPopupTitle] = useState("");
+  const [popupMessage, setPopupMessage] = useState("");
+
+  const showLoading = (msg = "Submitting application...") => {
+    setPopupType("loading");
+    setPopupTitle("Please wait");
+    setPopupMessage(msg);
+  };
+  const showSuccess = (
+    title = "Application Submitted",
+    msg = "Our HR team will contact you shortly."
+  ) => {
+    setPopupType("success");
+    setPopupTitle(title);
+    setPopupMessage(msg);
+  };
+  const showError = (
+    title = "Submission Failed",
+    msg = "Something went wrong. Please try again or contact support."
+  ) => {
+    setPopupType("error");
+    setPopupTitle(title);
+    setPopupMessage(msg);
+  };
+  const closePopup = () => setPopupType(null);
+
+  // Lock body scroll while popup is open
+  useEffect(() => {
+    if (popupType) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [popupType]);
+
+  // Auto-close success after 3.5s
+  useEffect(() => {
+    if (popupType === "success") {
+      const t = setTimeout(() => setPopupType(null), 3500);
+      return () => clearTimeout(t);
+    }
+  }, [popupType]);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     if (file && file.size > 10 * 1024 * 1024) {
-      setErrorMsg("Resume must be under 10 MB.");
-      setStatus("error");
+      showError("File Too Large", "Resume must be under 10 MB.");
       return;
     }
     setResumeFile(file);
-    setErrorMsg("");
-    if (status === "error") setStatus("idle");
   };
 
   const uploadResume = async (file: File): Promise<{ secure_url: string }> => {
@@ -60,36 +109,30 @@ export default function Career() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!resumeFile) {
-      setErrorMsg("Please attach your resume.");
-      setStatus("error");
+
+    if (!name || !email || !department || !experience || !resumeFile) {
+      console.error("Missing required fields", { name, email, department, experience, resumeFile });
+      showError("Incomplete Form", "All fields including resume are required.");
       return;
     }
-    setErrorMsg("");
+
+    showLoading("Uploading resume...");
 
     let resumeUrl = "";
     try {
-      setStatus("uploading");
       const uploadResponse = await uploadResume(resumeFile);
       resumeUrl = uploadResponse.secure_url;
     } catch (err) {
       console.error("CLOUDINARY ERROR:", err);
-      setStatus("error");
-      setErrorMsg("Resume upload failed. Please try again.");
-      alert("Resume upload failed. Please try again.");
+      showError(
+        "Upload Failed",
+        "We couldn't upload your resume. Please check your connection and try again."
+      );
       return;
     }
 
-    if (!name || !email || !department || !experience || !resumeUrl) {
-      console.error("Missing required fields", {
-        name,
-        email,
-        department,
-        experience,
-        resumeUrl,
-      });
-      setStatus("error");
-      alert("All fields including resume are required.");
+    if (!resumeUrl) {
+      showError("Upload Failed", "Resume URL is missing after upload. Please try again.");
       return;
     }
 
@@ -102,7 +145,7 @@ export default function Career() {
     };
     console.log("EMAIL PAYLOAD:", templateParams);
 
-    setStatus("sending");
+    showLoading("Sending application...");
     await emailjs
       .send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -111,8 +154,7 @@ export default function Career() {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(() => {
-        setStatus("success");
-        alert("Application sent successfully!");
+        showSuccess();
         formRef.current?.reset();
         setName("");
         setEmail("");
@@ -122,13 +164,14 @@ export default function Career() {
       })
       .catch((error) => {
         console.error("EMAILJS ERROR:", error);
-        setStatus("error");
-        setErrorMsg("Failed to send application. Check console.");
-        alert("Failed to send application. Check console.");
+        showError(
+          "Submission Failed",
+          "Something went wrong. Please try again or contact support."
+        );
       });
   };
 
-  const isBusy = status === "uploading" || status === "sending";
+  const isBusy = popupType === "loading";
 
   return (
     <PageTransition>
@@ -260,11 +303,6 @@ export default function Career() {
               </label>
             </div>
 
-            {/* Error message */}
-            {status === "error" && errorMsg && (
-              <p className="text-red-400 text-sm text-center" data-testid="text-error">{errorMsg}</p>
-            )}
-
             {/* Submit */}
             <div className="pt-2">
               <button
@@ -273,9 +311,12 @@ export default function Career() {
                 data-testid="button-submit"
                 className="w-full flex items-center justify-center gap-3 rounded-xl bg-primary text-black font-bold py-4 text-sm uppercase tracking-[0.2em] hover:bg-primary/90 active:scale-[0.99] transition disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {status === "uploading" && <>Uploading resume…</>}
-                {status === "sending" && <>Sending application…</>}
-                {!isBusy && (
+                {isBusy ? (
+                  <>
+                    <span className="inline-block w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                    Submitting…
+                  </>
+                ) : (
                   <>
                     <FaPaperPlane className="text-xs" />
                     Submit Application
@@ -289,6 +330,14 @@ export default function Career() {
           </form>
         </motion.div>
       </div>
+
+      {/* Status Popup */}
+      <StatusPopup
+        type={popupType}
+        title={popupTitle}
+        message={popupMessage}
+        onClose={closePopup}
+      />
 
       {/* Local styles for inputs */}
       <style>{`
@@ -325,5 +374,111 @@ function Field({ label, icon, children }: { label: string; icon?: React.ReactNod
       </label>
       {children}
     </div>
+  );
+}
+
+function StatusPopup({
+  type,
+  title,
+  message,
+  onClose,
+}: {
+  type: PopupType;
+  title: string;
+  message: string;
+  onClose: () => void;
+}) {
+  const isLoading = type === "loading";
+  const isSuccess = type === "success";
+  const isError = type === "error";
+
+  return (
+    <AnimatePresence>
+      {type && (
+        <motion.div
+          key="popup-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
+          onClick={isLoading ? undefined : onClose}
+          data-testid="status-popup"
+        >
+          <motion.div
+            key="popup-card"
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 8 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            className="relative w-full max-w-sm rounded-2xl border border-white/10 bg-[#0c0c0c]/95 backdrop-blur-xl p-7 sm:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)]"
+          >
+            {/* Top accent bar */}
+            <div
+              className={
+                "absolute top-0 left-6 right-6 h-[2px] rounded-full " +
+                (isSuccess
+                  ? "bg-gradient-to-r from-transparent via-emerald-400 to-transparent"
+                  : isError
+                  ? "bg-gradient-to-r from-transparent via-red-500 to-transparent"
+                  : "bg-gradient-to-r from-transparent via-primary to-transparent")
+              }
+            />
+
+            {/* Icon */}
+            <div className="flex justify-center mb-5">
+              {isLoading && (
+                <div className="w-14 h-14 rounded-full border border-primary/20 bg-primary/10 flex items-center justify-center">
+                  <span className="inline-block w-7 h-7 border-[3px] border-primary/30 border-t-primary rounded-full animate-spin" />
+                </div>
+              )}
+              {isSuccess && (
+                <div className="w-14 h-14 rounded-full border border-emerald-400/30 bg-emerald-400/10 flex items-center justify-center">
+                  <FaCheckCircle className="text-emerald-400 text-2xl" />
+                </div>
+              )}
+              {isError && (
+                <div className="w-14 h-14 rounded-full border border-red-500/30 bg-red-500/10 flex items-center justify-center">
+                  <FaTimesCircle className="text-red-500 text-2xl" />
+                </div>
+              )}
+            </div>
+
+            {/* Text */}
+            <h3
+              className="text-white text-xl font-display font-bold text-center mb-2"
+              data-testid="popup-title"
+            >
+              {title}
+            </h3>
+            <p
+              className="text-white/60 text-sm text-center font-light leading-relaxed"
+              data-testid="popup-message"
+            >
+              {message}
+            </p>
+
+            {/* Action */}
+            {!isLoading && (
+              <button
+                onClick={onClose}
+                data-testid="button-popup-close"
+                className={
+                  "mt-7 w-full rounded-xl py-3 text-sm font-bold uppercase tracking-[0.2em] transition active:scale-[0.99] " +
+                  (isSuccess
+                    ? "bg-emerald-400 text-black hover:bg-emerald-300"
+                    : "bg-primary text-black hover:bg-primary/90")
+                }
+              >
+                OK
+              </button>
+            )}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
