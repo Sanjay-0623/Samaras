@@ -29,7 +29,7 @@ timeoutMs = 20000
 
 [userenv.shared]
 VITE_EMAILJS_PUBLIC_KEY = "qyidoJLvKq8vr7cLv"
-VITE_EMAILJS_SERVICE_ID = "service_oeaz4wd"
+VITE_EMAILJS_SERVICE_ID = "service_3on99re"
 VITE_EMAILJS_TEMPLATE_ID = "template_1lw86hh"
 VITE_CLOUDINARY_CLOUD_NAME = "dyqv3ubsi"
 VITE_CLOUDINARY_UPLOAD_PRESET = "samaras_resume_upload"
