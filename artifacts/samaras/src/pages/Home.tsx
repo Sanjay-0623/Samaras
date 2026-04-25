@@ -7,7 +7,7 @@ import {
   FaSeedling,
   FaFire,
   FaUtensils,
-  FaShoppingBag,
+  FaCalendarCheck,
   FaConciergeBell,
   FaWhatsapp,
   FaCheckCircle,
@@ -73,15 +73,25 @@ const services = [
     action: "scroll" as const,
   },
   {
-    id: "takeaway",
-    icon: FaShoppingBag,
-    title: "Takeaway",
+    id: "table-reservation",
+    icon: FaCalendarCheck,
+    title: "Table Reservation",
     description:
-      "Quick parcel orders ready when you arrive — fresh, hot, and packed with care for the journey home.",
-    cta: "Order via WhatsApp",
+      "Reserve your table at Samara's Veg for a seamless dining experience. Perfect for families, celebrations, and special occasions.",
+    cta: "Book Table",
     action: "link" as const,
     href: `https://wa.me/${RESERVE_WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      "Hi Samara's Veg, I'd like to place a takeaway order."
+      `Hello Samara's Veg,
+
+I would like to reserve a table.
+
+Name:
+Phone:
+Date:
+Time:
+Guests:
+
+Please confirm availability.`
     )}`,
   },
   {
