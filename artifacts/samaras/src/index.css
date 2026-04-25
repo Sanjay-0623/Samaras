@@ -140,3 +140,11 @@
 .contact-iti-wrapper .iti__country { color: #fff; }
 .contact-iti-wrapper .iti__country.iti__highlight { background-color: rgba(255,122,0,0.18) !important; }
 .contact-iti-wrapper .iti__dial-code { color: rgba(255,255,255,0.55); }
+
+/* Dark-theme date/time picker icons */
+.reserve-date-input::-webkit-calendar-picker-indicator {
+  filter: invert(0.85) sepia(1) saturate(8) hue-rotate(-10deg);
+  cursor: pointer;
+  opacity: 0.7;
+}
+.reserve-date-input::-webkit-calendar-picker-indicator:hover { opacity: 1; }

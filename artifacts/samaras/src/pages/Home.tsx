@@ -1,9 +1,21 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState, FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { FaMapMarkerAlt, FaLeaf, FaSeedling, FaFire } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaLeaf,
+  FaSeedling,
+  FaFire,
+  FaUtensils,
+  FaShoppingBag,
+  FaConciergeBell,
+  FaWhatsapp,
+  FaCheckCircle,
+} from "react-icons/fa";
 import { MdTableRestaurant } from "react-icons/md";
 import { PiForkKnife } from "react-icons/pi";
+import intlTelInput from "intl-tel-input/intlTelInputWithUtils";
+import "intl-tel-input/styles";
 import PageTransition from "@/components/PageTransition";
 
 /* ─── STATIC DATA ────────────────────────────────────────── */
@@ -47,6 +59,292 @@ const signatureDishes = [
     image: `${import.meta.env.BASE_URL}dish-biryani.png`,
   },
 ];
+
+const RESERVE_WHATSAPP_NUMBER = "918951454455";
+
+const services = [
+  {
+    id: "dine-in",
+    icon: FaUtensils,
+    title: "Dine-In",
+    description:
+      "Reserve a table at our restaurant and enjoy an elegant in-house dining experience with family and friends.",
+    cta: "Reserve a Table",
+    action: "scroll" as const,
+  },
+  {
+    id: "takeaway",
+    icon: FaShoppingBag,
+    title: "Takeaway",
+    description:
+      "Quick parcel orders ready when you arrive — fresh, hot, and packed with care for the journey home.",
+    cta: "Order via WhatsApp",
+    action: "link" as const,
+    href: `https://wa.me/${RESERVE_WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      "Hi Samara's Veg, I'd like to place a takeaway order."
+    )}`,
+  },
+  {
+    id: "catering",
+    icon: FaConciergeBell,
+    title: "Catering",
+    description:
+      "From intimate gatherings to grand celebrations — we bring authentic Indian vegetarian cuisine to your event.",
+    cta: "Get a Quote",
+    action: "route" as const,
+    to: "/contact",
+  },
+];
+
+function getTodayISO() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function getNextHour() {
+  const d = new Date();
+  let h = d.getHours() + 1;
+  if (h < 10) h = 10;
+  if (h > 22) h = 22;
+  return `${String(h).padStart(2, "0")}:00`;
+}
+
+function scrollToReserve() {
+  const el = document.getElementById("reserve-table");
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function ReserveTableSection() {
+  const [name, setName] = useState("");
+  const [date, setDate] = useState(getTodayISO());
+  const [time, setTime] = useState(getNextHour());
+  const [guests, setGuests] = useState("2");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const phoneInputRef = useRef<HTMLInputElement>(null);
+  const itiRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (!phoneInputRef.current) return;
+    const iti = intlTelInput(phoneInputRef.current, {
+      initialCountry: "auto",
+      separateDialCode: true,
+      geoIpLookup: (success: (countryCode: string) => void) => {
+        fetch("https://ipapi.co/json")
+          .then((res) => res.json())
+          .then((data) => success(data.country_code || "IN"))
+          .catch(() => success("IN"));
+      },
+    });
+    itiRef.current = iti;
+    return () => {
+      iti.destroy();
+      itiRef.current = null;
+    };
+  }, []);
+
+  const handleBook = (e: FormEvent) => {
+    e.preventDefault();
+    if (isProcessing) return;
+
+    const phone = itiRef.current ? itiRef.current.getNumber() : "";
+    const trimmedName = name.trim();
+
+    if (!trimmedName || !phone || !date || !time || !guests) {
+      alert("Please fill in all fields before booking.");
+      return;
+    }
+
+    const message = `Hello Samara's Veg,
+
+I would like to reserve a table:
+
+Name: ${trimmedName}
+Phone: ${phone}
+Date: ${date}
+Time: ${time}
+Guests: ${guests}`;
+
+    const url = `https://wa.me/${RESERVE_WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      message
+    )}`;
+
+    setIsProcessing(true);
+    setToast("Redirecting to WhatsApp...");
+    window.setTimeout(() => {
+      window.open(url, "_blank", "noopener,noreferrer");
+      setIsProcessing(false);
+      window.setTimeout(() => setToast(null), 1800);
+    }, 700);
+  };
+
+  const guestOptions = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"];
+
+  return (
+    <section
+      id="reserve-table"
+      className="py-16 md:py-28 px-6 lg:px-12 bg-[#080808] relative overflow-hidden scroll-mt-24"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,122,0,0.08),transparent_70%)] pointer-events-none" />
+      <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
+
+      <div className="max-w-3xl mx-auto relative z-10">
+        <div className="text-center mb-10 md:mb-14">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-primary font-bold tracking-[0.3em] uppercase mb-4 text-xs"
+          >
+            Book Your Visit
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl md:text-6xl font-display font-bold text-white leading-tight mb-4"
+          >
+            Reserve a Table
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-white/55 max-w-lg mx-auto font-light"
+          >
+            Send your reservation details over WhatsApp and we'll confirm your
+            table within minutes.
+          </motion.p>
+        </div>
+
+        <motion.form
+          onSubmit={handleBook}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="glass-panel p-6 md:p-10 relative overflow-hidden"
+        >
+          <div className="absolute -top-20 -right-20 w-72 h-72 bg-primary/10 blur-[80px] rounded-full pointer-events-none" />
+
+          <div className="space-y-5 relative z-10">
+            <div className="space-y-2">
+              <label className="text-xs font-semibold tracking-wider uppercase text-white/50">
+                Name
+              </label>
+              <input
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={isProcessing}
+                placeholder="Your full name"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/25 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60"
+              />
+            </div>
+
+            <div className="space-y-2 contact-iti-wrapper">
+              <label className="text-xs font-semibold tracking-wider uppercase text-white/50">
+                Phone
+              </label>
+              <input
+                ref={phoneInputRef}
+                id="reserve-phone"
+                type="tel"
+                disabled={isProcessing}
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/25 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="space-y-2">
+                <label className="text-xs font-semibold tracking-wider uppercase text-white/50">
+                  Date
+                </label>
+                <input
+                  type="date"
+                  required
+                  value={date}
+                  min={getTodayISO()}
+                  onChange={(e) => setDate(e.target.value)}
+                  disabled={isProcessing}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60 reserve-date-input"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-semibold tracking-wider uppercase text-white/50">
+                  Time
+                </label>
+                <input
+                  type="time"
+                  required
+                  value={time}
+                  min="10:00"
+                  max="22:00"
+                  onChange={(e) => setTime(e.target.value)}
+                  disabled={isProcessing}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60 reserve-date-input"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-semibold tracking-wider uppercase text-white/50">
+                Number of Guests
+              </label>
+              <select
+                value={guests}
+                onChange={(e) => setGuests(e.target.value)}
+                disabled={isProcessing}
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all font-light disabled:opacity-60 appearance-none"
+              >
+                {guestOptions.map((g) => (
+                  <option key={g} value={g} className="bg-[#181818]">
+                    {g} {g === "1" ? "Guest" : "Guests"}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isProcessing}
+              className="w-full inline-flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold tracking-[0.12em] uppercase text-sm rounded-xl px-4 py-5 hover:bg-[#1ebe5a] transition-all hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(37,211,102,0.55)] active:translate-y-0 mt-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
+            >
+              <FaWhatsapp size={20} />
+              {isProcessing ? "Opening WhatsApp..." : "Book via WhatsApp"}
+            </button>
+
+            <p className="text-center text-white/35 text-xs font-light pt-2">
+              Open daily 10:00 AM – 10:00 PM
+            </p>
+          </div>
+        </motion.form>
+      </div>
+
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.25 }}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-[#181818] border border-[#25D366]/40 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.6)]"
+          >
+            <FaCheckCircle className="text-[#25D366]" size={18} />
+            <span className="text-white text-sm font-medium">{toast}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -310,6 +608,116 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════ OUR SERVICES ═══ */}
+      <section className="py-16 md:py-28 px-6 lg:px-12 bg-[#080808] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(255,122,0,0.05),transparent_70%)] pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-10 md:mb-20">
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-primary font-bold tracking-[0.3em] uppercase mb-4 text-xs"
+            >
+              How We Serve You
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-5xl md:text-6xl font-display font-bold text-white leading-tight"
+            >
+              Our Services
+            </motion.h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {services.map((item, i) => {
+              const inner = (
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-b from-primary/8 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none rounded-3xl" />
+                  <div className="w-16 h-16 bg-primary/10 border border-primary/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary/20 group-hover:border-primary/40 transition-all duration-400 relative z-10">
+                    <item.icon className="w-7 h-7 text-primary group-hover:scale-110 transition-transform duration-400" />
+                  </div>
+                  <h3 className="text-white font-display font-bold text-2xl mb-3 relative z-10">
+                    {item.title}
+                  </h3>
+                  <p className="text-white/55 text-sm leading-relaxed font-light relative z-10 mb-6 flex-1">
+                    {item.description}
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-primary text-sm font-semibold tracking-wider uppercase relative z-10 group-hover:gap-3 transition-all duration-300">
+                    {item.cta} <span aria-hidden>→</span>
+                  </span>
+                </>
+              );
+
+              const baseClass =
+                "glass-panel p-6 md:p-8 group relative overflow-hidden flex flex-col text-left cursor-pointer h-full";
+
+              const cardWrapper = (children: React.ReactNode) => (
+                <motion.div
+                  custom={i}
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.15 }}
+                  whileHover={{ y: -8, transition: { duration: 0.25 } }}
+                  className="h-full"
+                >
+                  {children}
+                </motion.div>
+              );
+
+              if (item.action === "scroll") {
+                return (
+                  <div key={item.id}>
+                    {cardWrapper(
+                      <button
+                        type="button"
+                        onClick={scrollToReserve}
+                        className={`${baseClass} w-full`}
+                      >
+                        {inner}
+                      </button>
+                    )}
+                  </div>
+                );
+              }
+              if (item.action === "route") {
+                return (
+                  <div key={item.id}>
+                    {cardWrapper(
+                      <Link to={item.to!} className={baseClass}>
+                        {inner}
+                      </Link>
+                    )}
+                  </div>
+                );
+              }
+              return (
+                <div key={item.id}>
+                  {cardWrapper(
+                    <a
+                      href={item.href!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={baseClass}
+                    >
+                      {inner}
+                    </a>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════ RESERVE A TABLE ═══ */}
+      <ReserveTableSection />
 
       {/* ═══════════════════════ SIGNATURE DISHES ═══ */}
       <section className="py-16 md:py-28 px-6 lg:px-12 bg-[#080808] relative">
