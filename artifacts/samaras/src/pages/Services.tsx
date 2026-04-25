@@ -1,23 +1,53 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { MdTableRestaurant, MdTakeoutDining } from "react-icons/md";
+import { MdTableRestaurant, MdEventAvailable } from "react-icons/md";
 import { GiCookingPot } from "react-icons/gi";
 import PageTransition from "@/components/PageTransition";
 
-const services = [
+const RESERVE_WHATSAPP_NUMBER = "918951454455";
+const RESERVE_MESSAGE = `Hello Samara's Veg,
+
+I would like to reserve a table.
+
+Name:
+Phone:
+Date:
+Time:
+Guests:
+
+Please confirm availability.`;
+const RESERVE_WHATSAPP_URL = `https://wa.me/${RESERVE_WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  RESERVE_MESSAGE
+)}`;
+
+type ServiceItem = {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+  delay: number;
+  cta: string;
+  action: "navigate" | "whatsapp";
+};
+
+const services: ServiceItem[] = [
   {
     id: "dine-in",
     title: "Dine In",
     description: "Experience the warmth of Samara's Veg in our welcoming dining hall. Perfect for family gatherings, celebrations, and everyday indulgence in authentic Indian vegetarian cuisine.",
     icon: MdTableRestaurant,
     delay: 0.1,
+    cta: "Learn More",
+    action: "navigate",
   },
   {
-    id: "takeaway",
-    title: "Takeaway",
-    description: "Enjoy the flavours of Samara's Veg from the comfort of your home. Our meals are carefully packed to retain freshness, aroma, and taste — just as if you were dining in.",
-    icon: MdTakeoutDining,
+    id: "table-reservation",
+    title: "Table Reservation",
+    description: "Reserve your table at Samara's Veg for a seamless dining experience. Perfect for families, celebrations, and special occasions.",
+    icon: MdEventAvailable,
     delay: 0.2,
+    cta: "Book Table",
+    action: "whatsapp",
   },
   {
     id: "catering",
@@ -25,6 +55,8 @@ const services = [
     description: "Bring the Samara's Veg experience to your events. From weddings and corporate lunches to festive gatherings, our catering team delivers authentic Indian vegetarian feasts.",
     icon: GiCookingPot,
     delay: 0.3,
+    cta: "Learn More",
+    action: "navigate",
   },
 ];
 
@@ -56,40 +88,50 @@ export default function Services() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
-          {services.map((service) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: service.delay, ease: "easeOut" }}
-              className="glass-panel p-10 hover:border-primary/50 hover:-translate-y-3 transition-all duration-500 group relative overflow-hidden text-center flex flex-col items-center transform-gpu"
-            >
-              <div className="absolute top-0 inset-x-0 h-[30%] bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          {services.map((service) => {
+            const handleCardClick = () => {
+              if (service.action === "whatsapp") {
+                window.open(RESERVE_WHATSAPP_URL, "_blank", "noopener,noreferrer");
+              } else {
+                navigate("/contact");
+              }
+            };
 
-              <div className="w-[100px] h-[100px] bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-8 group-hover:bg-primary/20 transition-colors duration-500 relative z-10">
-                <service.icon className="w-12 h-12 text-primary group-hover:scale-110 transition-transform duration-500" />
-              </div>
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: service.delay, ease: "easeOut" }}
+                onClick={handleCardClick}
+                className="glass-panel p-10 hover:border-primary/50 hover:-translate-y-3 hover:scale-[1.02] hover:shadow-[0_20px_60px_-15px_rgba(255,122,0,0.35)] transition-all duration-500 group relative overflow-hidden text-center flex flex-col items-center transform-gpu cursor-pointer"
+              >
+                <div className="absolute top-0 inset-x-0 h-[30%] bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <h3 className="text-3xl font-display font-bold text-white mb-6 relative z-10">
-                {service.title}
-              </h3>
+                <div className="w-[100px] h-[100px] bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-8 group-hover:bg-primary/20 transition-colors duration-500 relative z-10">
+                  <service.icon className="w-12 h-12 text-primary group-hover:scale-110 transition-transform duration-500" />
+                </div>
 
-              <p className="text-white/60 text-base leading-relaxed relative z-10 mb-8 font-light flex-grow">
-                {service.description}
-              </p>
+                <h3 className="text-3xl font-display font-bold text-white mb-6 relative z-10">
+                  {service.title}
+                </h3>
 
-              <div className="relative z-10 mt-auto">
-                <button
-                  onClick={() => navigate("/contact")}
-                  className="text-sm font-bold uppercase tracking-widest text-primary hover:text-white transition-colors flex items-center gap-2 group/btn"
-                >
-                  Learn More
-                  <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-                </button>
-              </div>
-            </motion.div>
-          ))}
+                <p className="text-white/60 text-base leading-relaxed relative z-10 mb-8 font-light flex-grow">
+                  {service.description}
+                </p>
+
+                <div className="relative z-10 mt-auto">
+                  <span
+                    className="text-sm font-bold uppercase tracking-widest text-primary group-hover:text-white transition-colors flex items-center gap-2"
+                  >
+                    {service.cta}
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Bottom CTA Banner */}
