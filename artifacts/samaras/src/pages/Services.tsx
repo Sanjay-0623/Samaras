@@ -37,8 +37,8 @@ const services: ServiceItem[] = [
     description: "Experience the warmth of Samara's Veg in our welcoming dining hall. Perfect for family gatherings, celebrations, and everyday indulgence in authentic Indian vegetarian cuisine.",
     icon: MdTableRestaurant,
     delay: 0.1,
-    cta: "Learn More",
-    action: "navigate",
+    cta: "Reserve Now",
+    action: "whatsapp",
   },
   {
     id: "table-reservation",
