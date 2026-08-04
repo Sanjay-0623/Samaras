@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Samaras Restaurant - Modern web experience",
   "private": true,
+  "packageManager": "pnpm@10.15.1",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
