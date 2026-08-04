@@ -1,10 +1,5 @@
 {
   "buildCommand": "pnpm run build",
-  "outputDirectory": "artifacts/samaras/dist/public",
-  "framework": "vite",
-  "rootDirectory": "artifacts/samaras",
-  "env": {
-    "PORT": "3000",
-    "BASE_PATH": "/"
-  }
+  "outputDirectory": "dist/public",
+  "framework": "vite"
 }
